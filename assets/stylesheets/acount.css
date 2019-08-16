@@ -1,0 +1,49 @@
+.d_flex {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.d_inline {
+	display: inline-flex;
+}
+.text_design {
+	padding: 40px;
+}
+.vis_text  {
+	padding-left: 30px;
+	padding-top: 8px;
+}
+.vis_text h3 {
+	font-size: 1.5625em;
+}
+.vis_text p {
+	font-size: 0.8em;
+}
+.Card_visit {
+	padding: 0;
+	margin: 0 auto;
+}
+.p_text{
+	float: left;
+}
+.date {
+ 	float: right;
+	width: 15%;
+}
+.visits {
+	text-align: center;
+	color: #51A2B8;
+}
+.info {
+	margin-left: 10px;
+	display: inline;
+}
+.user {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}

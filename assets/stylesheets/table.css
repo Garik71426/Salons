@@ -1,0 +1,44 @@
+.btn_card_category {
+	    margin-top: 40%;
+    margin-right: 30px;
+}
+.Card_top {
+	margin: 2%;
+	box-shadow: 6px 8px 17px #1C8393;
+}
+.text {
+	color: #17A2B8;
+}
+.text_color {
+	color: #17A2B8;
+}
+.img_size {
+	width: 150px;	
+	height: 150px;	
+}
+@media screen and (max-width: 522px){
+    .img_size {
+    	width: 90px;
+    	height: 90px;	
+    }
+    .full_text {
+    	width: 200px;	
+    }
+    .name_title {
+    	font-size: 0.9em;	
+    }
+    .text_inform {
+    	font-size: 0.63em;
+    }
+    .btn_card_category {
+    	margin-bottom: 5%;	
+    	padding: 5px;
+    }
+}
+.category_button {
+    width: 175px;
+    margin: 30px;
+}
+.group {
+    display: -webkit-box;
+}

@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+h1 {
+	color: #106f7e;
+}
+h2 {
+	color: #106f7e;
+}
+.salon-page {
+	padding-top: 1.5%;
+}
+
+.button{
+    margin-top: 2%;
+    margin: 0 auto;
+}
+.name {
+  color: transparent;
+}
+.name::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.name::before {
+  content: 'Ավելացնել';
+  color: #17a2B8;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #17a2B8;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.name:hover::before {
+  border-color: #17a2B8;
+}
+.name:active {
+  outline: 0;
+}
+.name:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+

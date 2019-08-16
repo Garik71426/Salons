@@ -1,0 +1,30 @@
+footer {
+
+	background: -webkit-linear-gradient(#3a6877, #000);
+    background: linear-gradient(to bottom, #3a6877, #000);
+	margin-top: 30px;
+    margin: auto 0 0 0;
+}
+ul {
+	list-style: none;
+	padding-top: 10%;
+}
+li a {
+	color: #fff;
+	font-family: "Inconsolata", nonostace;
+}
+li a:hover {
+	text-decoration: none;
+	color: #e0dddb;
+
+}
+li {
+	color : #fff;
+}
+
+.icon_width {
+	width: 40px;
+    padding-left: 6%;
+    
+}
+/*footer amnea poqr vaxt textAlign center, padding : none*/

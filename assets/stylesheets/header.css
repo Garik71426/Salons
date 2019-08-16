@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+nav.navbar ul{
+	padding: 0;
+}
+nav.navbar li{
+	list-style: none;
+}
+.drop{
+	color: #000;
+	font-size: 	1.3em;
+    background: -webkit-linear-gradient(#3a6877, #3a6877);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mod_btn{
+    margin-top: 7%;
+ background: -webkit-linear-gradient(#3a6877,#3a6877);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
+	margin-left: 5%;	
+	font-size: 1.5em;
+     background: -webkit-linear-gradient(#000, #17A2B8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.modal_button {
+		
+	background-color: #17a2b8;
+    border-style: none;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 15px;
+
+}
+.modal-title {
+
+	color: #17a2b8;
+}
+span {
+	font-size: 30px;
+	color: #3a6877;
+}
+ li .dropdown-item:hover {
+ 	background: #FD703E;
+	background: -webkit-linear-gradient(#3a6877, #fff);
+    background: linear-gradient(to bottom, #3a6877, #fff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+
+}
+.header_design {
+	
+    border-radius: 10px;
+    box-shadow: 6px 8px 17px #1C8393;
+}
+ 
+
+@media only screen and (max-width: 992px) {
+  	.title {
+    	font-size: 1em;
+  	}
+}

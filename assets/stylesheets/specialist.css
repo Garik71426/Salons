@@ -1,0 +1,62 @@
+.user {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.info {
+	margin-left: 10px;
+	display: inline;
+}
+h1 {
+	text-align: center;
+}
+p {
+	color: #4b5859;
+}
+.textBlue {
+	color: #0898a8;
+	/*color: #17A2B8; */
+}
+span {
+	font-size: 1em;
+}
+
+@media only screen and (max-width: 409px) {
+    .info {
+        font-size: 0.9em;
+  }
+}
+.name_add {
+	margin: auto;
+  color: transparent;
+}
+.name_add::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.name_add::before {
+  content: 'Փոխել Նկարը';
+  color: #17a2B8;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #17a2B8;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.name_add:hover::before {
+  border-color: #17a2B8;
+}
+.name_add:active {
+  outline: 0;
+}
+.name_add:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
