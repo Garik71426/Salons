@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {observer} from 'mobx-react'
+import {observer} from 'mobx-react';
 import PropTypes from 'prop-types';
 
 import Header from './components/Home/Header';
@@ -11,7 +11,7 @@ import Salon from './components/salons/Salon';
 // import SalonUser from './components/salons/SalonUser'; 
 import Specialist from './components/specialists/Specialist';  
 import Categorys from './components/categorys/Categorys'; 
-import Acount from './components/acount/Acount'
+import Acount from './components/acount/Acount';
 
 import UIStore from './stores/UIStore';
 import AppStore from './stores/AppStore';
@@ -37,19 +37,51 @@ class App extends Component {
         this.AppStore.initData()
     }
     render() {
+        const routes = [
+            {
+                path: '/',
+                component: Section
+            },
+            {
+                path: '/Salon/:whichSalon',
+                component: Salon
+            },
+            {
+                path: '/Category/:whichCategory',
+                component: Categorys
+            },
+            {
+                path: '/Salon/:whichSalon/:salonIndex/:categoryIndex/:specialistIndex',
+                component: Specialist
+            },
+            {
+                path: '/Category/:whichCategory/:salonIndex/:categoryIndex/:specialistIndex',
+                component: Specialist
+            },
+            {
+                path: this.AppStore.isUser === 'salon' 
+                    ? '/AcountSalon/:whichSalon' 
+                    : this.AppStore.isUser === 'user' 
+                    ? '/Acount' 
+                    : '',
+                component: this.AppStore.isUser === 'salon' 
+                    ? Salon 
+                    : this.AppStore.isUser === 'user' 
+                    ? Acount 
+                    : ''
+            }
+        ];
         return (
             <div className = "App">
                 <Router>
                     <div>
                         <Header/>
                         <Switch>
-                            <Route exact path="/" component={Section} />
-                            <Route exact path="/Salon/:whichSalon" component={Salon}/>
-                            <Route exact path='/Category/:whichCategory' component={Categorys}/>
-                            <Route exact path='/Salon/:whichSalon/:salonIndex/:categoryIndex/:specialistIndex' component={Specialist}/>
-                            <Route exact path='/Category/:whichCategory/:salonIndex/:categoryIndex/:specialistIndex' component={Specialist}/>
-                            {this.AppStore.isUser === 'salon' && <Route exact path="/AcountSalon/:whichSalon" component={Salon}/>}
-                            {this.AppStore.isUser === 'user' && <Route exact path="/Acount" component={Acount}/>}
+                            {
+                                routes.map(item => {
+                                    return <Route exact path = {item.path} component = {item.component} />;
+                                })
+                            }
                             <Route component={NotFound} />
                         </Switch>
                     </div>
