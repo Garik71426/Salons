@@ -40,7 +40,8 @@ SET default_with_oids = false;
 
 CREATE TABLE public.category (
     id integer NOT NULL,
-    name character varying(15) NOT NULL
+    name character varying(15) NOT NULL,
+    description character varying(250) NOT NULL
 );
 
 
@@ -296,11 +297,11 @@ ALTER TABLE ONLY public.works ALTER COLUMN id SET DEFAULT nextval('public.works_
 -- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.category (id, name) FROM stdin;
-1	Վարսահարդարում
-2	Դիմահարդարում
-3	Մատնահարդարում
-4	Կոսմետոլոգիա
+COPY public.category (id, name, description) FROM stdin;
+1	Վարսահարդարում	Գեղեցկությունն ամենուր է, հույժ ցանկալի հյուր է։
+2	Դիմահարդարում	Գեղեցկությունը ձիրք ու զորություն ունի սրտերը խաղաղություն մտցնելու։
+3	Մատնահարդարում	Մարդու մեջ պետք է ամեն ինչ գեղեցիկ լինի։
+4	Կոսմետոլոգիա	Գեղեցիկն աստվածային է, վեհը՝ մարդկային։
 \.
 
 
@@ -314,7 +315,7 @@ COPY public.salon (id, name, address, phone, mobile_phone, email, info, img) FRO
 5	Փարվանա գեղեցկության սրահ	Նժդեհի 25	+37432243525	\N	ParvanaBeautySalon@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon3.jpg
 6	Կոկետ գեղեցկության սրահ	Մյասնիկյան 64	+37432250581	\N	Koket64@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon4.jpg
 7	Անժելիկա գեղեցկության սրահ	Մյասնիկյան 26/4	+37432247455	\N	Anjelika_Gexeckutyan_Srah@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon5.jpg
-8	Անիիկա գեղեցկության սրահ	Վարդանանց 14	+37432225683	\N	AniGexeckutyanSrah@gmail.com	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon6.jpg
+8	Անի գեղեցկության սրահ	Վարդանանց 14	+37432225683	\N	AniGexeckutyanSrah@gmail.com	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon6.jpg
 \.
 
 
@@ -324,6 +325,41 @@ COPY public.salon (id, name, address, phone, mobile_phone, email, info, img) FRO
 
 COPY public.salon_worker_category (worker_id, category_id, salon_id) FROM stdin;
 1	1	3
+30	3	7
+2	1	3
+3	1	3
+10	1	3
+4	2	3
+5	3	3
+6	4	3
+7	4	3
+8	1	4
+9	1	4
+3	1	4
+10	1	4
+11	2	4
+12	3	4
+13	4	4
+14	1	5
+15	2	5
+16	2	5
+17	3	5
+18	3	5
+19	4	5
+20	4	5
+21	1	6
+22	2	6
+23	2	6
+24	2	6
+25	4	6
+26	1	7
+27	1	7
+28	2	7
+29	3	7
+31	1	8
+32	1	8
+33	3	8
+34	4	8
 \.
 
 
@@ -346,6 +382,43 @@ COPY public.social (id, name) FROM stdin;
 COPY public.social_worker (worker_id, social_id, path) FROM stdin;
 1	1	https://www.facebook.com
 2	3	https://www.instagram.com
+4	1	https://www.facebook.com/2
+5	2	https://www.twitter.com/3
+6	2	https://www.twitter.com/4
+6	1	https://www.facebook.com/4
+7	3	https://www.instagram.com/5
+9	3	https://www.instagram.com/7
+9	1	https://www.facebook.com/7
+11	2	https://www.twitter.com/9
+12	1	https://www.facebook.com/10
+13	3	https://www.instagram.com/11
+14	3	https://www.instagram.com/12
+15	1	https://www.facebook.com/13
+15	2	https://www.twitter.com/13
+16	2	https://www.twitter.com/14
+16	3	https://www.instagram.com/14
+17	3	https://www.instagram.com/15
+17	1	https://www.facebook.com/15
+18	1	https://www.facebook.com/16
+18	2	https://www.twitter.com/16
+18	3	https://www.instagram.com/16
+19	1	https://www.facebook.com/17
+20	3	https://www.instagram.com/19
+21	3	https://www.instagram.com/20
+21	2	https://www.twitter.com/20
+21	1	https://www.facebook.com/20
+22	2	https://www.twitter.com/21
+22	3	https://www.instagram.com/21
+23	3	https://www.instagram.com/22
+24	2	https://www.twitter.com/23
+25	3	https://www.instagram.com/25
+25	2	https://www.twitter.com/26
+25	1	https://www.facebook.com/26
+27	1	https://www.facebook.com/27
+28	3	https://www.instagram.com/28
+29	1	https://www.facebook.com/29
+29	2	https://www.twitter.com/29
+29	3	https://www.instagram.com/29
 \.
 
 
@@ -455,6 +528,14 @@ ALTER TABLE ONLY public.category
 
 
 --
+-- Name: category category_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.category
+    ADD CONSTRAINT category_name_key UNIQUE (name);
+
+
+--
 -- Name: category category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -519,6 +600,22 @@ ALTER TABLE ONLY public.salon
 
 
 --
+-- Name: salon_worker_category salon_worker_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.salon_worker_category
+    ADD CONSTRAINT salon_worker_category_pkey PRIMARY KEY (worker_id, category_id, salon_id);
+
+
+--
+-- Name: social social_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.social
+    ADD CONSTRAINT social_name_key UNIQUE (name);
+
+
+--
 -- Name: social social_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -535,6 +632,14 @@ ALTER TABLE ONLY public.social_worker
 
 
 --
+-- Name: social_worker social_worker_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.social_worker
+    ADD CONSTRAINT social_worker_pkey PRIMARY KEY (worker_id, social_id);
+
+
+--
 -- Name: worker worker_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -548,6 +653,14 @@ ALTER TABLE ONLY public.worker
 
 ALTER TABLE ONLY public.workers_works
     ADD CONSTRAINT workers_works_img_key UNIQUE (img);
+
+
+--
+-- Name: works works_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.works
+    ADD CONSTRAINT works_name_key UNIQUE (name);
 
 
 --
