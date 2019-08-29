@@ -10,4 +10,4 @@ Category
 ![Category](/screenshots/Salon%20Category.png)
 
 Specialist
-![Specialist](screenshots/Salon%20Specialistng)
+![Specialist](/screenshots/Salon%20specialist.png)
