@@ -2,3 +2,5 @@
 /build
 /yarn.lock
 
+/Server/node_modules
+/Server/yarn.lock
