@@ -111,19 +111,6 @@ ALTER SEQUENCE public.salon_id_seq OWNED BY public.salon.id;
 
 
 --
--- Name: salon_worker_category; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.salon_worker_category (
-    worker_id integer NOT NULL,
-    category_id integer NOT NULL,
-    salon_id integer NOT NULL
-);
-
-
-ALTER TABLE public.salon_worker_category OWNER TO postgres;
-
---
 -- Name: social; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -180,7 +167,9 @@ CREATE TABLE public.worker (
     surname character varying(20) NOT NULL,
     b_day date NOT NULL,
     img character varying(50) NOT NULL,
-    about character varying(255)
+    about character varying(255),
+    category_id integer,
+    salon_id integer
 );
 
 
@@ -321,50 +310,6 @@ COPY public.salon (id, name, address, phone, mobile_phone, email, info, img) FRO
 
 
 --
--- Data for Name: salon_worker_category; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.salon_worker_category (worker_id, category_id, salon_id) FROM stdin;
-1	1	3
-30	3	7
-2	1	3
-3	1	3
-10	1	3
-4	2	3
-5	3	3
-6	4	3
-7	4	3
-8	1	4
-9	1	4
-3	1	4
-10	1	4
-11	2	4
-12	3	4
-13	4	4
-14	1	5
-15	2	5
-16	2	5
-17	3	5
-18	3	5
-19	4	5
-20	4	5
-21	1	6
-22	2	6
-23	2	6
-24	2	6
-25	4	6
-26	1	7
-27	1	7
-28	2	7
-29	3	7
-31	1	8
-32	1	8
-33	3	8
-34	4	8
-\.
-
-
---
 -- Data for Name: social; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -427,41 +372,41 @@ COPY public.social_worker (worker_id, social_id, path) FROM stdin;
 -- Data for Name: worker; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.worker (id, name, surname, b_day, img, about) FROM stdin;
-1	Լիլիթ	Կարապետյան	1987-02-21	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Մոսկվայում 
-2	Անուշ	Վարդանյան	1989-01-12	/static/assets/images/users/specialist.png	Ունեմ 2 տարվա աշխատանքային փորձ
-3	Հասմիկ	Չիլինգարյան	1989-01-12	/static/assets/images/users/specialist.png	Ունեմ 2 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Պեկինում
-4	Հայկուհի	Կարապետյան	1984-06-12	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ ԱՄՆ-ում 
-5	Սիրարփի	Հայրապետյան	1994-08-01	/static/assets/images/users/specialist.png	Ունեմ 3 տարվա աշխատանքային փորձ,վերապատրաստվել եմ Երևանում 
-6	Մանե	Իսահակյան	1991-09-05	/static/assets/images/users/specialist.png	Ունեմ 5 տարվա աշխատանքային փորձ,վերապատրաստվել եմ Վրաստանում 
-7	Աննա	Հարությունյան	1987-05-25	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ,վերապատրաստվել եմ Իտալիայում
-8	Հակոբ	Աբաղյան	1985-07-27	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ
-9	Հրաչիկ	Հովսեփյան	1990-10-27	/static/assets/images/users/specialist.png	Ունեմ 5 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Երևանում 
-10	Հասմիկ	Չիլինգարյան	1995-11-12	/static/assets/images/users/specialist.png	Ունեմ 2 տարվա աշխատանքային փորձ
-11	Սիրակ	Կարապետյան	1985-12-16	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ
-12	Անի	Մամուլյան	1994-01-16	/static/assets/images/users/specialist.png	վերապատրաստվել եմ Մոսկվայում 
-13	Անաստասիա	Մամուլյան	1990-02-18	/static/assets/images/users/specialist.png	ՈՒնեմ 4 տարվա աշխատանքային փորձ
-14	Աննա	Կարապետյան	1985-03-21	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Ալժիրում 
-15	Նունե	Խաչատրյան	1985-04-02	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ
-16	Վարդուհի	Ղազարյան	1995-05-09	/static/assets/images/users/specialist.png	Ունեմ 3 տարվա աշխատանքային փորձ, վերապատրաստվել եմ ԱՄՆ-ում 
-17	Գոհար	Բաբելյան	1994-06-08	/static/assets/images/users/specialist.png	Ունեմ 4 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Մոսկվայում 
-18	Մարիամ	Պապյան	1987-07-11	/static/assets/images/users/specialist.png	Ունեմ 9 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Մոսկվայում 
-19	Արմինե	Բաբայան	1992-08-15	/static/assets/images/users/specialist.png	Ունեմ 4 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Հունաստանում 
-20	Կարինե	Մուրադյան	1990-09-26	/static/assets/images/users/specialist.png	Ունեմ 6 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Իսպանիայում 
-21	Կարապետ	Հովակիմյան	1995-10-21	/static/assets/images/users/specialist.png	Ունեմ 1 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Հնդկաստանում 
-22	Լուսինե	Խաչատրյան	1975-10-29	/static/assets/images/users/specialist.png	Ունեմ 15 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Գերմանիայում 
-23	Էմա	Ադամյան	1987-10-06	/static/assets/images/users/specialist.png	վերապատրաստվել եմ Անգորայում 
-24	Մերի	Խառատյան	1980-11-13	/static/assets/images/users/specialist.png	Ունեմ 15 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Ավստրիայում 
-25	Կարինե	Հարությունյան	1994-11-30	/static/assets/images/users/specialist.png	Ունեմ 3 տարվա աշխատանքային փորձ
-26	Տիգրան	Քոչինյան	1996-12-31	/static/assets/images/users/specialist.png	Վերապատրաստվել եմ Գվինեայում
-27	Գարիկ	Իսկանդարյան	1988-12-01	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ
-28	Անահիտ	Կառյան	1996-12-13	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ
-29	Ինեսա	Մկրտչյան	1990-12-17	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ
-30	Էրիկ	Պապյան	1987-10-08	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Թալիանդում 
-31	Կարեն	Կարապետյան	1985-09-06	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Ինդոնեզիայում 
-32	Գոռ	Վարդանյան	1987-08-19	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Իրանում 
-33	Ամալյա	Կիրակոսյան	1994-07-23	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Մոսկվայում 
-34	Նունե	Հայրապետյան	1994-12-28	/static/assets/images/users/specialist.png	Ունեմ 3 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Երևանում 
+COPY public.worker (id, name, surname, b_day, img, about, category_id, salon_id) FROM stdin;
+9	Հրաչիկ	Հովսեփյան	1990-10-27	/static/assets/images/users/specialist.png	Ունեմ 5 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Երևանում 	1	3
+11	Սիրակ	Կարապետյան	1985-12-16	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ	2	4
+1	Լիլիթ	Կարապետյան	1987-02-21	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Մոսկվայում 	1	3
+12	Անի	Մամուլյան	1994-01-16	/static/assets/images/users/specialist.png	վերապատրաստվել եմ Մոսկվայում 	3	4
+2	Անուշ	Վարդանյան	1989-01-12	/static/assets/images/users/specialist.png	Ունեմ 2 տարվա աշխատանքային փորձ	1	3
+4	Հայկուհի	Կարապետյան	1984-06-12	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ ԱՄՆ-ում 	2	3
+5	Սիրարփի	Հայրապետյան	1994-08-01	/static/assets/images/users/specialist.png	Ունեմ 3 տարվա աշխատանքային փորձ,վերապատրաստվել եմ Երևանում 	3	3
+6	Մանե	Իսահակյան	1991-09-05	/static/assets/images/users/specialist.png	Ունեմ 5 տարվա աշխատանքային փորձ,վերապատրաստվել եմ Վրաստանում 	4	3
+7	Աննա	Հարությունյան	1987-05-25	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ,վերապատրաստվել եմ Իտալիայում	4	3
+8	Հակոբ	Աբաղյան	1985-07-27	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ	1	4
+3	Հասմիկ	Չիլինգարյան	1989-01-12	/static/assets/images/users/specialist.png	Ունեմ 2 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Պեկինում	1	4
+10	Հասմիկ	Չիլինգարյան	1995-11-12	/static/assets/images/users/specialist.png	Ունեմ 2 տարվա աշխատանքային փորձ	1	4
+13	Անաստասիա	Մամուլյան	1990-02-18	/static/assets/images/users/specialist.png	ՈՒնեմ 4 տարվա աշխատանքային փորձ	4	4
+14	Աննա	Կարապետյան	1985-03-21	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Ալժիրում 	1	5
+15	Նունե	Խաչատրյան	1985-04-02	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ	2	5
+16	Վարդուհի	Ղազարյան	1995-05-09	/static/assets/images/users/specialist.png	Ունեմ 3 տարվա աշխատանքային փորձ, վերապատրաստվել եմ ԱՄՆ-ում 	2	5
+17	Գոհար	Բաբելյան	1994-06-08	/static/assets/images/users/specialist.png	Ունեմ 4 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Մոսկվայում 	3	5
+18	Մարիամ	Պապյան	1987-07-11	/static/assets/images/users/specialist.png	Ունեմ 9 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Մոսկվայում 	3	5
+19	Արմինե	Բաբայան	1992-08-15	/static/assets/images/users/specialist.png	Ունեմ 4 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Հունաստանում 	4	5
+20	Կարինե	Մուրադյան	1990-09-26	/static/assets/images/users/specialist.png	Ունեմ 6 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Իսպանիայում 	4	5
+21	Կարապետ	Հովակիմյան	1995-10-21	/static/assets/images/users/specialist.png	Ունեմ 1 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Հնդկաստանում 	1	6
+22	Լուսինե	Խաչատրյան	1975-10-29	/static/assets/images/users/specialist.png	Ունեմ 15 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Գերմանիայում 	2	6
+23	Էմա	Ադամյան	1987-10-06	/static/assets/images/users/specialist.png	վերապատրաստվել եմ Անգորայում 	2	6
+24	Մերի	Խառատյան	1980-11-13	/static/assets/images/users/specialist.png	Ունեմ 15 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Ավստրիայում 	2	6
+25	Կարինե	Հարությունյան	1994-11-30	/static/assets/images/users/specialist.png	Ունեմ 3 տարվա աշխատանքային փորձ	4	6
+26	Տիգրան	Քոչինյան	1996-12-31	/static/assets/images/users/specialist.png	Վերապատրաստվել եմ Գվինեայում	1	7
+27	Գարիկ	Իսկանդարյան	1988-12-01	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ	1	7
+28	Անահիտ	Կառյան	1996-12-13	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ	2	7
+29	Ինեսա	Մկրտչյան	1990-12-17	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ	3	7
+30	Էրիկ	Պապյան	1987-10-08	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Թալիանդում 	3	7
+31	Կարեն	Կարապետյան	1985-09-06	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Ինդոնեզիայում 	1	8
+32	Գոռ	Վարդանյան	1987-08-19	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Իրանում 	1	8
+33	Ամալյա	Կիրակոսյան	1994-07-23	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Մոսկվայում 	3	8
+34	Նունե	Հայրապետյան	1994-12-28	/static/assets/images/users/specialist.png	Ունեմ 3 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Երևանում 	4	8
 \.
 
 
@@ -609,14 +554,6 @@ ALTER TABLE ONLY public.salon
 
 
 --
--- Name: salon_worker_category salon_worker_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.salon_worker_category
-    ADD CONSTRAINT salon_worker_category_pkey PRIMARY KEY (worker_id, category_id, salon_id);
-
-
---
 -- Name: social social_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -681,30 +618,6 @@ ALTER TABLE ONLY public.works
 
 
 --
--- Name: salon_worker_category salon_worker_category_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.salon_worker_category
-    ADD CONSTRAINT salon_worker_category_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.category(id);
-
-
---
--- Name: salon_worker_category salon_worker_category_salon_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.salon_worker_category
-    ADD CONSTRAINT salon_worker_category_salon_id_fkey FOREIGN KEY (salon_id) REFERENCES public.salon(id);
-
-
---
--- Name: salon_worker_category salon_worker_category_worker_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.salon_worker_category
-    ADD CONSTRAINT salon_worker_category_worker_id_fkey FOREIGN KEY (worker_id) REFERENCES public.worker(id);
-
-
---
 -- Name: social_worker social_worker_social_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -718,6 +631,22 @@ ALTER TABLE ONLY public.social_worker
 
 ALTER TABLE ONLY public.social_worker
     ADD CONSTRAINT social_worker_worker_id_fkey FOREIGN KEY (worker_id) REFERENCES public.worker(id);
+
+
+--
+-- Name: worker worker_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.worker
+    ADD CONSTRAINT worker_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.category(id);
+
+
+--
+-- Name: worker worker_salon_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.worker
+    ADD CONSTRAINT worker_salon_id_fkey FOREIGN KEY (salon_id) REFERENCES public.salon(id);
 
 
 --
