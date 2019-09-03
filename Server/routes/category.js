@@ -30,4 +30,17 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
+/* GET all workers, from that category */
+router.get('/:id/workers', function(req, res, next) {
+  client.query(`SELECT * FROM worker
+  WHERE id IN
+  (SELECT worker_id FROM salon_worker_category 
+  WHERE category_id = ${req.params.id})`, function (err, result) {
+      if (err) {
+          res.status(400).send(err);
+      }
+      res.status(200).send(result.rows);
+  });
+});
+
 module.exports = router;
