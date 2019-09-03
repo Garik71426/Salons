@@ -5,11 +5,10 @@ import {observer} from 'mobx-react';
 
 import ChangeSalonInfo from './modals/ChangeSalonInfo';
 import AddCategory from './modals/AddCategori';
-import SalonAddWorker from './modals/SalonAddWorker';
+import Workers from './Workers';
 
 import NotFound from './../../NotFound'; 
 import Messages from './../../Messages';
-import CardCategory from './../cards/CardCategory';
 
 import notification from './../../../assets/images/salon/notification.png';
 
@@ -24,37 +23,92 @@ class Salon extends Component {
             deleteWorker : PropTypes.func,
         }).isRequired
     }
+    state = {
+        salonInfo: {},
+        categoryInfo: [], 
+    };
+
     componentDidMount() {
-        this.context.AppStore.isPath({salonIndex : this.props.match.params.whichSalon},'salon');        
+        this.context.AppStore.isPath({salonIndex : this.props.match.params.whichSalon},'salon'); 
+        let salonIndex;
+        if (this.context.AppStore.isPagePath) {
+            salonIndex = this.props.match.params.whichSalon;
+        }
+        fetch(`http://localhost:3001/salon/${salonIndex}`)
+        .then(res => res.json())
+        .then(
+            (salon) => {
+                fetch(`http://localhost:3001/salon/category/${salonIndex}`)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({ salonInfo: salon , categoryInfo: result });
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                )
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
+    }
+
+    componentDidUpdate(){
+        this.context.AppStore.isPath({salonIndex : this.props.match.params.whichSalon},'salon'); 
+        let salonIndex;
+        if (this.context.AppStore.isPagePath) {
+            salonIndex = this.props.match.params.whichSalon;
+        }
+        fetch(`http://localhost:3001/salon/${salonIndex}`)
+        .then(res => res.json())
+        .then(
+            (salon) => {
+                fetch(`http://localhost:3001/salon/category/${salonIndex}`)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({ salonInfo: salon , categoryInfo: result });
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                )
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
     }
     
     render() {
-        const {_Data, deleteWorker, deleteCategory, isUser, isPagePath, isPath} = this.context.AppStore;
         let salonIndex;
-        if (isPagePath) {
+        if (this.context.AppStore.isPagePath) {
             salonIndex = this.props.match.params.whichSalon;
         }
-        const DataSalon = _Data[salonIndex];
+        const {deleteWorker, deleteCategory, isUser, isPagePath} = this.context.AppStore;
         
+        const { salonInfo, categoryInfo } =this.state;
 		return (
              <Container className = "salon-page">
                 {(isPagePath)? <>
                 <Row>
                     <Col >
-                        <h1 className='varsAnun'>{DataSalon.name}</h1>
+                        <h1 className='varsAnun'>{salonInfo.name}</h1>
                     </Col>
                     <img src={notification} alt=""  align="right" width = "50px" height = "50px"/>
 
 				</Row>
 				<Row className = "salon-page">
 					<Col md="6" >
-						<img src={DataSalon.img} alt="" className="logoSal" width = "100%" height = "370vh"/>
+						<img src={salonInfo.img} alt="" className="logoSal" width = "100%" height = "370vh"/>
 					</Col>
 					<Col md="6">
 						<h2>{Messages.beautySalons.beautySalonsAbout}</h2>
-						<p>{DataSalon.info}</p>
-                        <p>{Messages.beautySalons.beautySalonsAddress}` {DataSalon.address}</p>
-                        <p>{Messages.beautySalons.beautySalonsPhone}` {DataSalon.phone}</p>
+						<p>{salonInfo.info}</p>
+                        <p>{Messages.beautySalons.beautySalonsAddress}` {salonInfo.address}</p>
+                        <p>{Messages.beautySalons.beautySalonsPhone}` {salonInfo.phone}</p>
                         {isUser === 'salon' && <ChangeSalonInfo
                             salonindex={salonIndex}
                             />}
@@ -64,39 +118,20 @@ class Salon extends Component {
 
         		</Row>
         		
-                {DataSalon.category.map((categoryItem, categotyIndex) => {
-                    return 	<React.Fragment key = {categoryItem.prof}>
+                {categoryInfo.map((categoryItem, categotyIndex) => {
+                    return 	<React.Fragment key = {categoryItem.name}>
                         <Row align = "center" className = "mt-5 mb-5">
                             <Col>
                                 <h2>
-                                    {categoryItem.prof}
+                                    {categoryItem.name}
                                     {isUser === 'salon' && <Button color="danger"  onClick =  {deleteCategory} salon-index = {salonIndex} category-index = {categotyIndex}>X</Button>}
                                 </h2>
                             </Col>
                         </Row>
-                        <Row>{categoryItem.workers.map((specialistItem, specialistIndex) => {
-                                return <React.Fragment key = {specialistIndex}> 
-                                    {(isUser === 'salon')?
-                                    <CardCategory 
-                                        deleteCard = {<Button color="danger" className="delete" onClick = {deleteWorker} salon-index = {salonIndex} category-index = {categotyIndex} specialist-index = {specialistIndex}>X</Button>}
-                                        img={specialistItem.img}
-                                        title= {`${specialistItem.name} ${specialistItem.surname}`}
-                                        name = {`${salonIndex}/${categotyIndex}/${specialistIndex}`}
-                                        buttonText = {Messages.table.specialiistButtonText}
-                                        url = {this.props.match.url}
-                                        />:
-                                    <CardCategory 
-                                        img={specialistItem.img}
-                                        title= {`${specialistItem.name} ${specialistItem.surname}`}
-                                        name = {`${salonIndex}/${categotyIndex}/${specialistIndex}`}
-                                        buttonText = {Messages.table.specialiistButtonText}
-                                        url = {this.props.match.url}
-                                        />}
-                                </React.Fragment>
-                            })}
-                            {isUser === 'salon' && <SalonAddWorker salonIndex = {salonIndex} categoryIndex = {categotyIndex}/>}
-                        </Row>
-                        
+                        <Workers 
+                            category_id = {categoryItem.id}
+                            salon_id = {salonInfo.id}
+                        />
                     </React.Fragment>
                 })}
                 {isUser === 'salon' && <Row align = "center" className = "mt-5 mb-5">  

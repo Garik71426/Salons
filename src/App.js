@@ -35,18 +35,6 @@ class App extends Component {
     }
     componentDidMount(){
         this.AppStore.initData();
-        fetch('http://localhost:3001/category')
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-        },
-        // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-        // чтобы не перехватывать исключения из ошибок в самих компонентах.
-        (error) => {
-            console.log(error);
-        }
-      )
     }
     render() {
         const routes = [
@@ -91,7 +79,7 @@ class App extends Component {
                         <Switch>
                             {
                                 routes.map(item => {
-                                    return <Route exact path = {item.path} component = {item.component} />;
+                                    return <Route key = {item.path} exact path = {item.path} component = {item.component} />;
                                 })
                             }
                             <Route component={NotFound} />

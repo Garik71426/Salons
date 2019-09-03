@@ -28,10 +28,21 @@ class HeaderUser extends Component {
         this.state = {
             isOpen: false,
             FuncForCookie : PropTypes.func,
+            _Data: []
         };
     }
     componentDidMount(){
-          this.context.AppStore.FuncForCookie();
+        this.context.AppStore.FuncForCookie();
+        fetch('http://localhost:3001/salon')
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({ _Data: result })
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
 
     }
     toggle() {
@@ -40,7 +51,8 @@ class HeaderUser extends Component {
         });
     }
     render() {
-        const {_Data, isUser, LogOut, LoginSalonIndex} = this.context.AppStore;
+        const { isUser, LogOut, LoginSalonIndex} = this.context.AppStore;
+        const { _Data } = this.state;
         return (
             <div >
                 <Container>
