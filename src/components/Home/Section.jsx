@@ -25,17 +25,15 @@ class Section extends Component {
 
     componentDidMount() {
         fetch('http://localhost:3001/category')
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({categorys: [...result]})
-        },
-        // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-        // чтобы не перехватывать исключения из ошибок в самих компонентах.
-        (error) => {
-            console.log(error);
-        }
-      )
+        .then(res => res.json())
+        .then(
+            (result) => {
+            this.setState({categorys: result})
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
     }
     render() {
         const {cardClick} = this.context.AppStore;

@@ -18,7 +18,6 @@ import './../../../assets/stylesheets/salon.css';
 class Salon extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-            _Data : PropTypes.array,
             deleteCategory : PropTypes.func,
             deleteWorker : PropTypes.func,
         }).isRequired
@@ -29,16 +28,13 @@ class Salon extends Component {
     };
 
     componentDidMount() {
-        this.context.AppStore.isPath({salonIndex : this.props.match.params.whichSalon},'salon'); 
-        let salonIndex;
-        if (this.context.AppStore.isPagePath) {
-            salonIndex = this.props.match.params.whichSalon;
-        }
-        fetch(`http://localhost:3001/salon/${salonIndex}`)
+        const salon_id = this.props.match.params.whichSalon;
+        this.context.AppStore.isPath({salon_id : salon_id},'salon'); 
+        fetch(`http://localhost:3001/salon/${salon_id}`)
         .then(res => res.json())
         .then(
             (salon) => {
-                fetch(`http://localhost:3001/salon/category/${salonIndex}`)
+                fetch(`http://localhost:3001/salon/category/${this.props.match.params.whichSalon}`)
                 .then(res => res.json())
                 .then(
                     (result) => {
@@ -55,44 +51,37 @@ class Salon extends Component {
         )
     }
 
-    componentDidUpdate(){
-        this.context.AppStore.isPath({salonIndex : this.props.match.params.whichSalon},'salon'); 
-        let salonIndex;
-        if (this.context.AppStore.isPagePath) {
-            salonIndex = this.props.match.params.whichSalon;
+    componentDidUpdate(prevProps){
+        if(this.props.match.params.whichSalon !== prevProps.match.params.whichSalon) {
+            let salon_id = this.props.match.params.whichSalon;
+            fetch(`http://localhost:3001/salon/${salon_id}`)
+            .then(res => res.json())
+            .then(
+                (salon) => {
+                    fetch(`http://localhost:3001/salon/category/${salon_id}`)
+                    .then(res => res.json())
+                    .then(
+                        (result) => {
+                            this.setState({ salonInfo: salon , categoryInfo: result });
+                        },
+                        (error) => {
+                            console.log(error);
+                        }
+                    )
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
         }
-        fetch(`http://localhost:3001/salon/${salonIndex}`)
-        .then(res => res.json())
-        .then(
-            (salon) => {
-                fetch(`http://localhost:3001/salon/category/${salonIndex}`)
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        this.setState({ salonInfo: salon , categoryInfo: result });
-                    },
-                    (error) => {
-                        console.log(error);
-                    }
-                )
-            },
-            (error) => {
-                console.log(error);
-            }
-        )
     }
     
     render() {
-        let salonIndex;
-        if (this.context.AppStore.isPagePath) {
-            salonIndex = this.props.match.params.whichSalon;
-        }
-        const {deleteWorker, deleteCategory, isUser, isPagePath} = this.context.AppStore;
-        
+        let salon_id = this.props.match.params.whichSalon;
+        const { deleteCategory, isUser, isPagePath} = this.context.AppStore;
         const { salonInfo, categoryInfo } =this.state;
 		return (
              <Container className = "salon-page">
-                {(isPagePath)? <>
                 <Row>
                     <Col >
                         <h1 className='varsAnun'>{salonInfo.name}</h1>
@@ -109,9 +98,9 @@ class Salon extends Component {
 						<p>{salonInfo.info}</p>
                         <p>{Messages.beautySalons.beautySalonsAddress}` {salonInfo.address}</p>
                         <p>{Messages.beautySalons.beautySalonsPhone}` {salonInfo.phone}</p>
-                        {isUser === 'salon' && <ChangeSalonInfo
-                            salonindex={salonIndex}
-                            />}
+                        {/* {isUser === 'salon' && <ChangeSalonInfo
+                            salon_id={salon_id}
+                            />} */}
 
 
 					</Col>
@@ -124,7 +113,7 @@ class Salon extends Component {
                             <Col>
                                 <h2>
                                     {categoryItem.name}
-                                    {isUser === 'salon' && <Button color="danger"  onClick =  {deleteCategory} salon-index = {salonIndex} category-index = {categotyIndex}>X</Button>}
+                                    {isUser === 'salon' && <Button color="danger"  onClick =  {deleteCategory} salon-index = {salon_id} category-index = {categotyIndex}>X</Button>}
                                 </h2>
                             </Col>
                         </Row>
@@ -135,9 +124,8 @@ class Salon extends Component {
                     </React.Fragment>
                 })}
                 {isUser === 'salon' && <Row align = "center" className = "mt-5 mb-5">  
-                    <AddCategory salonIndex = {salonIndex}/>
+                    <AddCategory salon_id = {salon_id}/>
                 </Row>}
-                </>: <NotFound/>}
 			</Container>
 		);
 	}

@@ -32,17 +32,20 @@ class Workers extends Component {
         )
     }
 
-    componentDidUpdate(){
-        fetch(`http://localhost:3001/salon//workers/${this.props.category_id}/${this.props.salon_id}`)
-        .then(res => res.json())
-        .then(
-            (result) => {
-                this.setState({ workers: result})
-            },
-            (error) => {
-                console.log(error);
-            }
-        )
+    componentDidUpdate(prevProps){
+        if(this.props.category_id !== prevProps.category_id 
+            && this.props.salon_id !== prevProps.salon_id) {
+            fetch(`http://localhost:3001/salon//workers/${this.props.category_id}/${this.props.salon_id}`)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({ workers: result})
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        }
     }
     
     render() {

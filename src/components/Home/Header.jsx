@@ -43,7 +43,6 @@ class HeaderUser extends Component {
                 console.log(error);
             }
         )
-
     }
     toggle() {
         this.setState({
@@ -76,8 +75,8 @@ class HeaderUser extends Component {
                                                 {Messages.header.dropDown}
                                             </DropdownToggle>
                                             <DropdownMenu right>
-                                                {_Data.map((item,index) =>{
-                                                    return <Link to={`/Salon/${index}`} key = {item.address}>
+                                                {_Data.map(item => {
+                                                    return <Link to={`/Salon/${item.id}`} key = {item.address}>
                                                         <DropdownItem  className="drop_item">
                                                             {item.name}
                                                         </DropdownItem>
