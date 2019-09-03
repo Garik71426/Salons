@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1)
--- Dumped by pg_dump version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1)
+-- Dumped from database version 10.10 (Ubuntu 10.10-1.pgdg18.04+1)
+-- Dumped by pg_dump version 10.10 (Ubuntu 10.10-1.pgdg18.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -41,7 +41,8 @@ SET default_with_oids = false;
 CREATE TABLE public.category (
     id integer NOT NULL,
     name character varying(15) NOT NULL,
-    description character varying(250) NOT NULL
+    description character varying(250) NOT NULL,
+    img character varying(50)
 );
 
 
@@ -297,11 +298,11 @@ ALTER TABLE ONLY public.works ALTER COLUMN id SET DEFAULT nextval('public.works_
 -- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.category (id, name, description) FROM stdin;
-1	Վարսահարդարում	Գեղեցկությունն ամենուր է, հույժ ցանկալի հյուր է։
-2	Դիմահարդարում	Գեղեցկությունը ձիրք ու զորություն ունի սրտերը խաղաղություն մտցնելու։
-3	Մատնահարդարում	Մարդու մեջ պետք է ամեն ինչ գեղեցիկ լինի։
-4	Կոսմետոլոգիա	Գեղեցիկն աստվածային է, վեհը՝ մարդկային։
+COPY public.category (id, name, description, img) FROM stdin;
+1	Վարսահարդարում	Գեղեցկությունն ամենուր է, հույժ ցանկալի հյուր է։	static/assets/images/section/vars.jpg
+2	Դիմահարդարում	Գեղեցկությունը ձիրք ու զորություն ունի սրտերը խաղաղություն մտցնելու։	static/assets/images/section/dim.jpg
+3	Մատնահարդարում	Մարդու մեջ պետք է ամեն ինչ գեղեցիկ լինի։	static/assets/images/section/mat.jpg
+4	Կոսմետոլոգիա	Գեղեցիկն աստվածային է, վեհը՝ մարդկային։	static/assets/images/section/spa.jpg
 \.
 
 
@@ -368,10 +369,10 @@ COPY public.salon_worker_category (worker_id, category_id, salon_id) FROM stdin;
 --
 
 COPY public.social (id, name) FROM stdin;
-1	facebook
-2	twitter
-3	instagram
-5	vk
+1	Facebook
+3	Instagram
+2	Twitter
+5	Vk
 \.
 
 
@@ -525,6 +526,14 @@ SELECT pg_catalog.setval('public.works_id_seq', 2, true);
 
 ALTER TABLE ONLY public.category
     ADD CONSTRAINT category_category_name_key UNIQUE (name);
+
+
+--
+-- Name: category category_img_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.category
+    ADD CONSTRAINT category_img_key UNIQUE (img);
 
 
 --

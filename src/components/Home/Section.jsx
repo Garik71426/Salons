@@ -18,6 +18,25 @@ class Section extends Component {
             cardClick : PropTypes.func,
         }).isRequired
     }
+
+    state = {
+        categorys: []
+    }
+
+    componentDidMount() {
+        fetch('http://localhost:3001/category')
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({categorys: [...result]})
+        },
+        // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
+        // чтобы не перехватывать исключения из ошибок в самих компонентах.
+        (error) => {
+            console.log(error);
+        }
+      )
+    }
     render() {
         const {cardClick} = this.context.AppStore;
         return (
@@ -27,12 +46,12 @@ class Section extends Component {
                 </Container>
                 <Container className = "cardSection">
                     <Row>
-                        {homeConfigs.categorys.map(item => {
-                            return  <React.Fragment key = {item.title}>
+                        {this.state.categorys.map(item => {
+                            return  <React.Fragment key = {item.name}>
                                 <CardCategory 
                                     img={item.img}
-                                    title={item.title}
-                                    explaText={item.explaText}
+                                    title={item.name}
+                                    explaText={item.description}
                                     CardClass = "cardSection1"
                                     buttonText = {Messages.section.homeCardButtonText}
                                     url = {'Category'}
