@@ -43,6 +43,18 @@ router.get('/category/:salon_id', function(req, res, next) {
     });
 });
 
+/* GET salon by worker_id */
+router.get('/specialist/:worker_id', function(req, res, next) {
+    client.query(`SELECT name, address FROM salon
+    WHERE id IN (SELECT salon_id FROM worker
+    WHERE id = ${req.params.worker_id})`, function (err, result) {
+        if (err) {
+            return res.status(400).send(err);
+        }
+        res.status(200).send(result.rows[0]);
+    });
+});
+
 //* GET workers by salon_id and category_id */
 router.get('/workers/:category_id/:salon_id', function(req, res, next) {
     client.query(`select * from worker 

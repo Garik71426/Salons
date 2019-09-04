@@ -7,7 +7,6 @@ import Carusel from './Carusel';
 import CardCategory from './../cards/CardCategory';
 
 import Messages from './../../Messages';
-import {homeConfigs} from './../../config/categoryConfig';
 
 import './../../../assets/stylesheets/section.css';
 
@@ -15,7 +14,7 @@ import './../../../assets/stylesheets/section.css';
 class Section extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-            cardClick : PropTypes.func,
+
         }).isRequired
     }
 
@@ -36,7 +35,6 @@ class Section extends Component {
         )
     }
     render() {
-        const {cardClick} = this.context.AppStore;
         return (
             <section>
                 <Container fluid className = "carusel">
@@ -53,7 +51,7 @@ class Section extends Component {
                                     CardClass = "cardSection1"
                                     buttonText = {Messages.section.homeCardButtonText}
                                     url = {'Category'}
-                                    name ={`${item.id}`}
+                                    id ={`${item.id}`}
                                     />
                             </React.Fragment>
                         })}

@@ -3,11 +3,10 @@ import {Container, Row, Col,Button} from 'reactstrap';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 
-import ChangeSalonInfo from './modals/ChangeSalonInfo';
+//import ChangeSalonInfo from './modals/ChangeSalonInfo';
 import AddCategory from './modals/AddCategori';
 import Workers from './Workers';
 
-import NotFound from './../../NotFound'; 
 import Messages from './../../Messages';
 
 import notification from './../../../assets/images/salon/notification.png';
@@ -78,7 +77,7 @@ class Salon extends Component {
     
     render() {
         let salon_id = this.props.match.params.whichSalon;
-        const { deleteCategory, isUser, isPagePath} = this.context.AppStore;
+        const { deleteCategory, isUser } = this.context.AppStore;
         const { salonInfo, categoryInfo } =this.state;
 		return (
              <Container className = "salon-page">
@@ -120,6 +119,7 @@ class Salon extends Component {
                         <Workers 
                             category_id = {categoryItem.id}
                             salon_id = {salonInfo.id}
+                            url = {this.props.match.url}
                         />
                     </React.Fragment>
                 })}

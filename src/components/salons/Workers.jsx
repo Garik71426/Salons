@@ -52,7 +52,7 @@ class Workers extends Component {
         const { deleteWorker, isUser } = this.context.AppStore;
         
         const { workers } = this.state;
-        const { salon_id, category_id } = this.props;
+        const { salon_id, category_id, url } = this.props;
 		return (
             <Row>{workers.map((specialistItem, specialistIndex) => {
                     return <React.Fragment key = {specialistIndex}> 
@@ -61,16 +61,16 @@ class Workers extends Component {
                             deleteCard = {<Button color="danger" className="delete" onClick = {deleteWorker} salon-index = {salon_id} category-index = {category_id} specialist-index = {specialistIndex}>X</Button>}
                             img={specialistItem.img}
                             title= {`${specialistItem.name} ${specialistItem.surname}`}
-                            name = {`${salon_id}/${category_id}/${specialistIndex}`}
+                            id = {specialistItem.id}
                             buttonText = {Messages.table.specialiistButtonText}
-                            //url = {this.props.match.url}
+                            url = 'specialist'
                             />:
                         <CardCategory 
                             img={specialistItem.img}
                             title= {`${specialistItem.name} ${specialistItem.surname}`}
-                            name = {`${salon_id}/${category_id}/${specialistIndex}`}
+                            id = {specialistItem.id}
                             buttonText = {Messages.table.specialiistButtonText}
-                            //url = {this.props.match.url}
+                            url = 'specialist'
                             />}
                     </React.Fragment>
                 })}

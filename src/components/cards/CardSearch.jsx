@@ -10,10 +10,28 @@ import Messages from './../../Messages';
 
 class CardSearch extends Component {
     static propTypes = {
-
+        nameSurname: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired
+    }
+    state = {
+        salon: {}
+    }
+    componentDidMount(){
+        fetch(`http://localhost:3001/salon/specialist/${this.props.id}`)
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({ salon: result });
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
     }
     render() {
-        const { image, nameSurname, address, salonTitle, url, name} = this.props;
+        const { image, nameSurname, id} = this.props;
+        const { salon } = this.state;
         return (
             <Card className = "Card_top">
                     <Media className = "text">
@@ -24,10 +42,10 @@ class CardSearch extends Component {
                         <Media heading className="name_title">
                             {nameSurname}
                         </Media>
-                            {Messages.table.userAddress}` {address}
-                            <div>{Messages.table.beautySalonName}`  {salonTitle}</div>
+                            {Messages.table.userAddress}` {salon.address}
+                            <div>{Messages.table.beautySalonName}`  {salon.name}</div>
                         </Media>
-                        <Link to = {`${url}/${name}`}>
+                        <Link to = {`/specialist/${id}`}>
                             <Button className = "btn_card_category" outline color = "info">Մանրամասն</Button>
                         </Link>
                 </Media>

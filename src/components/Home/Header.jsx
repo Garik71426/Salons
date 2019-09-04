@@ -17,7 +17,7 @@ import './../../../assets/stylesheets/header.css';
 class HeaderUser extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-            _Data : PropTypes.array.isRequired,
+            Salon : PropTypes.array.isRequired,
             isUser : PropTypes.string,
             LogOut : PropTypes.func,
         }).isRequired
@@ -28,7 +28,7 @@ class HeaderUser extends Component {
         this.state = {
             isOpen: false,
             FuncForCookie : PropTypes.func,
-            _Data: []
+            Salon: []
         };
     }
     componentDidMount(){
@@ -37,7 +37,7 @@ class HeaderUser extends Component {
         .then(res => res.json())
         .then(
             (result) => {
-                this.setState({ _Data: result })
+                this.setState({ Salon: result })
             },
             (error) => {
                 console.log(error);
@@ -51,7 +51,7 @@ class HeaderUser extends Component {
     }
     render() {
         const { isUser, LogOut, LoginSalonIndex} = this.context.AppStore;
-        const { _Data } = this.state;
+        const { Salon } = this.state;
         return (
             <div >
                 <Container>
@@ -75,7 +75,7 @@ class HeaderUser extends Component {
                                                 {Messages.header.dropDown}
                                             </DropdownToggle>
                                             <DropdownMenu right>
-                                                {_Data.map(item => {
+                                                {Salon.map(item => {
                                                     return <Link to={`/Salon/${item.id}`} key = {item.address}>
                                                         <DropdownItem  className="drop_item">
                                                             {item.name}

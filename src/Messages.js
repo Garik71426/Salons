@@ -90,7 +90,7 @@ const Messages = {
     },
     specialist : {
         information : 'Տեղեկատվություն',
-        phoneNumber : ' Հեռ․ - ',
+        salonPhone: 'Սրահի Հեռ․ -',
         salonName : ' Սրահի անուն - ',
         salonAddress : ' Սրահի հասցե - ',
         socialMedia : ' Կապ սոց․ կայքերում - ',

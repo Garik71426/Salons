@@ -51,11 +51,11 @@ class App extends Component {
                 component: Categorys
             },
             {
-                path: '/Salon/:whichSalon/:salonIndex/:categoryIndex/:specialistIndex',
+                path: '/Salon/:whichSalon/:specialistIndex',
                 component: Specialist
             },
             {
-                path: '/Category/:whichCategory/:salonIndex/:categoryIndex/:specialistIndex',
+                path: '/specialist/:specialistIndex',
                 component: Specialist
             },
             {
