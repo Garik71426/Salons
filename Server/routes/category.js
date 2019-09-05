@@ -7,7 +7,7 @@ const client = require('../public/javascripts/client');
 router.get('/', function(req, res, next) {
     client.query('SELECT * FROM category', function (err, result) {
         if (err) {
-            res.status(400).send(err);
+            return res.status(500).send(err);
         }
         res.status(200).send(result.rows);
     });
@@ -15,23 +15,35 @@ router.get('/', function(req, res, next) {
 
 /* GET category by ID */
 router.get('/:id', function(req, res, next) {
+    if (isNaN(Number(req.params.id))) {
+        return res.status(400).send('Bad request');
+    }
     client.query(`SELECT * FROM category WHERE id=${req.params.id}`, function (err, result) {
         if (err) {
-            res.status(400).send(err);
+            return res.status(500).send(err);
         }
-        res.status(200).send(result.rows[0]);
+        if (result.rows.length === 0) {
+            return res.status(404).send('Not Found');
+        }
+        return res.status(200).send(result.rows[0]);
     });
 });
 
 /* GET all workers, from that category */
 router.get('/:id/workers', function(req, res, next) {
-  client.query(`SELECT * FROM worker
-  WHERE category_id = ${req.params.id}`, function (err, result) {
-      if (err) {
-          res.status(400).send(err);
-      }
-      res.status(200).send(result.rows);
-  });
+    if (isNaN(Number(req.params.id))) {
+        return res.status(400).send('Bad request');
+    }
+    client.query(`SELECT * FROM worker
+    WHERE category_id = ${req.params.id}`, function (err, result) {
+        if (err) {
+            res.status(500).send(err);
+        }
+        if (result.rows.length === 0) {
+            return res.status(404).send('Not Found');
+        }
+        res.status(200).send(result.rows);
+    });
 });
 
 module.exports = router;

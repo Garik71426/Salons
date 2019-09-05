@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 
 import SearchWorker from './SearchWorker';
-import CardSearch from './../cards/CardSearch';
+import Workers from './Workers';
 import CategorysNavigator from './CategorysNavigator';
 
 import './../../../assets/stylesheets/table.css';
@@ -17,24 +17,14 @@ class Categorys extends Component {
         }).isRequired
     }
     state = {
-        category: {},
-        workers:[]
+        category: {}
     }
     componentDidMount() {
         fetch(`http://localhost:3001/category/${this.props.match.params.whichCategory}`)
         .then(res => res.json())
         .then(
             (category) => {
-                fetch(`http://localhost:3001/category/${this.props.match.params.whichCategory}/workers`)
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        this.setState({ category: category, workers: result });
-                    },
-                    (error) => {
-                        console.log(error);
-                    }
-                )
+                this.setState({ category: category });
             },
             (error) => {
                 console.log(error);
@@ -47,16 +37,7 @@ class Categorys extends Component {
             .then(res => res.json())
             .then(
                 (category) => {
-                    fetch(`http://localhost:3001/category/${this.props.match.params.whichCategory}/workers`)
-                    .then(res => res.json())
-                    .then(
-                        (result) => {
-                            this.setState({ category: category, workers: result });
-                        },
-                        (error) => {
-                            console.log(error);
-                        }
-                    )
+                    this.setState({ category: category });
                 },
                 (error) => {
                     console.log(error);
@@ -65,7 +46,7 @@ class Categorys extends Component {
         }
     }
     render(){
-        const { category, workers } = this.state;
+        const { category } = this.state;
         
         return(
             <Container>
@@ -73,17 +54,7 @@ class Categorys extends Component {
                 <SearchWorker />
                 <div>
                     <h3 align = "center" className = "mt-5 mb-5 text_color">{category.name}</h3>
-                    {workers.map(item => {
-                        return <React.Fragment key = {item.id}>
-                            <CardSearch 
-                                image = {item.img}
-                                nameSurname = {`${item.name} ${item.surname}`}
-                                id = {item.id}
-                            /> 
-                        </React.Fragment>
-                        })
-                    }
-                    
+                    {category.id && <Workers category_id = {category.id}/>}                   
                 </div>
             </Container>
         );

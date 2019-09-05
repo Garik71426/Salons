@@ -10,19 +10,17 @@ import Messages from './../../Messages';
 
 class CardSearch extends Component {
     static propTypes = {
-        nameSurname: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
         id: PropTypes.number.isRequired
     }
     state = {
-        salon: {}
+        specialist: {}
     }
     componentDidMount(){
-        fetch(`http://localhost:3001/salon/specialist/${this.props.id}`)
+        fetch(`http://localhost:3001/worker/${this.props.id}/full`)
         .then(res => res.json())
         .then(
             (result) => {
-                this.setState({ salon: result });
+                this.setState({ specialist: result });
             },
             (error) => {
                 console.log(error);
@@ -30,20 +28,20 @@ class CardSearch extends Component {
         )
     }
     render() {
-        const { image, nameSurname, id} = this.props;
-        const { salon } = this.state;
+        const { id } = this.props;
+        const { specialist } = this.state;
         return (
             <Card className = "Card_top">
                     <Media className = "text">
                         <Media left href="#">
-                            <img src={image} alt = "specialistImg" className = "img_size"/>
+                            <img src={specialist.img} alt = "specialistImg" className = "img_size"/>
                         </Media>
                         <Media body className="full_text">
                         <Media heading className="name_title">
-                            {nameSurname}
+                            {`${specialist.name} ${specialist.surname}`}
                         </Media>
-                            {Messages.table.userAddress}` {salon.address}
-                            <div>{Messages.table.beautySalonName}`  {salon.name}</div>
+                            {Messages.table.userAddress}` {specialist.salon_address}
+                            <div>{Messages.table.beautySalonName}`  {specialist.salon_name}</div>
                         </Media>
                         <Link to = {`/specialist/${id}`}>
                             <Button className = "btn_card_category" outline color = "info">Մանրամասն</Button>

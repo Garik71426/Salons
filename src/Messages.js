@@ -89,7 +89,7 @@ const Messages = {
         beautySalonsPhone : 'Հեռախոսահամար'
     },
     specialist : {
-        information : 'Տեղեկատվություն',
+        information : 'Տեղեկատվություն -',
         salonPhone: 'Սրահի Հեռ․ -',
         salonName : ' Սրահի անուն - ',
         salonAddress : ' Սրահի հասցե - ',
@@ -99,8 +99,8 @@ const Messages = {
         chooseClock : 'Ընտրել ժամ',
         confirmed : 'Հաստատել',
         myWorkes : 'Իմ աշխատանքներ',
-        age : 'Տարիք',
-        prof : 'Մասնագիտություն',
+        age : 'Տարիք -',
+        prof : 'Մասնագիտություն -',
     },
 
     AddWorker : {

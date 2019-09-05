@@ -52,7 +52,7 @@ class Salon extends Component {
 
     componentDidUpdate(prevProps){
         if(this.props.match.params.whichSalon !== prevProps.match.params.whichSalon) {
-            let salon_id = this.props.match.params.whichSalon;
+            const salon_id = this.props.match.params.whichSalon;
             fetch(`http://localhost:3001/salon/${salon_id}`)
             .then(res => res.json())
             .then(
@@ -105,7 +105,6 @@ class Salon extends Component {
 					</Col>
 
         		</Row>
-        		
                 {categoryInfo.map((categoryItem, categotyIndex) => {
                     return 	<React.Fragment key = {categoryItem.name}>
                         <Row align = "center" className = "mt-5 mb-5">

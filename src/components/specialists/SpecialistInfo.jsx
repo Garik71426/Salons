@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 
+import Social from './Social';
+
 import Messages from './../../Messages';
 
 @observer
@@ -12,39 +14,19 @@ class SpecialistInfo extends Component {
         }).isRequired
     };
     state = {
-        salon: {},
-        category: {},
-        socialNetwork: []
+        specialist: {}
     }
     componentDidMount() {
-        fetch(`http://localhost:3001/salon/${this.props.specialist.salon_id}`)
-                .then(res => res.json())
-                .then(
-                    (salon) => {
-                        fetch(`http://localhost:3001/category/${this.props.specialist.category_id}`)
-                        .then(res => res.json())
-                        .then(
-                            (category) => {
-                                fetch(`http://localhost:3001/worker/${this.props.specialist.id}/social`)
-                                .then(res => res.json())
-                                .then(
-                                    (socialNetwork) => {
-                                        this.setState({ salon: salon, category: category, socialNetwork: socialNetwork })    
-                                    },
-                                    (error) => {
-                                        console.log(error);
-                                    }
-                                )        
-                            },
-                            (error) => {
-                                console.log(error);
-                            }
-                        )        
-                    },
-                    (error) => {
-                        console.log(error);
-                    }
-                )
+        fetch(`http://localhost:3001/worker/${this.props.specialist_id}/full`)
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({ specialist: result })            
+            },
+            (error) => {
+                console.log(error);
+            }
+        )
     }
 
     calculate_age = (dob) => { 
@@ -54,20 +36,17 @@ class SpecialistInfo extends Component {
     }
 
     render() {
-        const { salon, category, socialNetwork } =  this.state;
-        const { specialist } = this.props;
+        const { specialist } =  this.state;
         const age = this.calculate_age(new Date(specialist.b_day));
         return (
             <div>
                 <h2 className = "textBlue"> {Messages.specialist.information} </h2>
-                <p> {Messages.specialist.salonPhone} {salon.phone} </p>
+                <p> {Messages.specialist.salonPhone} {specialist.salon_phone} </p>
                 <p> {Messages.specialist.age} {age} </p>
-                <p> {Messages.specialist.salonName}{salon.name}</p>
-                <p>{Messages.specialist.salonAddress} {salon.address}</p>
-                <p> {Messages.specialist.prof} {category.name} </p>
-                <p>{Messages.specialist.socialMedia} {socialNetwork.map(item => {
-                    return <a target="blank" href={item.path} key={item.id}>{item.name} </a>
-                })}</p>
+                <p> {Messages.specialist.salonName}{specialist.salon_name}</p>
+                <p>{Messages.specialist.salonAddress} {specialist.salon_address}</p>
+                <p> {Messages.specialist.prof} {specialist.category_name} </p>
+                {specialist.id && <Social specialist_id = {specialist.id}/>}
             </div>
         );
     }

@@ -12,8 +12,6 @@ import Messages from './../../Messages';
 
 import './../../../assets/stylesheets/specialist.css';
 
-import NotFound from './../../NotFound'; 
-
 @observer
 class SpecialistUser extends Component {
     static contextTypes = {
@@ -39,8 +37,8 @@ class SpecialistUser extends Component {
     }
 
     render() {
-        const { deleteWorksImage, isUser, id, isPagePath, isPath, changeSpeciaistWorkImages} = this.context.AppStore;
-        let { specialist, salon, category } =  this.state;
+        const { isUser } = this.context.AppStore;
+        let { specialist } =  this.state;
         return (
             <Container className="mb-5 sections mt-5">
                 <Row>
@@ -53,7 +51,7 @@ class SpecialistUser extends Component {
                             <p>{specialist.about}</p>
                         </div>
                     </div>
-                    {specialist.id && <SpecialistInfo specialist = {specialist}/>}
+                    {specialist.id && <SpecialistInfo specialist_id = {specialist.id}/>}
                 </Col>
                     {isUser === 'user' && <DateHourse />}
                 </Row>
