@@ -1,14 +1,7 @@
-var express = require('express');
-var router = express.Router();
-const { Client } = require('pg');
+const express = require('express');
+const router = express.Router();
 
-const connectionString = 'postgres://postgres:salon123@localhost:5432/salons';
-const client = new Client({
-    connectionString: connectionString
-});
-
-client.connect();
-
+const client = require('../public/javascripts/client');
 
 /* GET all workers. */
 router.get('/', function(req, res, next) {
@@ -56,7 +49,9 @@ router.get('/:id/social', function(req, res, next) {
 
 /* GET worker full info from id. */
 router.get('/:id/full', function(req, res, next) {
-    client.query(`SELECT w.id, w.name, w.surname, w.b_day, w.img, w.about, s.name, s.address, s.phone, c.name
+    client.query(`SELECT w.id, w.name, w.surname, w.b_day, w.img, w.about,
+    s.name AS salon_name, s.address AS salon_address, s.phone AS salon_phone,
+    c.name AS categoty_name
     FROM worker w INNER JOIN salon s ON
     w.id = ${req.params.id} AND s.id = w.salon_id
     INNER JOIN category c ON 

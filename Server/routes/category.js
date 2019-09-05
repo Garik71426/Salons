@@ -1,14 +1,7 @@
-var express = require('express');
-var router = express.Router();
-const { Client } = require('pg');
+const express = require('express');
+const router = express.Router();
 
-const connectionString = 'postgres://postgres:salon123@localhost:5432/salons';
-const client = new Client({
-    connectionString: connectionString
-});
-
-client.connect();
-
+const client = require('../public/javascripts/client');
 
 /* GET all categorys. */
 router.get('/', function(req, res, next) {
