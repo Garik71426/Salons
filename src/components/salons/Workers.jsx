@@ -35,7 +35,7 @@ class Workers extends Component {
     componentDidUpdate(prevProps){
         if(this.props.category_id !== prevProps.category_id 
             && this.props.salon_id !== prevProps.salon_id) {
-            fetch(`http://localhost:3001/salon//workers/${this.props.category_id}/${this.props.salon_id}`)
+            fetch(`http://localhost:3001/salon/workers/${this.props.category_id}/${this.props.salon_id}`)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -52,7 +52,7 @@ class Workers extends Component {
         const { deleteWorker, isUser } = this.context.AppStore;
         
         const { workers } = this.state;
-        const { salon_id, category_id, url } = this.props;
+        const { salon_id, category_id } = this.props;
 		return (
             <Row>{workers.map((specialistItem, specialistIndex) => {
                     return <React.Fragment key = {specialistIndex}> 

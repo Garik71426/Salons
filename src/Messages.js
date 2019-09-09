@@ -89,7 +89,7 @@ const Messages = {
         beautySalonsPhone : 'Հեռախոսահամար'
     },
     specialist : {
-        information : 'Տեղեկատվություն -',
+        information : 'Տեղեկատվություն',
         salonPhone: 'Սրահի Հեռ․ -',
         salonName : ' Սրահի անուն - ',
         salonAddress : ' Սրահի հասցե - ',
