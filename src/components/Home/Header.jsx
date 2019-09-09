@@ -67,31 +67,29 @@ class HeaderUser extends Component {
                                 <span className="title">{Messages.header.title}</span>
                             </NavbarBrand>
                             <NavbarToggler onClick={this.toggle}/>
-                                <Collapse isOpen={this.state.isOpen} navbar>
-                                    <Nav className="ml-auto dropd" navbar>
-                                        <UncontrolledDropdown nav inNavbar >
-                                            <DropdownToggle nav className="drop" caret>
-                                                {Messages.header.dropDown}
-                                            </DropdownToggle>
-                                            <DropdownMenu right>
-                                                {Salon.map(item => {
-                                                    return <Link to={`/Salon/${item.id}`} key = {item.address}>
-                                                        <DropdownItem  className="drop_item">
-                                                            {item.name}
-                                                        </DropdownItem>
-                                                    </Link>
-                                                })}
-                                            </DropdownMenu>
-                                        </UncontrolledDropdown>
-                                        <>
-                                            <NavItem>
-                                                <ModalLogin/>
-                                            </NavItem>
-                                            <NavItem>
-                                                <ModalRegister/>
-                                            </NavItem>
-                                        </>
-                                    </Nav>
+                            <Collapse isOpen={this.state.isOpen} navbar>
+                                <Nav className="ml-auto dropd" navbar>
+                                    <UncontrolledDropdown nav inNavbar >
+                                        <DropdownToggle nav className="drop" caret>
+                                            {Messages.header.dropDown}
+                                        </DropdownToggle>
+                                        <DropdownMenu right>
+                                            {Salon.map(item => {
+                                                return <Link to={`/salon/${item.id}`} key = {item.address}>
+                                                    <DropdownItem  className="drop_item">
+                                                        {item.name}
+                                                    </DropdownItem>
+                                                </Link>
+                                            })}
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                    <NavItem>
+                                        <ModalLogin/>
+                                    </NavItem>
+                                    <NavItem>
+                                        <ModalRegister/>
+                                    </NavItem>
+                                </Nav>
                             </Collapse>
                         </Navbar>
                     </div>

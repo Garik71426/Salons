@@ -41,15 +41,15 @@ class App extends Component {
                 component: Section
             },
             {
-                path: '/Salon/:whichSalon',
+                path: '/salon/:whichSalon',
                 component: Salon
             },
             {
-                path: '/Category/:whichCategory',
+                path: '/category/:whichCategory',
                 component: Categorys
             },
             {
-                path: '/Salon/:whichSalon/:specialistIndex',
+                path: '/salon/:whichSalon/:specialistIndex',
                 component: Specialist
             },
             {
