@@ -17,9 +17,7 @@ import './../../../assets/stylesheets/header.css';
 class HeaderUser extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-            Salon : PropTypes.array.isRequired,
-            isUser : PropTypes.string,
-            LogOut : PropTypes.func,
+
         }).isRequired
     }
     constructor(props) {
@@ -32,7 +30,6 @@ class HeaderUser extends Component {
         };
     }
     componentDidMount(){
-        this.context.AppStore.FuncForCookie();
         fetch('http://localhost:3001/salon')
         .then(res => res.json())
         .then(

@@ -32,7 +32,7 @@ class App extends Component {
         }
     }
     componentDidMount(){
-        this.AppStore.initData();
+        //this.AppStore.initData();
     }
     render() {
         const routes = [

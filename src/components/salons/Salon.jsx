@@ -1,10 +1,8 @@
 import React,{Component} from 'react';
-import {Container, Row, Col,Button} from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 
-//import ChangeSalonInfo from './modals/ChangeSalonInfo';
-import AddCategory from './modals/AddCategori';
 import Workers from './Workers';
 
 import Messages from './../../Messages';

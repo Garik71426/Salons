@@ -16,7 +16,7 @@ class CardCategory extends Component {
         CardClass : PropTypes.string,
         buttonText : PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired
+        id: PropTypes.string.isRequired
     }
 	render() {   
         const { img, title, explaText, CardClass, buttonText, url, id} = this.props;
