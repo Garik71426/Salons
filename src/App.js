@@ -43,15 +43,15 @@ class App extends Component {
                 component: Section
             },
             {
-                path: '/Salon/:whichSalon',
+                path: '/salon/:whichSalon',
                 component: Salon
             },
             {
-                path: '/Category/:whichCategory',
+                path: '/category/:whichCategory',
                 component: Categorys
             },
             {
-                path: '/Salon/:whichSalon/:specialistIndex',
+                path: '/salon/:whichSalon/:specialistIndex',
                 component: Specialist
             },
             {
@@ -60,9 +60,9 @@ class App extends Component {
             },
             {
                 path: this.AppStore.isUser === 'salon' 
-                    ? '/AcountSalon/:whichSalon' 
+                    ? '/scountSalon/:whichSalon' 
                     : this.AppStore.isUser === 'user' 
-                    ? '/Acount' 
+                    ? '/scount' 
                     : '',
                 component: this.AppStore.isUser === 'salon' 
                     ? Salon 

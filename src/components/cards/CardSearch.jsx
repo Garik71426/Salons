@@ -3,8 +3,6 @@ import { Card, Button, Media } from 'reactstrap';
 import PropTypes from 'prop-types';
 import {Link}  from 'react-router-dom';
 
-import Error from '../Error';
-
 import './../../../assets/stylesheets/table.css';
 
 import Messages from './../../Messages';
@@ -35,7 +33,6 @@ class CardSearch extends Component {
     render() {
         const { id } = this.props;
         const { specialist, status } = this.state;
-        console.log(this.state.status)
 
         return (<>
             { (status.code === 200 || status.code === 304) ? <Card className = "Card_top">

@@ -76,7 +76,7 @@ class HeaderUser extends Component {
                                             </DropdownToggle>
                                             <DropdownMenu right>
                                                 {Salon.map(item => {
-                                                    return <Link to={`/Salon/${item.id}`} key = {item.address}>
+                                                    return <Link to={`/salon/${item.id}`} key = {item.address}>
                                                         <DropdownItem  className="drop_item">
                                                             {item.name}
                                                         </DropdownItem>
@@ -87,10 +87,10 @@ class HeaderUser extends Component {
                                         {(isUser === 'salon' || isUser === 'user')?
                                         <>
                                             <NavItem>{(isUser === 'salon')?
-                                                <Link to={`/AcountSalon/${LoginSalonIndex}`}>
+                                                <Link to={`/acountSalon/${LoginSalonIndex}`}>
                                                     <Button className="ml-auto mod_btn"  color="link">{Messages.header.UserPage}</Button>
                                                 </Link>:
-                                                <Link to={'/Acount'}>
+                                                <Link to={'/acount'}>
                                                     <Button className="ml-auto mod_btn"  color="link">{Messages.header.UserPage}</Button>
                                                 </Link>}
 

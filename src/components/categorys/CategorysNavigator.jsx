@@ -32,7 +32,7 @@ class CategorysNavigator extends Component {
                 <ButtonToolbar className="mt-5">
                     <ButtonGroup className = "group">
                         {categorys.map(item => {
-                            return <Link to={`/Category/${item.id}`} key = {item.id} >
+                            return <Link to={`/category/${item.id}`} key = {item.id} >
                                         <Button className = "category_button" color = "info">{item.name}</Button>
                                     </Link>
                         })}
