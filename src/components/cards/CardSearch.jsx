@@ -3,6 +3,7 @@ import { Card, Button, Media } from 'reactstrap';
 import PropTypes from 'prop-types';
 import {Link}  from 'react-router-dom';
 
+import Error from '../Error';
 
 import './../../../assets/stylesheets/table.css';
 
@@ -13,25 +14,31 @@ class CardSearch extends Component {
         id: PropTypes.number.isRequired
     }
     state = {
-        specialist: {}
+        specialist: {},
+        status: {}
     }
     componentDidMount(){
         fetch(`http://localhost:3001/worker/${this.props.id}/full`)
-        .then(res => res.json())
+        .then(
+            (res) => {
+                this.setState({ status: {code: res.status, message: res.statusText} });
+                return res.json();
+            }
+        )
         .then(
             (result) => {
                 this.setState({ specialist: result });
-            },
-            (error) => {
-                console.log(error);
             }
         )
     }
+
     render() {
         const { id } = this.props;
-        const { specialist } = this.state;
-        return (
-            <Card className = "Card_top">
+        const { specialist, status } = this.state;
+        console.log(this.state.status)
+
+        return (<>
+            { (status.code === 200 || status.code === 304) ? <Card className = "Card_top">
                     <Media className = "text">
                         <Media left href="#">
                             <img src={specialist.img} alt = "specialistImg" className = "img_size"/>
@@ -47,7 +54,8 @@ class CardSearch extends Component {
                             <Button className = "btn_card_category" outline color = "info">Մանրամասն</Button>
                         </Link>
                 </Media>
-            </Card>
+            </Card> : <></> }
+            </>
         );
     }
 }

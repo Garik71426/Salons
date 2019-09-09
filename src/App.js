@@ -12,10 +12,10 @@ import Salon from './components/salons/Salon';
 import Specialist from './components/specialists/Specialist';  
 import Categorys from './components/categorys/Categorys'; 
 import Acount from './components/acount/Acount';
+import Error from './components/Error'; 
 
 import UIStore from './stores/UIStore';
 import AppStore from './stores/AppStore';
-import NotFound from './NotFound'; 
 
 import './../assets/stylesheets/App.css';
 
@@ -82,7 +82,7 @@ class App extends Component {
                                     return <Route key = {item.path} exact path = {item.path} component = {item.component} />;
                                 })
                             }
-                            <Route component={NotFound} />
+                            <Route component={Error} />
                         </Switch>
                     </div>
                 </Router>
