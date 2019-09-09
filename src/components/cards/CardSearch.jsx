@@ -31,12 +31,9 @@ class CardSearch extends Component {
             }
         )
     }
-
     render() {
         const { id } = this.props;
         const { specialist, status } = this.state;
-        console.log(this.state.status)
-
         return (<>
             { (status.code === 200 || status.code === 304) ? <Card className = "Card_top">
                     <Media className = "text">

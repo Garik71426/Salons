@@ -11,8 +11,7 @@ import './../../../assets/stylesheets/table.css';
 class SearchWorker extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-            tableSearch : PropTypes.func,
-            onChaked : PropTypes.func,
+            
         }).isRequired
     }
     state = {
@@ -25,34 +24,33 @@ class SearchWorker extends Component {
 
     }
     render(){
-        const { onChaked, tableSearch } =this.context.AppStore;
         return(
                 <Form className="form_pos mt-5">
-                <Label><b>{Messages.table.searchFor}</b></Label>
-                <FormGroup check inline >
+                    <Label><b>{Messages.table.searchFor}</b></Label>
+                    <FormGroup check inline >
                         <FormGroup check>
                             <Label check>
 
-                                <Input type="radio" name="search" value="name" onChange = {onChaked} defaultChecked />{Messages.table.forName}
+                                <Input type="radio" name="search" value="name" defaultChecked />{Messages.table.forName}
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                              <Label check>
-                                 <Input type="radio" value="surname" name = "search" onChange = {onChaked}/>{Messages.table.forSurname}
+                                 <Input type="radio" value="surname" name = "search" />{Messages.table.forSurname}
                              </Label>
                          </FormGroup>
                          <FormGroup check>
                               <Label check>
-                                  <Input type="radio" value="salonAddress" name = "search" onChange = {onChaked}/>{Messages.table.forAddress}
+                                  <Input type="radio" value="salonAddress" name = "search" />{Messages.table.forAddress}
                               </Label>
                           </FormGroup>
                           <FormGroup check>
                                <Label check>
-                                   <Input type="radio" value="salonTitle" name = "search" onChange = {onChaked}/>{Messages.table.forSalon}
+                                   <Input type="radio" value="salonTitle" name = "search" />{Messages.table.forSalon}
                                </Label>
                           </FormGroup>
-                        </FormGroup>
-                        <Input type="search"  className="input_search" id="exampleSearch" onChange={tableSearch}/>
+                    </FormGroup>
+                    <Input type="search"  className="input_search" id="exampleSearch" />
                 </Form>
         );
     }

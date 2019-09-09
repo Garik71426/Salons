@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link}  from 'react-router-dom';
 import {Collapse, Navbar, NavbarToggler, NavbarBrand,
         Nav, UncontrolledDropdown, DropdownToggle,
-        DropdownMenu, DropdownItem , Container,Button, NavItem} from 'reactstrap';
+        DropdownMenu, DropdownItem , Container, NavItem} from 'reactstrap';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 
@@ -50,7 +50,6 @@ class HeaderUser extends Component {
         });
     }
     render() {
-        const { isUser, LogOut, LoginSalonIndex} = this.context.AppStore;
         const { Salon } = this.state;
         return (
             <div >
@@ -84,31 +83,14 @@ class HeaderUser extends Component {
                                                 })}
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
-                                        {(isUser === 'salon' || isUser === 'user')?
                                         <>
-                                            <NavItem>{(isUser === 'salon')?
-                                                <Link to={`/AcountSalon/${LoginSalonIndex}`}>
-                                                    <Button className="ml-auto mod_btn"  color="link">{Messages.header.UserPage}</Button>
-                                                </Link>:
-                                                <Link to={'/Acount'}>
-                                                    <Button className="ml-auto mod_btn"  color="link">{Messages.header.UserPage}</Button>
-                                                </Link>}
-
-
+                                            <NavItem>
+                                                <ModalLogin/>
                                             </NavItem>
                                             <NavItem>
-                                                <Button className="ml-auto mod_btn" onClick={LogOut} color="link">{Messages.header.LogOut}</Button>
+                                                <ModalRegister/>
                                             </NavItem>
-                                        </>:
-                                            <>
-                                                <NavItem>
-                                                    <ModalLogin/>
-                                                </NavItem>
-                                                <NavItem>
-                                                    <ModalRegister/>
-                                                </NavItem>
-                                            </>
-                                        }
+                                        </>
                                     </Nav>
                             </Collapse>
                         </Navbar>

@@ -1,9 +1,7 @@
 import React,{Component} from 'react';
-import { Row, Button} from 'reactstrap';
+import { Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
-
-import SalonAddWorker from './modals/SalonAddWorker';
 
 import Messages from './../../Messages';
 import CardCategory from './../cards/CardCategory';
@@ -12,8 +10,7 @@ import CardCategory from './../cards/CardCategory';
 class Workers extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-            deleteCategory : PropTypes.func,
-            deleteWorker : PropTypes.func,
+
         }).isRequired
     }
     state = {
@@ -49,32 +46,19 @@ class Workers extends Component {
     }
     
     render() {
-        const { deleteWorker, isUser } = this.context.AppStore;
-        
         const { workers } = this.state;
-        const { salon_id, category_id } = this.props;
 		return (
             <Row>{workers.map((specialistItem, specialistIndex) => {
                     return <React.Fragment key = {specialistIndex}> 
-                        {(isUser === 'salon')?
-                        <CardCategory 
-                            deleteCard = {<Button color="danger" className="delete" onClick = {deleteWorker} salon-index = {salon_id} category-index = {category_id} specialist-index = {specialistIndex}>X</Button>}
-                            img={specialistItem.img}
-                            title= {`${specialistItem.name} ${specialistItem.surname}`}
-                            id = {specialistItem.id}
-                            buttonText = {Messages.table.specialiistButtonText}
-                            url = 'specialist'
-                            />:
                         <CardCategory 
                             img={specialistItem.img}
                             title= {`${specialistItem.name} ${specialistItem.surname}`}
                             id = {specialistItem.id}
                             buttonText = {Messages.table.specialiistButtonText}
                             url = 'specialist'
-                            />}
+                        />
                     </React.Fragment>
                 })}
-                {isUser === 'salon' && <SalonAddWorker salonIndex = {salon_id} categoryIndex = {category_id}/>}
             </Row>
 		);
 	}

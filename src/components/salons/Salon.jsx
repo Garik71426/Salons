@@ -76,8 +76,6 @@ class Salon extends Component {
     }
     
     render() {
-        let salon_id = this.props.match.params.whichSalon;
-        const { deleteCategory, isUser } = this.context.AppStore;
         const { salonInfo, categoryInfo } =this.state;
 		return (
              <Container className = "salon-page">
@@ -97,21 +95,15 @@ class Salon extends Component {
 						<p>{salonInfo.info}</p>
                         <p>{Messages.beautySalons.beautySalonsAddress}` {salonInfo.address}</p>
                         <p>{Messages.beautySalons.beautySalonsPhone}` {salonInfo.phone}</p>
-                        {/* {isUser === 'salon' && <ChangeSalonInfo
-                            salon_id={salon_id}
-                            />} */}
-
-
 					</Col>
 
         		</Row>
-                {categoryInfo.map((categoryItem, categotyIndex) => {
+                {categoryInfo.map(categoryItem => {
                     return 	<React.Fragment key = {categoryItem.name}>
                         <Row align = "center" className = "mt-5 mb-5">
                             <Col>
                                 <h2>
                                     {categoryItem.name}
-                                    {isUser === 'salon' && <Button color="danger"  onClick =  {deleteCategory} salon-index = {salon_id} category-index = {categotyIndex}>X</Button>}
                                 </h2>
                             </Col>
                         </Row>
@@ -122,9 +114,6 @@ class Salon extends Component {
                         />
                     </React.Fragment>
                 })}
-                {isUser === 'salon' && <Row align = "center" className = "mt-5 mb-5">  
-                    <AddCategory salon_id = {salon_id}/>
-                </Row>}
 			</Container>
 		);
 	}

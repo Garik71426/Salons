@@ -3,8 +3,6 @@ import {Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 
-import DateHourse from './form/DateHourse'
-import ChangeSpecialistInfo from './modals/ChangeSpecialistInfo'
 import WorkImages from './WorkImages';
 import SpecialistInfo from './SpecialistInfo';
 
@@ -16,8 +14,7 @@ import './../../../assets/stylesheets/specialist.css';
 class SpecialistUser extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-            isUser : PropTypes.string,
-            deleteWorksImage : PropTypes.func,
+
         }).isRequired
     };
     state = {
@@ -37,7 +34,6 @@ class SpecialistUser extends Component {
     }
 
     render() {
-        const { isUser } = this.context.AppStore;
         let { specialist } =  this.state;
         return (
             <Container className="mb-5 sections mt-5">
@@ -47,13 +43,11 @@ class SpecialistUser extends Component {
                     <div className="user" >
                         <img src={specialist.img} height = "200px" alt="user image" width="200px" className ="d-inline" />
                         <div className="info">
-                            {isUser === 'salon' && <ChangeSpecialistInfo salonIndex={specialist.salon_id} categoryIndex={specialist.category_id} specialistIndex = {specialist.id}/>}
                             <p>{specialist.about}</p>
                         </div>
                     </div>
                     {specialist.id && <SpecialistInfo specialist_id = {specialist.id}/>}
                 </Col>
-                    {isUser === 'user' && <DateHourse />}
                 </Row>
                 <h1 className = "textBlue" >{Messages.specialist.myWorkes}</h1>
                 <Row className = "mt-5">

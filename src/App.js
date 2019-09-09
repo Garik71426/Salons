@@ -8,10 +8,8 @@ import Header from './components/Home/Header';
 import Section from './components/Home/Section';
 import Footer from './components/Home/Footer';
 import Salon from './components/salons/Salon'; 
-// import SalonUser from './components/salons/SalonUser'; 
 import Specialist from './components/specialists/Specialist';  
 import Categorys from './components/categorys/Categorys'; 
-import Acount from './components/acount/Acount';
 import Error from './components/Error'; 
 
 import UIStore from './stores/UIStore';
@@ -57,18 +55,6 @@ class App extends Component {
             {
                 path: '/specialist/:specialistIndex',
                 component: Specialist
-            },
-            {
-                path: this.AppStore.isUser === 'salon' 
-                    ? '/AcountSalon/:whichSalon' 
-                    : this.AppStore.isUser === 'user' 
-                    ? '/Acount' 
-                    : '',
-                component: this.AppStore.isUser === 'salon' 
-                    ? Salon 
-                    : this.AppStore.isUser === 'user' 
-                    ? Acount 
-                    : ''
             }
         ];
         return (

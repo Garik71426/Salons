@@ -11,25 +11,24 @@ import './../../../assets/stylesheets/card.css'
 class CardCategory extends Component {
     static propTypes = {
         img : PropTypes.string.isRequired,
-        deleteCard : PropTypes.object,
         title : PropTypes.string,
         explaText : PropTypes.string,
-        cardClick : PropTypes.func,
         CardClass : PropTypes.string,
         buttonText : PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired
     }
 	render() {   
-        const {deleteCard, img, title, explaText, cardClick, CardClass, buttonText, url, id} = this.props;
+        const { img, title, explaText, CardClass, buttonText, url, id} = this.props;
 		return(
             <Col lg = {3} md={6} sm = {6} xs = {8} className="cardOne">
                 <Card className = "card_design">
-                    {deleteCard}
                     <CardImg variant="top" src={img} />
                     <CardBody>
                         <CardTitle>{title}</CardTitle>
                         <CardText className = {CardClass}>{explaText}</CardText>
                         <Link to={`/${url}/${id}`} >
-                            <Button color="info" onClick = {cardClick} prof = {id} >{buttonText}</Button>
+                            <Button color="info" >{buttonText}</Button>
                         </Link>
                     </CardBody>
                 </Card>

@@ -50,7 +50,7 @@ class Section extends Component {
                                     explaText={item.description}
                                     CardClass = "cardSection1"
                                     buttonText = {Messages.section.homeCardButtonText}
-                                    url = {'Category'}
+                                    url = {'category'}
                                     id ={`${item.id}`}
                                     />
                             </React.Fragment>
