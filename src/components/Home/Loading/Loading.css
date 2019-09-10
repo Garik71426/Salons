@@ -3,23 +3,4 @@
     text-align: center;
     font-size: 3rem;
     color: #00FF7F;
-    animation: wave .5s infinite ease-in-out;
-}
-
-@keyframes wave{
-    0%{
-        color: #00FF7F;
-    }
-    25%{
-        color:#ee0;
-    }
-    50%{
-        color: #00FF7F;
-    }
-    75%{
-        color: #ee0;
-    }
-    100%{
-        color:#00FF7F
-    }
 }

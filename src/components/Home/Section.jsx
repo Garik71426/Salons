@@ -17,15 +17,21 @@ class Section extends Component {
         }).isRequired
     }
 
-    // state = {
-    //     categorys: this.context.AppStore.categorys
-    // }
+    state = {
+        categorys: []
+    }
 
     componentDidMount() {
-        this.context.AppStore.getAllCategorys();
+        fetch('http://localhost:3001/category')
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({ categorys : result })
+            }
+        )
     }
     render() {
-        const { categorys } = this.context.AppStore;
+        const { categorys } = this.state;
         return (
             <section>
                 <Container fluid className = "carusel">
@@ -33,7 +39,7 @@ class Section extends Component {
                 </Container>
                 <Container className = "cardSection">
                     <Row>
-                        {categorys.category.map(item => {
+                        {categorys.map(item => {
                             return  <React.Fragment key = {item.name}>
                                 <CardCategory 
                                     img={item.img}
