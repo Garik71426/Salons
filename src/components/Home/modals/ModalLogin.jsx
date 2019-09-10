@@ -29,24 +29,9 @@ class ModalLogin extends Component {
     render(){
     return(
       <div>
-          <Button className="ml-auto mod_btn" outline color="link" >{this.props.buttonLabel}{Messages.header.signIn.signIn}</Button>
-          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-              <ModalHeader toggle={this.toggle}>{Messages.header.signIn.signInTitle}</ModalHeader>
-              <ModalBody>
-                  <Form>
-                      <FormGroup>
-                          <Label for="exampleEmail">{Messages.header.signIn.signInEmail}</Label>
-                          <Input type="email" name="Էլ. փոստ" id="exampleEmail" placeholder={Messages.header.signIn.signInEmailPlaceholder} />
-                      </FormGroup>
-                      <FormGroup>
-                          <Label for="examplePassword">{Messages.header.signIn.signInPassword}</Label>
-                          <Input type="password" name="Գաղտնաբառ" id="examplePassword" placeholder={Messages.header.signIn.signInPasswordPlaceholder} />
-                      </FormGroup>
-                  </Form>
-              </ModalBody>
-              <ModalFooter onClick={this.toggle}>
-                  <Button className="modal_button">{Messages.header.signIn.signInButton}</Button>
-              </ModalFooter>
+          <Button onClick={this.toggle} className="ml-auto mod_btn" outline color="link" >{this.props.buttonLabel}{Messages.header.signIn.signIn}</Button>
+          <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                {this.props.login}
           </Modal>
       </div>
     );
