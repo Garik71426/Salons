@@ -11,12 +11,10 @@ import notification from './../../../assets/images/salon/notification.png';
 
 import './../../../assets/stylesheets/salon.css';
 
-@observer
 class Salon extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-            deleteCategory : PropTypes.func,
-            deleteWorker : PropTypes.func,
+
         }).isRequired
     }
     state = {
@@ -30,7 +28,7 @@ class Salon extends Component {
         .then(res => res.json())
         .then(
             (salon) => {
-                fetch(`http://localhost:3001/salon/category/${this.props.match.params.whichSalon}`)
+                fetch(`http://localhost:3001/salon/category/${salon_id}`)
                 .then(res => res.json())
                 .then(
                     (result) => {

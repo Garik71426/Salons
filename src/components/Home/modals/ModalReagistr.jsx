@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
 
 import Messages from './../../../Messages';
 
 import './../../../../assets/stylesheets/setting.css';
 
-@observer
 class ModalRegister extends Component {
 	static contextTypes = {
 		AppStore: PropTypes.shape({

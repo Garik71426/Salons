@@ -4,8 +4,6 @@ import Messages from './../../Messages';
 
 import './../../../assets/stylesheets/footer.css';
 
-
-
 class Footer extends Component {
 	render() {
 		return (

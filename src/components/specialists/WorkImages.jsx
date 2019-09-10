@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 
-@observer
 class WorkImages extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({

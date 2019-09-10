@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 
 import Social from './Social';
 
 import Messages from './../../Messages';
 
-@observer
 class SpecialistInfo extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
