@@ -26,7 +26,6 @@ class Salon extends Component {
 
     componentDidMount() {
         const salon_id = this.props.match.params.whichSalon;
-        this.context.AppStore.isPath({salon_id : salon_id},'salon'); 
         fetch(`http://localhost:3001/salon/${salon_id}`)
         .then(res => res.json())
         .then(
