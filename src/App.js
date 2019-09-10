@@ -5,7 +5,7 @@ import {observer} from 'mobx-react';
 import PropTypes from 'prop-types';
 
 import Header from './components/Home/Header';
-import Section from './components/Home/Section';
+import Home from './components/Home/Home';
 import Footer from './components/Home/Footer';
 import Salon from './components/salons/Salon'; 
 import Specialist from './components/specialists/Specialist';  
@@ -38,7 +38,7 @@ class App extends Component {
         const routes = [
             {
                 path: '/',
-                component: Section
+                component: Home
             },
             {
                 path: '/salon/:whichSalon',
