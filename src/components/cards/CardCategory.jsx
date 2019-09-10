@@ -1,20 +1,16 @@
 import React, {Component} from 'react';
 import { Card, CardImg, CardText, CardBody,
-        CardTitle, Button, Col } from 'reactstrap';
+        CardTitle, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import {Link}  from 'react-router-dom';
-import {observer} from 'mobx-react';
 
-import './../../../assets/stylesheets/card.css'
+import './CardCategory.css'
 
-@observer
 class CardCategory extends Component {
     static propTypes = {
         img : PropTypes.string.isRequired,
         title : PropTypes.string,
-        explaText : PropTypes.string,
-        CardClass : PropTypes.string,
-        buttonText : PropTypes.string.isRequired,
+        description : PropTypes.string,
         url: PropTypes.string.isRequired,
         id: PropTypes.oneOfType([
             PropTypes.string,
@@ -22,19 +18,18 @@ class CardCategory extends Component {
         ])
     }
 	render() {   
-        const { img, title, explaText, CardClass, buttonText, url, id} = this.props;
+        const { img, title, description, url, id} = this.props;
 		return(
-            <Col lg = {3} md={6} sm = {6} xs = {8} className="cardOne">
-                <Card className = "card_design">
-                    <CardImg variant="top" src={img} />
-                    <CardBody>
-                        <CardTitle>{title}</CardTitle>
-                        <CardText className = {CardClass}>{explaText}</CardText>
-                        <Link to={`/${url}/${id}`} >
-                            <Button color="info" >{buttonText}</Button>
-                        </Link>
-                    </CardBody>
-                </Card>
+            <Col lg = {3} md={6} sm = {6} xs = {8} className="cardCategory">
+                <Link to={`/${url}/${id}`} >
+                    <Card>
+                        <CardImg variant="top" src={img} />
+                        <CardBody>
+                            <CardTitle>{title}</CardTitle>
+                            <CardText>{description}</CardText>
+                        </CardBody>
+                    </Card>
+                </Link>
             </Col>
 		);
 	}

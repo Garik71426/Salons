@@ -3,7 +3,7 @@ import { Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import Messages from './../../Messages';
-import CardCategory from './../cards/CardCategory';
+import UserCard from './../cards/UserCard';
 
 class Workers extends Component {
     static contextTypes = {
@@ -48,7 +48,7 @@ class Workers extends Component {
 		return (
             <Row>{workers.map((specialistItem, specialistIndex) => {
                     return <React.Fragment key = {specialistIndex}> 
-                        <CardCategory 
+                        <UserCard 
                             img={specialistItem.img}
                             title= {`${specialistItem.name} ${specialistItem.surname}`}
                             id = {specialistItem.id}

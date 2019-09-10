@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import Header from './components/Home/Header';
 import Loading from './components/Home/Loading';
 import Footer from './components/Home/Footer';
-
 import Error from './components/Error'; 
 
 import UIStore from './stores/UIStore';

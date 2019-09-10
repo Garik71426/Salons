@@ -1,30 +1,39 @@
-footer {
-
-	background: -webkit-linear-gradient(#3a6877, #000);
-    background: linear-gradient(to bottom, #3a6877, #000);
+.footer {
+	color: #6e3e24;
+	box-shadow: 6px -8px 17px #6e3e24;
+	border-radius: 10px;
 	margin-top: 30px;
-    margin: auto 0 0 0;
 }
 ul {
 	list-style: none;
 	padding-top: 10%;
 }
 li a {
-	color: #fff;
-	font-family: "Inconsolata", nonostace;
+	color: #6e3e24;
 }
 li a:hover {
+	color: #6e6e20;
 	text-decoration: none;
-	color: #e0dddb;
-
 }
-li {
-	color : #fff;
+.social{
+	display: inline-flex;
+	margin-top: 30px;
+	text-align: center;
+	width: 100%;
 }
-
-.icon_width {
-	width: 40px;
-    padding-left: 6%;
-    
+.social svg{
+	width: 50px;
+	fill: salmon;
 }
-/*footer amnea poqr vaxt textAlign center, padding : none*/
+.social li{
+	width: 33.3333%;
+}
+.copyright{
+	padding: 20px 0;
+	text-align: center;
+}
+.line{
+	width: 100%;
+	height: 2px;
+	background-color: salmon;
+}

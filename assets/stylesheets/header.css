@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 nav.navbar ul{
 	padding: 0;
 }
@@ -17,17 +16,12 @@ nav.navbar > a:hover {
 	text-decoration: none;
 }
 .drop{
-	color: #000;
+	color: #6e3e24!important;
 	font-size: 	1.3em;
-    background: -webkit-linear-gradient(#3a6877, #3a6877);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 .mod_btn{
-    margin-top: 7%;
- background: -webkit-linear-gradient(#3a6877,#3a6877);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+	margin-top: 7%;
+	color: #6e3e24;
 }
 
 .title {
@@ -36,39 +30,16 @@ nav.navbar > a:hover {
     margin-left: 5%;
     display: block;
     font-size: 1.5em;
-    background: -webkit-linear-gradient(#000, #17A2B8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #6e3e24;
 }
 
-.modal_button {
-		
-	background-color: #17a2b8;
-    border-style: none;
-	color: #fff;
-	padding: 10px 20px;
-	border-radius: 15px;
-
-}
-.modal-title {
-
-	color: #17a2b8;
-}
 span {
 	font-size: 30px;
-	color: #3a6877;
-}
- li .dropdown-item:hover {
- 	background: #FD703E;
-	background: -webkit-linear-gradient(#3a6877, #fff);
-    background: linear-gradient(to bottom, #3a6877, #fff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: #fff;
-
+	color: #6e3e24;
 }
 .header_design {
-	
     border-radius: 10px;
-    box-shadow: 6px 8px 17px #1C8393;
+    box-shadow: 6px 8px 17px #6e3e24;
 }
  
 
