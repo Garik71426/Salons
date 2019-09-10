@@ -26,7 +26,10 @@ class Section extends Component {
         .then(res => res.json())
         .then(
             (result) => {
-                this.setState({ categorys : result })
+                this.setState({ categorys: result })
+            },
+            (error) => {
+                console.log(error);
             }
         )
     }
