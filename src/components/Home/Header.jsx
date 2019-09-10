@@ -4,7 +4,6 @@ import {Collapse, Navbar, NavbarToggler, NavbarBrand,
         Nav, UncontrolledDropdown, DropdownToggle,
         DropdownMenu, DropdownItem , Container, NavItem} from 'reactstrap';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 
 import ModalLogin from './modals/ModalLogin';
 import ModalRegister from './modals/ModalReagistr';
@@ -12,6 +11,21 @@ import ModalRegister from './modals/ModalReagistr';
 import Messages from './../../Messages';
 
 import './../../../assets/stylesheets/header.css';
+
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from 'firebase';
+
+const config = {
+    apiKey: 'AIzaSyCE723-OL8hsSGdbwe7yEn8FJG9fMYt3ic',
+    authDomain: 'beautysalon-32253.firebaseapp.com',
+    databaseURL: 'https://beautysalon-32253.firebaseio.com',
+    projectId: 'beautysalon-32253',
+    storageBucket: 'beautysalon-32253.appspot.com',
+    messagingSenderId: '36265934266',
+    appId: '1:36265934266:web:ce2a9cab4fcb45cef03183'
+    // ...
+  };
+  firebase.initializeApp(config);
 
 class Header extends Component {
     static contextTypes = {
@@ -25,10 +39,26 @@ class Header extends Component {
         this.state = {
             isOpen: false,
             FuncForCookie : PropTypes.func,
-            Salon: []
+            Salon: [],
+            isSignedIn: false
         };
     }
+    uiConfig = {
+        // Popup signin flow rather than redirect flow.
+        signInFlow: 'modal',
+        // We will display Google and Facebook as auth providers.
+        signInOptions: [
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        callbacks: {
+          // Avoid redirects after sign-in.
+          signInSuccessWithAuthResult: () => false
+        }
+      };
     componentDidMount(){
+        this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+            (user) => this.setState({isSignedIn: !!user})
+        );
         fetch('http://localhost:3001/salon')
         .then(res => res.json())
         .then(
@@ -39,6 +69,19 @@ class Header extends Component {
                 console.log(error);
             }
         )
+    }
+    componentWillUnmount() {
+        this.unregisterAuthObserver();
+      }
+      deleteAllCookies = () => {
+        const cookies = document.cookie.split(";");
+    
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i];
+            let eqPos = cookie.indexOf("=");
+            let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
     }
     toggle() {
         this.setState({
@@ -80,11 +123,24 @@ class Header extends Component {
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                     <NavItem>
-                                        <ModalLogin/>
+                                        {
+                                            !this.state.isSignedIn ? <ModalLogin login = {
+                                                <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
+                                            } /> :
+                                                  <a onClick={() => {
+                                                      firebase.auth().signOut();
+                                                      this.deleteAllCookies();
+                                                      localStorage.clear();
+                                                      this.setState({isSignedIn:false})
+                                                    }}>Sign-out</a>
+                                        }
+                                    </NavItem>
+                                    {/* <NavItem>
+                                        <ModalLogin login = {}/>
                                     </NavItem>
                                     <NavItem>
                                         <ModalRegister/>
-                                    </NavItem>
+                                    </NavItem> */}
                                 </Nav>
                             </Collapse>
                         </Navbar>

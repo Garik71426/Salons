@@ -5,7 +5,9 @@ nav.navbar ul{
 nav.navbar li{
 	list-style: none;
 }
-
+.firebaseui-container {
+	max-width: 100%!important;
+}
 nav.navbar > a{
 	display: -webkit-inline-box;
 	list-style-type: none;
