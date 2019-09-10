@@ -12,7 +12,8 @@ import './../../../assets/stylesheets/section.css';
 class Section extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-
+            getAllCategorys: PropTypes.func,
+            categorys: PropTypes.object
         }).isRequired
     }
 
@@ -25,7 +26,7 @@ class Section extends Component {
         .then(res => res.json())
         .then(
             (result) => {
-                this.setState({categorys: result})
+                this.setState({ categorys: result })
             },
             (error) => {
                 console.log(error);
@@ -33,6 +34,7 @@ class Section extends Component {
         )
     }
     render() {
+        const { categorys } = this.state;
         return (
             <section>
                 <Container fluid className = "carusel">
@@ -40,7 +42,7 @@ class Section extends Component {
                 </Container>
                 <Container className = "cardSection">
                     <Row>
-                        {this.state.categorys.map(item => {
+                        {categorys.map(item => {
                             return  <React.Fragment key = {item.name}>
                                 <CardCategory 
                                     img={item.img}

@@ -5,6 +5,17 @@ nav.navbar ul{
 nav.navbar li{
 	list-style: none;
 }
+
+nav.navbar > a{
+	display: -webkit-inline-box;
+	list-style-type: none;
+	text-decoration: none;
+}
+
+nav.navbar > a:hover {
+	list-style-type: none;
+	text-decoration: none;
+}
 .drop{
 	color: #000;
 	font-size: 	1.3em;
@@ -20,12 +31,16 @@ nav.navbar li{
 }
 
 .title {
-	margin-left: 5%;	
-	font-size: 1.5em;
-     background: -webkit-linear-gradient(#000, #17A2B8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+	text-decoration: none;
+    list-style: none;
+    margin-left: 5%;
+    display: block;
+    font-size: 1.5em;
+    background: -webkit-linear-gradient(#000, #17A2B8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+
 .modal_button {
 		
 	background-color: #17a2b8;
