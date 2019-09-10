@@ -1,12 +1,10 @@
 import React,{Component} from 'react';
 import { Row } from 'reactstrap';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 
 import Messages from './../../Messages';
 import CardCategory from './../cards/CardCategory';
 
-@observer
 class Workers extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({

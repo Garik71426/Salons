@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 
 import WorkImages from './WorkImages';
 import SpecialistInfo from './SpecialistInfo';
@@ -10,7 +9,6 @@ import Messages from './../../Messages';
 
 import './../../../assets/stylesheets/specialist.css';
 
-@observer
 class SpecialistUser extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({

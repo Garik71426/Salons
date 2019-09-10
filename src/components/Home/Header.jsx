@@ -13,8 +13,7 @@ import Messages from './../../Messages';
 
 import './../../../assets/stylesheets/header.css';
 
-@observer
-class HeaderUser extends Component {
+class Header extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
 
@@ -95,4 +94,4 @@ class HeaderUser extends Component {
         );
     }
 }
-export default HeaderUser
+export default Header;

@@ -1,14 +1,11 @@
 import React, { Component }  from 'react';
-import {Modal, ModalHeader, ModalBody,ModalFooter, Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import { Modal, ModalHeader, ModalBody,ModalFooter, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import Messages from './../../../Messages';
 
 import './../../../../assets/stylesheets/header.css';
 
-import {observer} from "mobx-react";
-
-@observer
 class ModalLogin extends Component {
   static contextTypes = {
   AppStore : PropTypes.shape({

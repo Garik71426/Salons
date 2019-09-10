@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container,  Row } from 'reactstrap';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react'
 
 import Carusel from './Carusel';
 import CardCategory from './../cards/CardCategory';
@@ -10,7 +9,6 @@ import Messages from './../../Messages';
 
 import './../../../assets/stylesheets/section.css';
 
-@observer
 class Section extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
@@ -52,7 +50,7 @@ class Section extends Component {
                                     buttonText = {Messages.section.homeCardButtonText}
                                     url = {'category'}
                                     id ={`${item.id}`}
-                                    />
+                                />
                             </React.Fragment>
                         })}
                     </Row>
