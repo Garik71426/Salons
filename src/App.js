@@ -1,13 +1,13 @@
 import React, { Component, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
 import Header from './components/Home/Header';
 import Loading from './components/Home/Loading';
 import Footer from './components/Home/Footer';
-import Error from './components/Error'; 
+import Error from './components/Error';
 
 import UIStore from './stores/UIStore';
 import AppStore from './stores/AppStore';
@@ -22,18 +22,18 @@ const Categorys = React.lazy(() => import("./components/categorys/Categorys"));
 @observer
 class App extends Component {
     static childContextTypes = {
-        UIStore : PropTypes.object,
-        AppStore : PropTypes.object
+        UIStore: PropTypes.object,
+        AppStore: PropTypes.object
     }
     UIStore = new UIStore();
     AppStore = new AppStore();
-    getChildContext (){
+    getChildContext() {
         return {
-            UIStore : this.UIStore,
-            AppStore : this.AppStore,
+            UIStore: this.UIStore,
+            AppStore: this.AppStore,
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         //this.AppStore.initData();
     }
     render() {
@@ -60,15 +60,15 @@ class App extends Component {
             }
         ];
         return (
-            <div className = "App">
+            <div className="App">
                 <Router>
                     <div>
-                        <Header/>
+                        <Header />
                         <Suspense fallback={<Loading />}>
                             <Switch>
                                 {
                                     routes.map(item => {
-                                        return <Route key = {item.path} exact path = {item.path} component = {item.component} />;
+                                        return <Route key={item.path} exact path={item.path} component={item.component} />;
                                     })
                                 }
                                 <Route component={Error} />
@@ -76,9 +76,9 @@ class App extends Component {
                         </Suspense>
                     </div>
                 </Router>
-                <Footer/>
+                <Footer />
             </div>
-        );  
+        );
     }
 }
 
