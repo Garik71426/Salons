@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 
+import Messages from './../../Messages';
+
 class WorkImages extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
@@ -28,13 +30,18 @@ class WorkImages extends Component {
     render() {
         const { workImgs } =  this.state;
         return (
-            <Row className = "mt-5">
-            {workImgs.map((item, index) => {
-                    return <Col align = "center" key = {item.img}>
-                        <img src={item.img} alt="works image" className ="d-inline " width="200px" height="200px" />
-                    </Col>
-                })}
-            </Row>
+            <>
+                { workImgs.length !== 0 ? 
+                <Row className = "mt-5">
+                    <h1>{Messages.specialist.myWorkes}</h1>
+                    <Row className = "mt-5">
+                        {workImgs.map(item => {
+                        return <Col align = "center" key = {item.img}>
+                            <img src={item.img} alt="works image" className ="d-inline " width="200px" height="200px" />
+                        </Col>})}
+                    </Row>
+                </Row> : null}
+            </>
         );
     }
 }

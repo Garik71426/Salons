@@ -74,16 +74,9 @@ class Salon extends Component {
         const { salonInfo, categoryInfo } =this.state;
 		return (
              <Container className = "salon-page">
-                <Row>
-                    <Col >
-                        <h1 className='varsAnun'>{salonInfo.name}</h1>
-                    </Col>
-                    <img src={notification} alt=""  align="right" width = "50px" height = "50px"/>
-
-				</Row>
-				<Row className = "salon-page">
+				<Row className = 'about'>
 					<Col md="6" >
-						<img src={salonInfo.img} alt="" className="logoSal" width = "100%" height = "370vh"/>
+						<img src={salonInfo.img} alt="salon images"/>
 					</Col>
 					<Col md="6">
 						<h2>{Messages.beautySalons.beautySalonsAbout}</h2>
@@ -95,7 +88,7 @@ class Salon extends Component {
         		</Row>
                 {categoryInfo.map(categoryItem => {
                     return 	<React.Fragment key = {categoryItem.name}>
-                        <Row align = "center" className = "mt-5 mb-5">
+                        <Row align = "center" className = "mt-5 mb-5 category">
                             <Col>
                                 <h2>
                                     {categoryItem.name}

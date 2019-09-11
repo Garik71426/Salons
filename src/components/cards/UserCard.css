@@ -1,0 +1,29 @@
+.card_design{
+    box-shadow: 0px 0px 30px 3px #6e3e24;
+    background-color: #ffdcd1;
+}
+
+.card_design .card-title{
+    text-align: center;
+    color: #6e3e24;
+    font-size: 1.1em;
+    height: 2.8em;
+}
+.card_design .btn{
+    background-color: salmon;
+    color: white;
+    border: 2px solid salmon;
+    border-radius: 25px;
+    padding: 1em auto;
+}
+.card_design .btn:hover{
+    background-color: transparent;
+    color: salmon;
+}
+.card_design .card-img{
+    border-radius: 50%;
+    padding: 15px;
+    max-width: 200px;
+    max-height: 200px;
+    margin: 0 auto;
+}

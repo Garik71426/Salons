@@ -27,11 +27,15 @@ class Social extends Component {
     render() {
         const { socialNetwork } =  this.state;
         return (
-            <p>
-                {Messages.specialist.socialMedia} {socialNetwork.map(item => {
-                    return <a target="blank" href={item.path} key={item.id}>{item.name} </a>
-                })}
-            </p>
+            <>
+                { socialNetwork.length !== 0 
+                    ? <p>
+                        {Messages.specialist.socialMedia} {socialNetwork.map(item => {
+                            return <a target="blank" href={item.path} key={item.id}>{item.name} </a>
+                        })}
+                    </p> 
+                    : null }
+            </>
         );
     }
 }

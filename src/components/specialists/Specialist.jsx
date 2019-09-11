@@ -47,12 +47,10 @@ class SpecialistUser extends Component {
                     {specialist.id && <SpecialistInfo specialist_id = {specialist.id}/>}
                 </Col>
                 </Row>
-                <h1 className = "textBlue" >{Messages.specialist.myWorkes}</h1>
-                <Row className = "mt-5">
                 <WorkImages 
                     specialist = {this.props.match.params.specialistIndex}
                 />
-                </Row>
+                
         </Container>
         );
     }
