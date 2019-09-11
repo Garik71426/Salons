@@ -21,6 +21,14 @@ class ModalRegister extends Component {
 
 		this.toggle = this.toggle.bind(this);
 	}
+	state = {
+		name: '',
+		surname: '',
+		email: '',
+		phone: '',
+		password: '',
+		repeat_password: ''
+	}
 
 	toggle(event) {
 		this.setState(prevState => ({
@@ -30,43 +38,31 @@ class ModalRegister extends Component {
 	render() {
 		return (
 			<div>
-				<Button className="ml-0 mod_btn" outline color="link" >{this.props.buttonLabel}{Messages.header.signUp.signUp}</Button>
+				<Button onClick = {this.toggle} className="ml-0 mod_btn" outline color="link" >{this.props.buttonLabel}{Messages.header.signUp}</Button>
 				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-					<ModalHeader toggle={this.toggle}>{Messages.header.signUp.signUpTitle}</ModalHeader>
-					<FormGroup>
-						<div className="dis_flex">
-							<p className="login_Log">{Messages.header.signUp.signUpAs}</p>
-							<a className="btn_1">{Messages.header.signUp.signUpAsUser}</a>
-							<a className="btn_2">{Messages.header.signUp.signUpAsSalon}</a>
-						</div>
-					</FormGroup>
+					<ModalHeader toggle={this.toggle}>{Messages.header.signUp}</ModalHeader>
 					<ModalBody>
-						<Form>
+						<Form onSubmit = {this.props.onSubmit}>
 							<FormGroup>
-								<Label for="examplePassword">{Messages.header.signUp.signUpName}</Label>
-								<Input type="text" name="Անուն" id="examplePassword" />
-
-								<Label for="examplePassword1">{Messages.header.signUp.signUpSurname}</Label>
-								<Input type="text" name="Ազգանուն" id="examplePassword1" />
-
-								<Label for="exampleEmail">{Messages.header.signUp.signUpEmail}</Label>
-								<Input type="email" name="Էլ. փոստ" id="exampleEmail" placeholder={Messages.header.signUp.signUpEmailPlaceholder} />
-
-								<Label for="exampleEmail1">{Messages.header.signUp.signUpNickName}</Label>
-								<Input type="text" name="Հեռախոս" id="exampleEmail1" />
+								<Label for="examplePassword">{Messages.header.Name}</Label>
+								<Input type="text" name="name" id="examplePassword" />
+								<Label for="examplePassword1">{Messages.header.Surname}</Label>
+								<Input type="text" name="surname" id="examplePassword1" />
+								<Label for="exampleEmail">{Messages.header.Email}</Label>
+								<Input type="email" name="email" id="exampleEmail" placeholder={Messages.header.EmailPlaceholder} />
+								<Label for="exampleEmail1">{Messages.header.Phone}</Label>
+								<Input type="text" name="phone" id="exampleEmail1" placeholder={Messages.header.PhonePlaceholder}/>
+								<Label for="examplePassword2">{Messages.header.Password}</Label>
+								<Input type="password" name="password" id="examplePassword2" placeholder={Messages.header.PasswordPlaceholder} />
+								<Label for="examplePassword3">{Messages.header.RepeatPassword}</Label>
+								<Input type="password" name="repeat_password" id="examplePassword3" placeholder={Messages.header.PasswordPlaceholder} />
 							</FormGroup>
 							<FormGroup>
-								<Label for="examplePassword2">{Messages.header.signUp.signUpPassword}</Label>
-								<Input type="password" name="Գաղտնաբառ" id="examplePassword2" placeholder={Messages.header.signUp.signUpPasswordPlaceholder} />
-
-								<Label for="examplePassword3">{Messages.header.signUp.signUpRepeatPassword}</Label>
-								<Input type="password" name="krknel gaxtnabar@" id="examplePassword3" placeholder={Messages.header.signUp.signUpwordPlaceholder} />
+								<Button type='submit' color="primary">{Messages.header.Submit}</Button>{' '}
+								<Button color="secondary" onClick={this.toggle}>{Messages.header.Cancel}</Button>
 							</FormGroup>
 						</Form>
 					</ModalBody>
-					<ModalFooter onClick={this.toggle}>
-						<Button color="info" className="modal_button">{Messages.settings.saveChange}</Button>
-					</ModalFooter>
 				</Modal>
 			</div>
 		);

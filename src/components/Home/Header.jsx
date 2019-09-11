@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {Link}  from 'react-router-dom';
-import {Collapse, Navbar, NavbarToggler, NavbarBrand,
-        Nav, UncontrolledDropdown, DropdownToggle,
-        DropdownMenu, DropdownItem , Container, NavItem} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import {
+    Collapse, Navbar, NavbarToggler, NavbarBrand,
+    Nav, UncontrolledDropdown, DropdownToggle,
+    DropdownMenu, DropdownItem, Container, NavItem
+} from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import ModalLogin from './modals/ModalLogin';
@@ -12,7 +14,6 @@ import Messages from './../../Messages';
 
 import './../../../assets/stylesheets/header.css';
 
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 
 const config = {
@@ -24,12 +25,12 @@ const config = {
     messagingSenderId: '36265934266',
     appId: '1:36265934266:web:ce2a9cab4fcb45cef03183'
     // ...
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
 class Header extends Component {
     static contextTypes = {
-        AppStore : PropTypes.shape({
+        AppStore: PropTypes.shape({
 
         }).isRequired
     }
@@ -38,44 +39,33 @@ class Header extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
-            FuncForCookie : PropTypes.func,
+            FuncForCookie: PropTypes.func,
             Salon: [],
             isSignedIn: false
         };
     }
-    uiConfig = {
-        // Popup signin flow rather than redirect flow.
-        signInFlow: 'modal',
-        // We will display Google and Facebook as auth providers.
-        signInOptions: [
-          firebase.auth.EmailAuthProvider.PROVIDER_ID
-        ],
-        callbacks: {
-          // Avoid redirects after sign-in.
-          signInSuccessWithAuthResult: () => false
-        }
-      };
-    componentDidMount(){
+
+    componentDidMount() {
         this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-            (user) => this.setState({isSignedIn: !!user})
+            (user) => this.setState({ isSignedIn: !!user })
         );
         fetch('http://localhost:3001/salon')
-        .then(res => res.json())
-        .then(
-            (result) => {
-                this.setState({ Salon: result })
-            },
-            (error) => {
-                console.log(error);
-            }
-        )
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({ Salon: result })
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
     }
     componentWillUnmount() {
         this.unregisterAuthObserver();
-      }
-      deleteAllCookies = () => {
+    }
+    deleteAllCookies = () => {
         const cookies = document.cookie.split(";");
-    
+
         for (let i = 0; i < cookies.length; i++) {
             let cookie = cookies[i];
             let eqPos = cookie.indexOf("=");
@@ -83,6 +73,32 @@ class Header extends Component {
             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         }
     }
+
+    handleSignIn = async event => {
+        event.preventDefault();
+        const { email, password } = event.target.elements;
+        try {
+            const user = await firebase
+                .auth()
+                .signInWithEmailAndPassword(email.value, password.value);
+                console.log(user.user.uid)
+        } catch (error) {
+            alert(error);
+        }
+    };
+
+    handleSignUp = async event => {
+        event.preventDefault();
+        const { email, password } = event.target.elements;
+        try {
+            const user = await firebase
+                .auth()
+                .createUserWithEmailAndPassword(email.value, password.value);
+            // console.log(user.user.uid)
+        } catch (error) {
+            alert(error);
+        }
+    };
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -93,11 +109,11 @@ class Header extends Component {
         return (
             <div >
                 <Container>
-                    <div className = "header_design">
-                        <Navbar  light expand="md">
+                    <div className="header_design">
+                        <Navbar light expand="md">
                             <Link to="/">
                                 <img
-                                    src= '/static/assets/images/header/logo.png'
+                                    src='/static/assets/images/header/logo.png'
                                     width="50"
                                     height="50"
                                     className="d-inline-block align-top"
@@ -105,7 +121,7 @@ class Header extends Component {
                                 />
                                 <span className="title">{Messages.header.title}</span>
                             </Link>
-                            <NavbarToggler onClick={this.toggle}/>
+                            <NavbarToggler onClick={this.toggle} />
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto dropd" navbar>
                                     <UncontrolledDropdown nav inNavbar >
@@ -114,33 +130,33 @@ class Header extends Component {
                                         </DropdownToggle>
                                         <DropdownMenu right>
                                             {Salon.map(item => {
-                                                return <Link to={`/salon/${item.id}`} key = {item.address}>
-                                                    <DropdownItem  className="drop_item">
+                                                return <Link to={`/salon/${item.id}`} key={item.address}>
+                                                    <DropdownItem className="drop_item">
                                                         {item.name}
                                                     </DropdownItem>
                                                 </Link>
                                             })}
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
-                                    <NavItem>
-                                        {
-                                            !this.state.isSignedIn ? <ModalLogin login = {
-                                                <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
-                                            } /> :
-                                                  <a onClick={() => {
-                                                      firebase.auth().signOut();
-                                                      this.deleteAllCookies();
-                                                      localStorage.clear();
-                                                      this.setState({isSignedIn:false})
-                                                    }}>Sign-out</a>
-                                        }
-                                    </NavItem>
-                                    {/* <NavItem>
-                                        <ModalLogin login = {}/>
-                                    </NavItem>
-                                    <NavItem>
-                                        <ModalRegister/>
-                                    </NavItem> */}
+                                    {
+                                        !this.state.isSignedIn ?
+                                        <>
+                                            <NavItem>
+                                                <ModalLogin onSubmit={this.handleSignIn} />
+                                            </NavItem>
+                                            <NavItem>
+                                                <ModalRegister onSubmit={this.handleSignUp}/>
+                                            </NavItem>
+                                        </> :
+                                        <NavItem>
+                                            <a onClick={() => {
+                                            firebase.auth().signOut();
+                                            this.deleteAllCookies();
+                                            localStorage.clear();
+                                            this.setState({ isSignedIn: false })
+                                        }}>{Messages.header.LogOut}</a>
+                                        </NavItem>                                            
+                                    }
                                 </Nav>
                             </Collapse>
                         </Navbar>

@@ -72,7 +72,7 @@ class Footer extends Component {
 				</Row>
 				<div className='line'></div>
 				<Row className = 'justify-content-center'>
-					<Col xs = {10} className = 'copyright'>{Messages.footer.footerDate}</Col>
+					<Col xs = {10} className = 'copyright'>{`${Messages.footer.footerDate} ${new Date().getFullYear()}`}</Col>
 				</Row>
 			</Container>
 		);
