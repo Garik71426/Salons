@@ -33,7 +33,7 @@ class ModalLogin extends Component {
 
 	render() {
 		return (
-			<div>
+			<>
 				<Button onClick={this.toggle} className='ml-auto mod_btn' outline color='link' >{this.props.buttonLabel}{Messages.header.signIn}</Button>
 				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
 					<ModalHeader toggle={this.toggle}>{Messages.header.signIn}</ModalHeader>
@@ -52,7 +52,7 @@ class ModalLogin extends Component {
 						</Form>
 					</ModalBody>
 				</Modal>
-			</div>
+			</>
 		);
 	}
 }

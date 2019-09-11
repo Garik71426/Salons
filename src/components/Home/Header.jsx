@@ -14,7 +14,8 @@ import Messages from './../../Messages';
 
 import './../../../assets/stylesheets/header.css';
 
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 const config = {
     apiKey: 'AIzaSyCE723-OL8hsSGdbwe7yEn8FJG9fMYt3ic',

@@ -1,3 +1,6 @@
+.dropd.navbar-nav {
+	align-items: center;
+}
 nav.navbar ul{
 	padding: 0;
 }

@@ -37,8 +37,8 @@ class ModalRegister extends Component {
 	}
 	render() {
 		return (
-			<div>
-				<Button onClick = {this.toggle} className="ml-0 mod_btn" outline color="link" >{this.props.buttonLabel}{Messages.header.signUp}</Button>
+			<>
+				<Button onClick = {this.toggle} className="ml-auto mod_btn" outline color="link" >{this.props.buttonLabel}{Messages.header.signUp}</Button>
 				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
 					<ModalHeader toggle={this.toggle}>{Messages.header.signUp}</ModalHeader>
 					<ModalBody>
@@ -64,7 +64,7 @@ class ModalRegister extends Component {
 						</Form>
 					</ModalBody>
 				</Modal>
-			</div>
+			</>
 		);
 	}
 }
