@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const client = require('../public/javascripts/client');
+const client = require('../client');
 
 /* GET all workers. */
 router.get('/', function(req, res, next) {

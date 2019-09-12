@@ -27,7 +27,8 @@ class ModalRegister extends Component {
 		email: '',
 		phone: '',
 		password: '',
-		repeat_password: ''
+		repeat_password: '',
+		b_day: ''
 	}
 
 	toggle(event) {
@@ -56,6 +57,8 @@ class ModalRegister extends Component {
 								<Input type="password" name="password" id="examplePassword2" placeholder={Messages.header.PasswordPlaceholder} />
 								<Label for="examplePassword3">{Messages.header.RepeatPassword}</Label>
 								<Input type="password" name="repeat_password" id="examplePassword3" placeholder={Messages.header.PasswordPlaceholder} />
+								<Label for="b_day">'tsnndyan tiv'</Label>
+								<Input type="text" name="b_day" id="b_day" placeholder='tsnndyan tiv' />
 							</FormGroup>
 							<FormGroup>
 								<Button type='submit' color="primary">{Messages.header.Submit}</Button>{' '}

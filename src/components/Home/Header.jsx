@@ -6,6 +6,7 @@ import {
     DropdownMenu, DropdownItem, Container, NavItem
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import ModalLogin from './modals/ModalLogin';
 import ModalRegister from './modals/ModalReagistr';
@@ -64,15 +65,16 @@ class Header extends Component {
     componentWillUnmount() {
         this.unregisterAuthObserver();
     }
-    deleteAllCookies = () => {
-        const cookies = document.cookie.split(";");
-
+    deleteAllCookies = async (uid) => {
+        const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             let cookie = cookies[i];
-            let eqPos = cookie.indexOf("=");
+            let eqPos = cookie.indexOf('=');
             let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
         }
+        localStorage.clear();
+        this.setState({ isSignedIn: false })
     }
 
     handleSignIn = async event => {
@@ -82,7 +84,7 @@ class Header extends Component {
             const user = await firebase
                 .auth()
                 .signInWithEmailAndPassword(email.value, password.value);
-                console.log(user.user.uid)
+            console.log(user.user.uid)
         } catch (error) {
             alert(error);
         }
@@ -90,12 +92,26 @@ class Header extends Component {
 
     handleSignUp = async event => {
         event.preventDefault();
-        const { email, password } = event.target.elements;
+        const { email, password, name, surname, phone, b_day } = event.target.elements;
+        const body = {
+            name: name.value,
+            surname: surname.value,
+            email: email.value,
+            phone: phone.value,
+            b_day: b_day.value
+        };
         try {
-            const user = await firebase
+            const response = await firebase
                 .auth()
                 .createUserWithEmailAndPassword(email.value, password.value);
-            // console.log(user.user.uid)
+            body.uid = response.user.uid;
+            await axios.post('http://localhost:3001/users/registration', body)
+                .then(res => {
+                    alert('Շնորհավորում ենք։ Դուք հաջողությամբ գրանցվել եք։')
+                })
+                .catch(err => {
+                    alert('Something was wront. Please try again...');
+                });
         } catch (error) {
             alert(error);
         }
@@ -110,29 +126,29 @@ class Header extends Component {
         return (
             <div >
                 <Container>
-                    <div className="header_design">
-                        <Navbar light expand="md">
-                            <Link to="/">
+                    <div className='header_design'>
+                        <Navbar light expand='md'>
+                            <Link to='/'>
                                 <img
                                     src='/static/assets/images/header/logo.png'
-                                    width="50"
-                                    height="50"
-                                    className="d-inline-block align-top"
-                                    alt="React Bootstrap logo"
+                                    width='50'
+                                    height='50'
+                                    className='d-inline-block align-top'
+                                    alt='React Bootstrap logo'
                                 />
-                                <span className="title">{Messages.header.title}</span>
+                                <span className='title'>{Messages.header.title}</span>
                             </Link>
                             <NavbarToggler onClick={this.toggle} />
                             <Collapse isOpen={this.state.isOpen} navbar>
-                                <Nav className="ml-auto dropd" navbar>
+                                <Nav className='ml-auto dropd' navbar>
                                     <UncontrolledDropdown nav inNavbar >
-                                        <DropdownToggle nav className="drop" caret>
+                                        <DropdownToggle nav className='drop' caret>
                                             {Messages.header.dropDown}
                                         </DropdownToggle>
                                         <DropdownMenu right>
                                             {Salon.map(item => {
                                                 return <Link to={`/salon/${item.id}`} key={item.address}>
-                                                    <DropdownItem className="drop_item">
+                                                    <DropdownItem className='drop_item'>
                                                         {item.name}
                                                     </DropdownItem>
                                                 </Link>
@@ -141,22 +157,20 @@ class Header extends Component {
                                     </UncontrolledDropdown>
                                     {
                                         !this.state.isSignedIn ?
-                                        <>
+                                            <>
+                                                <NavItem>
+                                                    <ModalLogin onSubmit={this.handleSignIn} />
+                                                </NavItem>
+                                                <NavItem>
+                                                    <ModalRegister onSubmit={this.handleSignUp} />
+                                                </NavItem>
+                                            </> :
                                             <NavItem>
-                                                <ModalLogin onSubmit={this.handleSignIn} />
+                                                <a onClick={() => {
+                                                    firebase.auth().signOut();
+                                                    this.deleteAllCookies();
+                                                }}>{Messages.header.LogOut}</a>
                                             </NavItem>
-                                            <NavItem>
-                                                <ModalRegister onSubmit={this.handleSignUp}/>
-                                            </NavItem>
-                                        </> :
-                                        <NavItem>
-                                            <a onClick={() => {
-                                            firebase.auth().signOut();
-                                            this.deleteAllCookies();
-                                            localStorage.clear();
-                                            this.setState({ isSignedIn: false })
-                                        }}>{Messages.header.LogOut}</a>
-                                        </NavItem>                                            
                                     }
                                 </Nav>
                             </Collapse>

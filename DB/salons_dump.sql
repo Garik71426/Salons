@@ -71,6 +71,40 @@ ALTER SEQUENCE public.category_id_seq OWNED BY public.category.id;
 
 
 --
+-- Name: role; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.role (
+    id integer NOT NULL,
+    name character varying(15) NOT NULL
+);
+
+
+ALTER TABLE public.role OWNER TO postgres;
+
+--
+-- Name: role_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.role_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.role_id_seq OWNER TO postgres;
+
+--
+-- Name: role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.role_id_seq OWNED BY public.role.id;
+
+
+--
 -- Name: salon; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -82,7 +116,8 @@ CREATE TABLE public.salon (
     mobile_phone character varying(15),
     email character varying(63) NOT NULL,
     info character varying(255),
-    img character varying(50)
+    img character varying(50),
+    admin_id integer
 );
 
 
@@ -156,6 +191,47 @@ CREATE TABLE public.social_worker (
 
 
 ALTER TABLE public.social_worker OWNER TO postgres;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    name character varying(15) NOT NULL,
+    surname character varying(20) NOT NULL,
+    email character varying(63) NOT NULL,
+    phone character varying(15) NOT NULL,
+    img character varying(50),
+    uid character varying(50) NOT NULL,
+    b_day date NOT NULL,
+    role_id integer
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
 
 --
 -- Name: worker; Type: TABLE; Schema: public; Owner: postgres
@@ -256,6 +332,13 @@ ALTER TABLE ONLY public.category ALTER COLUMN id SET DEFAULT nextval('public.cat
 
 
 --
+-- Name: role id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.role ALTER COLUMN id SET DEFAULT nextval('public.role_id_seq'::regclass);
+
+
+--
 -- Name: salon id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -267,6 +350,13 @@ ALTER TABLE ONLY public.salon ALTER COLUMN id SET DEFAULT nextval('public.salon_
 --
 
 ALTER TABLE ONLY public.social ALTER COLUMN id SET DEFAULT nextval('public.social_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
@@ -296,16 +386,27 @@ COPY public.category (id, name, description, img) FROM stdin;
 
 
 --
+-- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.role (id, name) FROM stdin;
+1	admin
+2	user
+3	salon_admin
+\.
+
+
+--
 -- Data for Name: salon; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.salon (id, name, address, phone, mobile_phone, email, info, img) FROM stdin;
-3	Սյուզի գեղեցկության սրահ	Տիգրան Մեծ 74	+37498526478	\N	SyuziBeautySalon@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon1.jpg
-4	Լիլիթ գեղեցկության սրահ	Գր․ Լուսավորիչ 42	+37443501024	\N	lilitSalon@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon2.jpg
-5	Փարվանա գեղեցկության սրահ	Նժդեհի 25	+37432243525	\N	ParvanaBeautySalon@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon3.jpg
-6	Կոկետ գեղեցկության սրահ	Մյասնիկյան 64	+37432250581	\N	Koket64@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon4.jpg
-7	Անժելիկա գեղեցկության սրահ	Մյասնիկյան 26/4	+37432247455	\N	Anjelika_Gexeckutyan_Srah@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon5.jpg
-8	Անի գեղեցկության սրահ	Վարդանանց 14	+37432225683	\N	AniGexeckutyanSrah@gmail.com	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon6.jpg
+COPY public.salon (id, name, address, phone, mobile_phone, email, info, img, admin_id) FROM stdin;
+3	Սյուզի գեղեցկության սրահ	Տիգրան Մեծ 74	+37498526478	\N	SyuziBeautySalon@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon1.jpg	\N
+4	Լիլիթ գեղեցկության սրահ	Գր․ Լուսավորիչ 42	+37443501024	\N	lilitSalon@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon2.jpg	\N
+5	Փարվանա գեղեցկության սրահ	Նժդեհի 25	+37432243525	\N	ParvanaBeautySalon@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon3.jpg	\N
+6	Կոկետ գեղեցկության սրահ	Մյասնիկյան 64	+37432250581	\N	Koket64@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon4.jpg	\N
+7	Անժելիկա գեղեցկության սրահ	Մյասնիկյան 26/4	+37432247455	\N	Anjelika_Gexeckutyan_Srah@mail.ru	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon5.jpg	\N
+8	Անի գեղեցկության սրահ	Վարդանանց 14	+37432225683	\N	AniGexeckutyanSrah@gmail.com	Մեր գեղեցկության սրահը գործում է Վանաձորում դեռևս 2007թ-ից ։ Մեր հավատարիմ և մշտական գործնկերներն են  մի շարք աշխարահրջակ ընկերություններ, որոնցից են Bell Cosmetics,Gity Cosmetics, Gity Cosmetics և այլ ընկերություններ	/static/assets/images/salon/salon6.jpg	\N
 \.
 
 
@@ -369,11 +470,21 @@ COPY public.social_worker (worker_id, social_id, path) FROM stdin;
 
 
 --
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (id, name, surname, email, phone, img, uid, b_day, role_id) FROM stdin;
+2	Գոռ	Մանուկյան	gorman93@mail.ru	+37494161990	\N	PuThdHRBipTFbwVACyCeFahBITZ2	1993-09-24	1
+9	Գարիկ	Իսկանդարյան	garo1997@mail.ru	+37493399432	\N	WCrWdG0b7kQJUkThpyKH7jxD5az1	1997-03-13	2
+\.
+
+
+--
 -- Data for Name: worker; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.worker (id, name, surname, b_day, img, about, category_id, salon_id) FROM stdin;
-9	Հրաչիկ	Հովսեփյան	1990-10-27	/static/assets/images/users/specialist.png	Ունեմ 5 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Երևանում 	1	3
+9	Հրաչիկ	Հովսեփյան	1990-10-27	/static/assets/images/users/specialist.png	Ունեմ 5 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Երևանում 	\N	\N
 11	Սիրակ	Կարապետյան	1985-12-16	/static/assets/images/users/specialist.png	Ունեմ 8 տարվա աշխատանքային փորձ	2	4
 1	Լիլիթ	Կարապետյան	1987-02-21	/static/assets/images/users/specialist.png	Ունեմ 10 տարվա աշխատանքային փորձ, վերապատրաստվել եմ Մոսկվայում 	1	3
 12	Անի	Մամուլյան	1994-01-16	/static/assets/images/users/specialist.png	վերապատրաստվել եմ Մոսկվայում 	3	4
@@ -438,6 +549,13 @@ SELECT pg_catalog.setval('public.category_id_seq', 4, true);
 
 
 --
+-- Name: role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.role_id_seq', 3, true);
+
+
+--
 -- Name: salon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -449,6 +567,13 @@ SELECT pg_catalog.setval('public.salon_id_seq', 8, true);
 --
 
 SELECT pg_catalog.setval('public.social_id_seq', 5, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 9, true);
 
 
 --
@@ -495,6 +620,22 @@ ALTER TABLE ONLY public.category
 
 ALTER TABLE ONLY public.category
     ADD CONSTRAINT category_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: role role_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.role
+    ADD CONSTRAINT role_name_key UNIQUE (name);
+
+
+--
+-- Name: role role_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.role
+    ADD CONSTRAINT role_pkey PRIMARY KEY (id);
 
 
 --
@@ -586,6 +727,46 @@ ALTER TABLE ONLY public.social_worker
 
 
 --
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+
+--
+-- Name: users users_img_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_img_key UNIQUE (img);
+
+
+--
+-- Name: users users_phone_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_phone_key UNIQUE (phone);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_uid_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_uid_key UNIQUE (uid);
+
+
+--
 -- Name: worker worker_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -618,6 +799,14 @@ ALTER TABLE ONLY public.works
 
 
 --
+-- Name: salon salon_admin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.salon
+    ADD CONSTRAINT salon_admin_id_fkey FOREIGN KEY (admin_id) REFERENCES public.users(id);
+
+
+--
 -- Name: social_worker social_worker_social_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -631,6 +820,14 @@ ALTER TABLE ONLY public.social_worker
 
 ALTER TABLE ONLY public.social_worker
     ADD CONSTRAINT social_worker_worker_id_fkey FOREIGN KEY (worker_id) REFERENCES public.worker(id);
+
+
+--
+-- Name: users users_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_role_id_fkey FOREIGN KEY (role_id) REFERENCES public.role(id);
 
 
 --
