@@ -51,20 +51,19 @@ class Header extends Component {
         this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
             (user) => this.setState({ isSignedIn: !!user })
         );
-        fetch('http://localhost:3001/salon')
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({ Salon: result })
-                },
-                (error) => {
-                    console.log(error);
-                }
-            )
+        axios.get('http://localhost:3001/salon')
+            .then(res => {
+                this.setState({ Salon: res.data });
+            })
+            .catch(err => {
+                return err;
+            });
     }
+
     componentWillUnmount() {
         this.unregisterAuthObserver();
     }
+
     deleteAllCookies = async (uid) => {
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
@@ -76,6 +75,11 @@ class Header extends Component {
         localStorage.clear();
         this.setState({ isSignedIn: false })
     }
+
+    handleSignOut = () => {
+        firebase.auth().signOut();
+        this.deleteAllCookies();
+    };
 
     handleSignIn = async event => {
         event.preventDefault();
@@ -100,6 +104,7 @@ class Header extends Component {
             phone: phone.value,
             b_day: b_day.value
         };
+
         try {
             const response = await firebase
                 .auth()
@@ -116,11 +121,13 @@ class Header extends Component {
             alert(error);
         }
     };
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
+
     render() {
         const { Salon } = this.state;
         return (
@@ -165,12 +172,18 @@ class Header extends Component {
                                                     <ModalRegister onSubmit={this.handleSignUp} />
                                                 </NavItem>
                                             </> :
-                                            <NavItem>
-                                                <a onClick={() => {
-                                                    firebase.auth().signOut();
-                                                    this.deleteAllCookies();
-                                                }}>{Messages.header.LogOut}</a>
-                                            </NavItem>
+                                            <>
+                                                <NavItem>
+                                                    <Link to='/my'>
+                                                        Իմ Էջը
+                                                    </Link>
+                                                </NavItem>
+                                                <NavItem>
+                                                    <Link to='/' onClick={this.handleSignOut}>
+                                                        {Messages.header.LogOut}
+                                                    </Link>
+                                                </NavItem>
+                                            </>
                                     }
                                 </Nav>
                             </Collapse>
@@ -181,4 +194,5 @@ class Header extends Component {
         );
     }
 }
+
 export default Header;
