@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { Row } from 'reactstrap';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import Messages from './../../Messages';
 import UserCard from './../cards/UserCard';
@@ -15,31 +16,25 @@ class Workers extends Component {
         workers: [], 
     };
     componentDidMount() {
-        fetch(`http://localhost:3001/salon//workers/${this.props.category_id}/${this.props.salon_id}`)
-        .then(res => res.json())
-        .then(
-            (result) => {
-                this.setState({ workers: result})
-            },
-            (error) => {
-                console.log(error);
-            }
-        )
+        axios.get(`http://localhost:3001/salon//workers/${this.props.category_id}/${this.props.salon_id}`)
+        .then(result => {
+            this.setState({ workers: result.data });
+        })
+        .catch(err => {
+            return err;
+        });
     }
 
     componentDidUpdate(prevProps){
         if(this.props.category_id !== prevProps.category_id 
             && this.props.salon_id !== prevProps.salon_id) {
-            fetch(`http://localhost:3001/salon/workers/${this.props.category_id}/${this.props.salon_id}`)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({ workers: result})
-                },
-                (error) => {
-                    console.log(error);
-                }
-            )
+            axios.get(`http://localhost:3001/salon//workers/${this.props.category_id}/${this.props.salon_id}`)
+            .then(result => {
+                this.setState({ workers: result.data });
+            })
+            .catch(err => {
+                return err;
+            });
         }
     }
     

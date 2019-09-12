@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import Messages from './../../Messages';
 
@@ -14,17 +15,13 @@ class WorkImages extends Component {
         workImgs: []
     }
     componentDidMount() {
-        fetch(`http://localhost:3001/worker/${this.props.specialist}/works`)
-        .then(res => res.json())
-        .then(
-            (result) => {
-                console.log(result)
-                this.setState({ workImgs: result })    
-            },
-            (error) => {
-                console.log(error);
-            }
-        )        
+        axios.get(`http://localhost:3001/worker/${this.props.specialist}/works`)
+        .then(result => {
+            this.setState({ workImgs: result.data });
+        })
+        .catch(err => {
+            return err;
+        });       
     }
 
     render() {

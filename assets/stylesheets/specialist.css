@@ -1,4 +1,4 @@
-.user {
+/* .user {
 	display: -webkit-flex;
 	display: -moz-flex;
 	display: -ms-flex;
@@ -17,7 +17,6 @@ p {
 }
 .textBlue {
 	color: #0898a8;
-	/*color: #17A2B8; */
 }
 span {
 	font-size: 1em;
@@ -59,4 +58,4 @@ span {
 }
 .name_add:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
+} */

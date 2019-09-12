@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import Messages from './../../../Messages';
-
-import './../../../../assets/stylesheets/setting.css';
 
 class ModalRegister extends Component {
 	static contextTypes = {

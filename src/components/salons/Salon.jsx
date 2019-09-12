@@ -1,13 +1,11 @@
 import React,{Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
+import axios from 'axios';
 
 import Workers from './Workers';
 
 import Messages from './../../Messages';
-
-import notification from './../../../assets/images/salon/notification.png';
 
 import './../../../assets/stylesheets/salon.css';
 
@@ -24,49 +22,37 @@ class Salon extends Component {
 
     componentDidMount() {
         const salon_id = this.props.match.params.whichSalon;
-        fetch(`http://localhost:3001/salon/${salon_id}`)
-        .then(res => res.json())
-        .then(
-            (salon) => {
-                fetch(`http://localhost:3001/salon/category/${salon_id}`)
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        this.setState({ salonInfo: salon , categoryInfo: result });
-                    },
-                    (error) => {
-                        console.log(error);
-                    }
-                )
-            },
-            (error) => {
-                console.log(error);
-            }
-        )
+        axios.get(`http://localhost:3001/salon/${salon_id}`)
+        .then(salon => {
+            axios.get(`http://localhost:3001/salon/category/${salon_id}`)
+            .then(result => {
+                this.setState({ salonInfo: salon.data , categoryInfo: result.data });
+            })
+            .catch(err => {
+                return err;
+            });
+        })
+        .catch(err => {
+            return err;
+        });
     }
 
     componentDidUpdate(prevProps){
         if(this.props.match.params.whichSalon !== prevProps.match.params.whichSalon) {
             const salon_id = this.props.match.params.whichSalon;
-            fetch(`http://localhost:3001/salon/${salon_id}`)
-            .then(res => res.json())
-            .then(
-                (salon) => {
-                    fetch(`http://localhost:3001/salon/category/${salon_id}`)
-                    .then(res => res.json())
-                    .then(
-                        (result) => {
-                            this.setState({ salonInfo: salon , categoryInfo: result });
-                        },
-                        (error) => {
-                            console.log(error);
-                        }
-                    )
-                },
-                (error) => {
-                    console.log(error);
-                }
-            )
+            axios.get(`http://localhost:3001/salon/${salon_id}`)
+            .then(salon => {
+                axios.get(`http://localhost:3001/salon/category/${salon_id}`)
+                .then(result => {
+                    this.setState({ salonInfo: salon.data , categoryInfo: result.data });
+                })
+                .catch(err => {
+                    return err;
+                });
+            })
+            .catch(err => {
+                return err;
+            });
         }
     }
     
@@ -74,6 +60,7 @@ class Salon extends Component {
         const { salonInfo, categoryInfo } =this.state;
 		return (
              <Container className = "salon-page">
+                <Row><h1 className = 'name'>{salonInfo.name}</h1></Row>
 				<Row className = 'about'>
 					<Col md="6" >
 						<img src={salonInfo.img} alt="salon images"/>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import Social from './Social';
 
@@ -15,16 +16,13 @@ class SpecialistInfo extends Component {
         specialist: {}
     }
     componentDidMount() {
-        fetch(`http://localhost:3001/worker/${this.props.specialist_id}/full`)
-        .then(res => res.json())
-        .then(
-            (result) => {
-                this.setState({ specialist: result })            
-            },
-            (error) => {
-                console.log(error);
-            }
-        )
+        axios.get(`http://localhost:3001/worker/${this.props.specialist_id}/full`)
+        .then(result => {
+            this.setState({ specialist: result.data });
+        })
+        .catch(err => {
+            return err;
+        });
     }
 
     calculate_age = (dob) => { 
