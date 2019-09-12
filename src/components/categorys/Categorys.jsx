@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
+import axios from 'axios';
 
 import SearchWorker from './SearchWorker';
 import Workers from './Workers';
@@ -12,52 +13,47 @@ import './../../../assets/stylesheets/table.css';
 @observer
 class Categorys extends Component {
     static contextTypes = {
-        AppStore : PropTypes.shape({
-            
+        AppStore: PropTypes.shape({
+
         }).isRequired
     }
     state = {
         category: {}
     }
     componentDidMount() {
-        fetch(`http://localhost:3001/category/${this.props.match.params.whichCategory}`)
-        .then(res => res.json())
-        .then(
-            (category) => {
-                this.setState({ category: category });
-            },
-            (error) => {
-                console.log(error);
-            }
-        )
+        axios.get(`http://localhost:3001/category/${this.props.match.params.whichCategory}`)
+            .then(res => {
+                this.setState({ category: res.data });
+            })
+            .catch(err => {
+                return err;
+            });
     }
     componentDidUpdate(prevProps) {
-        if(prevProps.match.params.whichCategory !== this.props.match.params.whichCategory){
-            fetch(`http://localhost:3001/category/${this.props.match.params.whichCategory}`)
-            .then(res => res.json())
-            .then(
-                (category) => {
-                    this.setState({ category: category });
-                },
-                (error) => {
-                    console.log(error);
-                }
-            )
+        if (prevProps.match.params.whichCategory !== this.props.match.params.whichCategory) {
+            axios.get(`http://localhost:3001/category/${this.props.match.params.whichCategory}`)
+                .then(res => {
+                    this.setState({ category: res.data });
+                })
+                .catch(err => {
+                    return err;
+                });
         }
     }
-    render(){
+    render() {
         const { category } = this.state;
-        
-        return(
+
+        return (
             <Container>
                 <CategorysNavigator />
                 <SearchWorker />
                 <div>
-                    <h3 align = "center" className = "mt-5 mb-5 text_color">{category.name}</h3>
-                    {category.id && <Workers category_id = {category.id}/>}                   
+                    <h3 align="center" className="mt-5 mb-5 text_color">{category.name}</h3>
+                    {category.id && <Workers category_id={category.id} />}
                 </div>
             </Container>
         );
     }
 }
+
 export default Categorys;
