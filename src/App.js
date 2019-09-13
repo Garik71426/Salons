@@ -13,6 +13,8 @@ import UIStore from './stores/UIStore';
 import AppStore from './stores/AppStore';
 
 import './../assets/stylesheets/App.css';
+import Acount from './components/acount/Acount';
+import AcountSetting from './components/acount/AcountSet';
 
 const Home = React.lazy(() => import("./components/Home/Home"));
 const Salon = React.lazy(() => import("./components/salons/Salon"));
@@ -57,24 +59,32 @@ class App extends Component {
             {
                 path: '/specialist/:specialistIndex',
                 component: Specialist
+            },
+            {
+                path: '/my/:uid',
+                component: Acount
+            },
+            {
+                path: '/my/:uid/setting',
+                component: AcountSetting
             }
         ];
         return (
             <div className="App">
                 <Router>
-                    <div>
-                        <Header />
-                        <Suspense fallback={<Loading />}>
-                            <Switch>
-                                {
-                                    routes.map(item => {
-                                        return <Route key={item.path} exact path={item.path} component={item.component} />;
-                                    })
-                                }
-                                <Route component={Error} />
-                            </Switch>
-                        </Suspense>
-                    </div>
+                    <Header />
+                        <div className = "App-container">
+                            <Suspense fallback={<Loading />}>
+                                <Switch>
+                                    {
+                                        routes.map(item => {
+                                            return <Route key={item.path} exact path={item.path} component={item.component} />;
+                                        })
+                                    }
+                                    <Route component={Error} />
+                                </Switch>
+                            </Suspense>
+                        </div>
                 </Router>
                 <Footer />
             </div>

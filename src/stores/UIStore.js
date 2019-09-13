@@ -1,9 +1,19 @@
-//import {extendObservable, computed, action} from 'mobx';
+import {extendObservable, computed, action} from 'mobx';
 
-//import AppStore from './AppStore';
 
 class UIStore {
+    storeProps = {
+
+    }
+    constructor(){
+        extendObservable(this, this.storeProps);
+    }
     
+    calculate_age = (dob) => { 
+        const diff_ms = Date.now() - dob.getTime();
+        const age_dt = new Date(diff_ms);       
+        return Math.abs(age_dt.getUTCFullYear() - 1970);
+    }
 }
 
 

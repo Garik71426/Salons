@@ -2,7 +2,9 @@
 	margin: 2em auto;
 }
 .salon-page .name{
-  font-size: 1.5em;
+  color: #6e3e24;
+  font-size: 2em;
+  margin: 1em auto 1.5em;
 }
 .salon-page .about img{
   width: 100%;

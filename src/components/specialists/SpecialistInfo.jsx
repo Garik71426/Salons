@@ -8,8 +8,8 @@ import Messages from './../../Messages';
 
 class SpecialistInfo extends Component {
     static contextTypes = {
-        AppStore : PropTypes.shape({
-            
+        UIStore : PropTypes.shape({
+            calculate_age: PropTypes.func
         }).isRequired
     };
     state = {
@@ -25,15 +25,9 @@ class SpecialistInfo extends Component {
         });
     }
 
-    calculate_age = (dob) => { 
-        const diff_ms = Date.now() - dob.getTime();
-        const age_dt = new Date(diff_ms);       
-        return Math.abs(age_dt.getUTCFullYear() - 1970);
-    }
-
     render() {
         const { specialist } =  this.state;
-        const age = this.calculate_age(new Date(specialist.b_day));
+        const age = this.context.UIStore.calculate_age(new Date(specialist.b_day));
         return (
             <div>
                 <h2 className = "textBlue"> {Messages.specialist.information} </h2>

@@ -81,10 +81,10 @@ const Messages = {
         salonName : ' Սրահի անուն - ',
         salonAddress : ' Սրահի հասցե - ',
         socialMedia : ' Կապ սոց․ կայքերում - ',
-        registered : 'Հերթագրվել',
-        chooseWork : 'Ընտրել աշխատանքը',
-        chooseClock : 'Ընտրել ժամ',
-        confirmed : 'Հաստատել',
+        // registered : 'Հերթագրվել',
+        // chooseWork : 'Ընտրել աշխատանքը',
+        // chooseClock : 'Ընտրել ժամ',
+        // confirmed : 'Հաստատել',
         myWorkes : 'Իմ աշխատանքներ',
         age : 'Տարիք -',
         prof : 'Մասնագիտություն -',
@@ -108,22 +108,12 @@ const Messages = {
         nameCategory : 'Նշել կատեգորիայի անուն',
         confirmChanges : 'Հաստատել '
     },
-    AcountUser : {
-         acountName : "Անուն:",
-         acountSurname : "Ազգանուն:",
-         acountPhoneNumber : "Հեռախոսահամար:",
-         acountChangeData : "Փոխել Տվյաները",
-         acountChangeDataSave : "Հաստատել",
-         acuntVisits : "Այցելություններ",
-         acountNameSetting : "Անուն",
-         acountSurnameSetting : "Ազգանուն",
-         acountPhoneNumberSetting : "Հեռախոսահամար",
-         acountNameVisits : "Անուն:",
-         acountSurnameVisits : "Ազգանուն:",
-         acountPhoneNumberVisits : "Հեռախոսահամար:",
-         acountBeuthySalonName : "Գեղեցկության սրահ:",
-         aountVisitsData : "Օր:",
-         acountVisitsHours : "Ժամ:",
+    Account : {
+        name : "Անուն:",
+        surname : "Ազգանուն:",
+        phone : "Հեռախոսահամար:",
+        age: 'Տարիք -',
+        Submit: 'Հաստատել',
      }
 };
 export default Messages;

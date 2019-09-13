@@ -43,21 +43,22 @@ class Header extends Component {
             isOpen: false,
             FuncForCookie: PropTypes.func,
             Salon: [],
-            isSignedIn: false
+            isSignedIn: false,
+            uid: ''
         };
     }
 
     componentDidMount() {
         this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-            (user) => this.setState({ isSignedIn: !!user })
+            (user) => this.setState({ isSignedIn: !!user, uid: user.uid })
         );
         axios.get('http://localhost:3001/salon')
-            .then(res => {
-                this.setState({ Salon: res.data });
-            })
-            .catch(err => {
-                return err;
-            });
+        .then(res => {
+            this.setState({ Salon: res.data });
+        })
+        .catch(err => {
+            return err;
+        });
     }
 
     componentWillUnmount() {
@@ -88,7 +89,6 @@ class Header extends Component {
             const user = await firebase
                 .auth()
                 .signInWithEmailAndPassword(email.value, password.value);
-            console.log(user.user.uid)
         } catch (error) {
             alert(error);
         }
@@ -129,7 +129,7 @@ class Header extends Component {
     }
 
     render() {
-        const { Salon } = this.state;
+        const { Salon, uid } = this.state;
         return (
             <div >
                 <Container>
@@ -174,7 +174,7 @@ class Header extends Component {
                                             </> :
                                             <>
                                                 <NavItem>
-                                                    <Link to='/my'>
+                                                    <Link to={`/my/${uid}`}>
                                                         Իմ Էջը
                                                     </Link>
                                                 </NavItem>

@@ -4,3 +4,28 @@
     flex-direction: column;
     min-height: 100vh;
 }
+.App-container{
+    min-height: calc(100vh - 230px)
+}
+
+/* .input_file {
+    color: transparent;
+  }
+  .input_file::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .input_file::before {
+    content: 'Ընտրեք նկարը';
+    color: #17A2B8;
+    display: inline-block;
+    
+    border: 1px solid #17A2B8;
+    border-radius: 5px;
+    padding: 5px 8px;
+    cursor: pointer;
+   
+    
+  }
+  .input_file:hover::before {
+    border-color: #17A2B8;
+  } */

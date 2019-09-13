@@ -13,6 +13,19 @@ router.get('/', function (req, res, next) {
     });
 });
 
+/* GET users by uid */
+router.get('/:uid', function (req, res, next) {
+    client.query(`SELECT * FROM users WHERE uid = '${req.params.uid}'`, function (err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        if (result.rows.length === 0) {
+            return res.status(404).send('Not Found');
+        }
+        res.status(200).send(result.rows[0]);
+    });
+});
+
 /* Register new user. */
 router.post('/registration', function (req, res, next) {
     client.query(`INSERT INTO users (name, surname, email, phone, uid, b_day, role_id)

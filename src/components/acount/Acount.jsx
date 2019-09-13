@@ -1,61 +1,56 @@
-import React,{Component} from 'react';
-import {Container, Row, Col,Button} from 'reactstrap';
+import React, { Component } from 'react';
+import { Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import Messages from './../../Messages';
 
-import AcountSet from './AcountSet';
+//import AcountSetting from './AcountSet';
 
-import AcountSetting from './AcountSet';
-import AcountVisits from './Visits';
-
-import './../../../assets/stylesheets/acount.css';
-
-@observer
 class Acount extends Component {
     static contextTypes = {
-        AppStore : PropTypes.shape({
-            _UserData : PropTypes.array,
-            AccountInfo : PropTypes.object,
-            FuncForCookie : PropTypes.func,
+        UIStore: PropTypes.shape({
+            calculate_age: PropTypes.func
         }).isRequired
     }
 
-    componentDidMount(){
-          this.context.AppStore.FuncForCookie();
-        
+    state = {
+        account: {}
+    }
+
+    componentDidMount() {
+        axios.get(`http://localhost:3001/users/${this.props.match.params.uid}`)
+        .then(res => {
+            this.setState({ account: res.data })
+        })
+        .catch(err => {
+            return err;
+        });
     }
     render() {
-        const {_UserData, AccountInfo} = this.context.AppStore;
-        const id = 0;
-        const UserData = _UserData.users[id];
-		return (
+        const { account } = this.state;
+        const age = this.context.UIStore.calculate_age(new Date(account.b_day));
+        return (
             <Container>
                 <Row>
-                    <Col lg = "12"  md = "12" sm = "12" className = "d_flex">
-                        <div className = "d_inline">
-                            <div className = "text_design user">
-                                <img src={AccountInfo.image} alt="User Image" />
-                                <div className="info" >
-                                    <p>{Messages.AcountUser.acountName} {AccountInfo.name}</p>
-                                    <p>{Messages.AcountUser.acountSurname} {AccountInfo.surname}</p>
-                                    <p>{Messages.AcountUser.acountPhoneNumber} {AccountInfo.phoneNumber}</p>
-                                    <AcountSetting  userId={id}/>
-                                </div>
-                            </div>
+                    <Col sm="8" >
+                        <h3> {account.name} {account.surname}</h3>
+                        <img src={account.img} height="200px" alt="user image" width="200px" style = { { borderRadius: '50%' } }/>
+                        <div>
+                            <p>{Messages.Account.name} {account.name}</p>
+                            <p>{Messages.Account.surname} {account.surname}</p>
+                            <p>{Messages.Account.phone} {account.phone}</p>
+                            <p>{Messages.Account.age} {age}</p>
+                            <Link to = {`/my/${this.props.match.params.uid}/setting`}>
+                                settings
+                            </Link>
                         </div>
                     </Col>
                 </Row>
-                <Row>
-                    <Col lg = "12" md = "12" sm = "12">
-                        <h3 className="visits">{Messages.AcountUser.acuntVisits}</h3>
-                        <AcountVisits />
-                    </Col>
-                </Row>
-			</Container>
+            </Container>
 		);
-	}
+    }
 }
 
 export default Acount;
