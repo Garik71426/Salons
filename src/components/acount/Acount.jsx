@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 
 import Messages from './../../Messages';
 
-//import AcountSetting from './AcountSet';
-
 class Acount extends Component {
     static contextTypes = {
         UIStore: PropTypes.shape({

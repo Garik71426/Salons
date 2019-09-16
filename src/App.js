@@ -14,7 +14,7 @@ import AppStore from './stores/AppStore';
 
 import './../assets/stylesheets/App.css';
 import Acount from './components/acount/Acount';
-import AcountSetting from './components/acount/AcountSet';
+import AcountSetting from './components/acount/AccountSetting';
 
 const Home = React.lazy(() => import("./components/Home/Home"));
 const Salon = React.lazy(() => import("./components/salons/Salon"));
