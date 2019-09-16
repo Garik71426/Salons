@@ -6,8 +6,8 @@ Home
 Salon
 ![Salon](/screenshots/Salon%20Ani.png)
 
-Category
-![Category](/screenshots/Salon%20Category.png)
-
 Specialist
 ![Specialist](/screenshots/Salon%20specialist.png)
+
+Category
+![Category](/screenshots/Salon%20Category.png)
