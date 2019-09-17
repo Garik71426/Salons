@@ -34,7 +34,7 @@ class SpecialistUser extends Component {
     render() {
         let { specialist } = this.state;
         return (
-            <Container className="mb-5 sections mt-5">
+            <Container className="mb-5 sections mt-5 section">
                 <Row>
                     <Col sm="8" >
                         <h3 className="textBlue" > {specialist.name} {specialist.surname}</h3>

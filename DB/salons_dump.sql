@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.10 (Ubuntu 10.10-1.pgdg18.04+1)
--- Dumped by pg_dump version 10.10 (Ubuntu 10.10-1.pgdg18.04+1)
+-- Dumped from database version 11.3 (Ubuntu 11.3-1.pgdg18.04+1)
+-- Dumped by pg_dump version 11.3 (Ubuntu 11.3-1.pgdg18.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16,20 +16,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -41,7 +27,6 @@ SET default_with_oids = false;
 CREATE TABLE public.category (
     id integer NOT NULL,
     name character varying(15) NOT NULL,
-    description character varying(250) NOT NULL,
     img character varying(50)
 );
 
@@ -377,11 +362,11 @@ ALTER TABLE ONLY public.works ALTER COLUMN id SET DEFAULT nextval('public.works_
 -- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.category (id, name, description, img) FROM stdin;
-1	Վարսահարդարում	Գեղեցկությունն ամենուր է, հույժ ցանկալի հյուր է։	static/assets/images/section/vars.jpg
-2	Դիմահարդարում	Գեղեցկությունը ձիրք ու զորություն ունի սրտերը խաղաղություն մտցնելու։	static/assets/images/section/dim.jpg
-3	Մատնահարդարում	Մարդու մեջ պետք է ամեն ինչ գեղեցիկ լինի։	static/assets/images/section/mat.jpg
-4	Կոսմետոլոգիա	Գեղեցիկն աստվածային է, վեհը՝ մարդկային։	static/assets/images/section/spa.jpg
+COPY public.category (id, name, img) FROM stdin;
+1	Վարսահարդարում	static/assets/images/section/vars.jpg
+2	Դիմահարդարում	static/assets/images/section/dim.jpg
+3	Մատնահարդարում	static/assets/images/section/mat.jpg
+4	Կոսմետոլոգիա	static/assets/images/section/spa.jpg
 \.
 
 
@@ -474,8 +459,9 @@ COPY public.social_worker (worker_id, social_id, path) FROM stdin;
 --
 
 COPY public.users (id, name, surname, email, phone, img, uid, b_day, role_id) FROM stdin;
-2	Գոռ	Մանուկյան	gorman93@mail.ru	+37494161990	\N	PuThdHRBipTFbwVACyCeFahBITZ2	1993-09-24	1
-9	Գարիկ	Իսկանդարյան	garo1997@mail.ru	+37493399432	\N	WCrWdG0b7kQJUkThpyKH7jxD5az1	1997-03-13	2
+2	Gor	Մանուկյան	gorman93@mail.ru	+37494161990	/static/assets/images/users/Gor.jpg	PuThdHRBipTFbwVACyCeFahBITZ2	1993-09-24	1
+9	Garik	Iskandaryan	garo1997@mail.ru	+37493399432	/static/assets/images/users/Garik.jpg	WCrWdG0b7kQJUkThpyKH7jxD5az1	1997-03-04	2
+10	Նարեկ	Hovhannisyan	narekna1998@gmail.com	+37477732868	/static/assets/images/users/Narek.jpg	aHsT2MNA5KdQ5bFz1aBNWgBcIjr2	1998-01-18	2
 \.
 
 
@@ -573,7 +559,7 @@ SELECT pg_catalog.setval('public.social_id_seq', 5, true);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 9, true);
+SELECT pg_catalog.setval('public.users_id_seq', 10, true);
 
 
 --

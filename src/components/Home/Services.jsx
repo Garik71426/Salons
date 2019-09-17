@@ -41,7 +41,6 @@ class Services extends Component {
                                 <CardCategory
                                     img={item.img}
                                     title={item.name}
-                                    description={item.description}
                                     url={'category'}
                                     id={`${item.id}`}
                                 />

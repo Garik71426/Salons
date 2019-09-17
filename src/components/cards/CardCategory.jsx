@@ -29,7 +29,6 @@ class CardCategory extends Component {
                         <CardImg variant="top" src={img} />
                         <CardBody>
                             <CardTitle>{title}</CardTitle>
-                            <CardText>{description}</CardText>
                         </CardBody>
                     </Card>
                 </Link>

@@ -65,7 +65,7 @@ class App extends Component {
                 component: Acount
             },
             {
-                path: '/my/:uid/setting',
+                path: '/my/:uid/settings',
                 component: AcountSetting
             }
         ];

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 
 import Messages from './../../Messages';
 
+import './Account.css';
+
 class Acount extends Component {
     static contextTypes = {
         UIStore: PropTypes.shape({
@@ -30,7 +32,7 @@ class Acount extends Component {
         const { account } = this.state;
         const age = this.context.UIStore.calculate_age(new Date(account.b_day));
         return (
-            <Container>
+            <Container className = 'account section'>
                 <Row>
                     <Col sm="8" >
                         <h3> {account.name} {account.surname}</h3>
@@ -40,8 +42,8 @@ class Acount extends Component {
                             <p>{Messages.Account.surname} {account.surname}</p>
                             <p>{Messages.Account.phone} {account.phone}</p>
                             <p>{Messages.Account.age} {age}</p>
-                            <Link to = {`/my/${this.props.match.params.uid}/setting`}>
-                                settings
+                            <Link to = {`/my/${this.props.match.params.uid}/settings`} className = 'btn_salmon'>
+                                Կարգավորումներ
                             </Link>
                         </div>
                     </Col>

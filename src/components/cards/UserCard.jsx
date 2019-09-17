@@ -27,7 +27,7 @@ class UserCard extends Component {
                     <CardBody>
                         <CardTitle>{title}</CardTitle>
                         <CardText>{explaText}</CardText>
-                        <Link to={`/${url}/${id}`} className = 'btn'>
+                        <Link to={`/${url}/${id}`} className = 'btn_salmon'>
                             {buttonText}
                         </Link>
                     </CardBody>

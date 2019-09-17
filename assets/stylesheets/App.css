@@ -8,6 +8,22 @@
     min-height: calc(100vh - 230px)
 }
 
+.section {
+	margin: 2em auto;
+}
+
+.btn_salmon{
+  border-radius: 30px;
+  padding: .5em 1em;
+  background-color: salmon;
+  color: white;
+  border: 2px solid salmon;
+}
+.btn_salmon:hover{
+  text-decoration: none;
+  background-color: transparent;
+  color: salmon;
+}
 /* .input_file {
     color: transparent;
   }

@@ -59,7 +59,7 @@ class Salon extends Component {
     render() {
         const { salonInfo, categoryInfo } =this.state;
 		return (
-             <Container className = "salon-page">
+             <Container className = "salon-page section">
                 <Row><h1 className = 'name'>{salonInfo.name}</h1></Row>
 				<Row className = 'about'>
 					<Col md="6" >
