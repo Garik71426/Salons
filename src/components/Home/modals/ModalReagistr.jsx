@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import Messages from './../../../Messages';
+import Constants from './../../../Constants';
 
 class ModalRegister extends Component {
 	static contextTypes = {
@@ -34,7 +35,14 @@ class ModalRegister extends Component {
 			modal: !prevState.modal
 		}));
 	}
+	generalInfoChangeInput = event => {
+		console.log(event.target.value)
+		return event;
+	}
 	render() {
+		const { signUp } = Constants;
+		const { generalInfoChangeInput } = this;
+		const { inputs } = Messages.header;
 		return (
 			<>
 				<Button onClick = {this.toggle} className="ml-auto mod_btn" outline color="link" >{this.props.buttonLabel}{Messages.header.signUp}</Button>
@@ -42,22 +50,20 @@ class ModalRegister extends Component {
 					<ModalHeader toggle={this.toggle}>{Messages.header.signUp}</ModalHeader>
 					<ModalBody>
 						<Form onSubmit = {this.props.onSubmit}>
-							<FormGroup>
-								<Label for="examplePassword">{Messages.header.Name}</Label>
-								<Input type="text" name="name" id="examplePassword" />
-								<Label for="examplePassword1">{Messages.header.Surname}</Label>
-								<Input type="text" name="surname" id="examplePassword1" />
-								<Label for="exampleEmail">{Messages.header.Email}</Label>
-								<Input type="email" name="email" id="exampleEmail" placeholder={Messages.header.EmailPlaceholder} />
-								<Label for="exampleEmail1">{Messages.header.Phone}</Label>
-								<Input type="text" name="phone" id="exampleEmail1" placeholder={Messages.header.PhonePlaceholder}/>
-								<Label for="examplePassword2">{Messages.header.Password}</Label>
-								<Input type="password" name="password" id="examplePassword2" placeholder={Messages.header.PasswordPlaceholder} />
-								<Label for="examplePassword3">{Messages.header.RepeatPassword}</Label>
-								<Input type="password" name="repeat_password" id="examplePassword3" placeholder={Messages.header.PasswordPlaceholder} />
-								<Label for="b_day">'tsnndyan tiv'</Label>
-								<Input type="text" name="b_day" id="b_day" placeholder='tsnndyan tiv' />
-							</FormGroup>
+							{Object.values(signUp).map(item => {
+								return <FormGroup key = {item}>
+									<Label for = {item}>{inputs[item].label}</Label>
+									<Input 
+										type = {inputs[item].type? inputs[item].type: 'text'}
+										name = {item}
+										id = {item}
+										data-date-format = {item === 'b_day' ? 'DD MMMM YYYY' : ''}
+										onChange = {generalInfoChangeInput}
+										placeholder = {inputs[item].placeholder ? inputs[item].placeholder : ''}
+									/>
+									<FormFeedback>{inputs.password.validationErrors}</FormFeedback>
+								</FormGroup>;
+							})}
 							<FormGroup>
 								<Button type='submit' color="primary">{Messages.header.Submit}</Button>{' '}
 								<Button color="secondary" onClick={this.toggle}>{Messages.header.Cancel}</Button>

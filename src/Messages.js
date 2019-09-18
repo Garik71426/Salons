@@ -8,37 +8,34 @@ const Messages = {
         Submit: 'Հաստատել',
         signIn : 'Մուտք',
         signUp : 'Գրանցվել',
-        Email : 'Էլ. փոստ',
-        EmailPlaceholder : 'exampleEmail@bk.ru',
-        Password : 'Գաղտնաբառ',
-        PasswordPlaceholder : '********',
-        Name : 'Անուն',
-        Surname : 'Ազգանուն',
-        RepeatPassword : 'Կրկնել գաղտնաբառը',
-        Phone: 'Հերախոս',
-        PhonePlaceholder: '+374XXYYYYYY'
+        inputs: {
+            name: { label: 'Անուն', validationErrors: 'Անունը պետք է պարունակի միայն տառեր և 1-ից 10 սիմվոլից բաղկացած լինի' },
+            surname: { label: 'Ազգանուն', validationErrors: 'Ազգանոընը պետք է պարունակի միայն տառեր և 1-ից 15 սիմվոլից բաղկացած լինի' },
+            email: { type: 'email', label: 'Էլ. փոստ', validationErrors: 'Սխալ էլ․փոստ', placeholder: 'exampleEmail@bk.ru' },
+            phone: { label: 'Հերախոս', validationErrors: 'Հեռախոսահամարը պետք է պարունակի միայն թվեր և 12 սիմվոլից բաղկացած լինի', placeholder: '+374XXYYYYYY' },
+            b_day: { type: 'date', label: 'Ծննդյան տարեթիվ', validationErrors: 'Անունը պետք է պարունակի միայն տառեր և 1-ից 10 սիմվոլից բաղկացած լինի' },
+            password: { type: 'password', label: 'Գաղտնաբառ', validationErrors: 'Գաղտնաբառը պետք է 8 սիմվոլից քիչ չլինի', placeholder: '********' },
+            repeatPassword: { type: 'password', label: 'Կրկնել գաղտնաբառը', validationErrors: 'Գաղտնաբառը պետք է 8 սիմվոլից քիչ չլինի', placeholder: '********' }
+        }
     },
-    validationErrors: {
-                nameError: "Անունը պետք է պարունակի միայն տառեր և 1-ից 10 սիմվոլից բաղկացած լինի",
-                surnameError: "Ազգանոընը պետք է պարունակի միայն տառեր և 1-ից 15 սիմվոլից բաղկացած լինի",
-                emailError: "Սխալ էլ․փոստ",
-                emailError2: "Այդ էլ․փոստը արդեն գրանցված է ",
-                phoneError: "Հեռախոսահամարը պետք է պարունակի միայն թվեր և 5-ից 12 սիմվոլից բաղկացած լինի",
-                phoneError2: "Այդ հեռախոսահամարը արդեն գրանցված է ",
-                passwordError: "Գաղտնաբառը պետք է 8 սիմվոլից քիչ չլինի",
-                passwordError2: "Այդ գաղտնաբառը արդեն գրանցված է ",
-                repeatPasswordError: "Գաղտնաբառերը չեն համընկնում",
-                ageError: "Տարիքը պետք է պարունակի միայն թվեր և 2 սիմվոլից ավել չլինի",
-                salonNameError: "Գեղեցկության սրահի անունը պետք է պարունակի 1-ից 30 սիմվոլ",
-                addressError: "Հասցեն պետք է պարունակի 1-ից 30 սիմվոլ",
-                infoError: "Տեքստը չի կարող 700 սիմվոլից ավել լինել",
-                mailError: "Հասցեն սխալ է նշված",
-                categoryError: "Կատեգորիայի անունը  պետք է պարունակի 1-ից 30 սիմվոլ"
-            },
-   
-    section : {
-        homeCardButtonText : 'Դիտել մասնագետներին'
-    },
+    // validationErrors: {
+    //             nameError: "Անունը պետք է պարունակի միայն տառեր և 1-ից 10 սիմվոլից բաղկացած լինի",
+    //             surnameError: "Ազգանոընը պետք է պարունակի միայն տառեր և 1-ից 15 սիմվոլից բաղկացած լինի",
+    //             emailError: "Սխալ էլ․փոստ",
+    //             emailError2: "Այդ էլ․փոստը արդեն գրանցված է ",
+    //             phoneError: "Հեռախոսահամարը պետք է պարունակի միայն թվեր և 5-ից 12 սիմվոլից բաղկացած լինի",
+    //             phoneError2: "Այդ հեռախոսահամարը արդեն գրանցված է ",
+    //             passwordError: "Գաղտնաբառը պետք է 8 սիմվոլից քիչ չլինի",
+    //             passwordError2: "Այդ գաղտնաբառը արդեն գրանցված է ",
+    //             repeatPasswordError: "Գաղտնաբառերը չեն համընկնում",
+    //             ageError: "Տարիքը պետք է պարունակի միայն թվեր և 2 սիմվոլից ավել չլինի",
+    //             salonNameError: "Գեղեցկության սրահի անունը պետք է պարունակի 1-ից 30 սիմվոլ",
+    //             addressError: "Հասցեն պետք է պարունակի 1-ից 30 սիմվոլ",
+    //             infoError: "Տեքստը չի կարող 700 սիմվոլից ավել լինել",
+    //             mailError: "Հասցեն սխալ է նշված",
+    //             categoryError: "Կատեգորիայի անունը  պետք է պարունակի 1-ից 30 սիմվոլ"
+    //         },
+
     settings : {
         settingsName : 'Փոխել տվյալները',
         name : 'Անուն',

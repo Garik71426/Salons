@@ -89,6 +89,7 @@ class Header extends Component {
             const user = await firebase
                 .auth()
                 .signInWithEmailAndPassword(email.value, password.value);
+                window.location.pathname = `/my/${user.user.uid}`
         } catch (error) {
             alert(error);
         }

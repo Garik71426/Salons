@@ -87,6 +87,7 @@ class App extends Component {
                         </div>
                 </Router>
                 <Footer />
+                
             </div>
         );
     }
