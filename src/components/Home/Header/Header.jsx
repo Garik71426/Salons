@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import {
-    Collapse, Navbar, NavbarToggler, NavbarBrand,
-    Nav, UncontrolledDropdown, DropdownToggle,
-    DropdownMenu, DropdownItem, Container, NavItem
-} from 'reactstrap';
-import PropTypes from 'prop-types';
-import axios from 'axios';
-
-import ModalLogin from './modals/ModalLogin';
-import ModalRegister from './modals/ModalReagistr';
-
-import Messages from './../../Messages';
-
-import './../../../assets/stylesheets/header.css';
-
+import { observer } from 'mobx-react'
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+        import {
+            Collapse, Navbar, NavbarToggler, Nav, 
+            UncontrolledDropdown, DropdownToggle, DropdownMenu,
+            DropdownItem, Container, NavItem
+        } from 'reactstrap';
+
+import ModalLogin from './../modals/ModalLogin';
+import ModalRegister from './../modals/ModalReagistr';
+
+import Messages from './../../../Messages';
+
+import './../../../../assets/stylesheets/header.css';
+
 
 const config = {
     apiKey: 'AIzaSyCE723-OL8hsSGdbwe7yEn8FJG9fMYt3ic',
@@ -30,10 +31,12 @@ const config = {
 };
 firebase.initializeApp(config);
 
+@observer
 class Header extends Component {
     static contextTypes = {
         AppStore: PropTypes.shape({
-
+            getAllSalons: PropTypes.func,
+            allSalons: PropTypes.array,
         }).isRequired
     }
     constructor(props) {
@@ -41,24 +44,16 @@ class Header extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
-            FuncForCookie: PropTypes.func,
-            Salon: [],
             isSignedIn: false,
             uid: ''
         };
     }
 
     componentDidMount() {
+        this.context.AppStore.getAllSalons();
         this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
             (user) => this.setState({ isSignedIn: !!user, uid: user.uid })
         );
-        axios.get('http://localhost:3001/salon')
-        .then(res => {
-            this.setState({ Salon: res.data });
-        })
-        .catch(err => {
-            return err;
-        });
     }
 
     componentWillUnmount() {
@@ -130,7 +125,8 @@ class Header extends Component {
     }
 
     render() {
-        const { Salon, uid } = this.state;
+        const { uid } = this.state;
+        const { allSalons } = this.context.AppStore;
         return (
             <div >
                 <Container>
@@ -154,7 +150,7 @@ class Header extends Component {
                                             {Messages.header.dropDown}
                                         </DropdownToggle>
                                         <DropdownMenu right>
-                                            {Salon.map(item => {
+                                            {allSalons.map(item => {
                                                 return <Link to={`/salon/${item.id}`} key={item.address}>
                                                     <DropdownItem className='drop_item'>
                                                         {item.name}

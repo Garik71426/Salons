@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import Messages from './../../Messages';
+import Messages from './../../../Messages';
 
-import './../../../assets/stylesheets/footer.css';
+import './../../../../assets/stylesheets/footer.css';
 
 class Footer extends Component {
 	render() {

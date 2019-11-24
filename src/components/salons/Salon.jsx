@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { observer } from 'mobx-react'
 
 import Workers from './Workers';
 
@@ -9,10 +9,14 @@ import Messages from './../../Messages';
 
 import './../../../assets/stylesheets/salon.css';
 
+@observer
 class Salon extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
-
+            getSalon: PropTypes.func,
+            getCategory: PropTypes.func,
+            salon: PropTypes.object,
+            category: PropTypes.array,
         }).isRequired
     }
     state = {
@@ -22,58 +26,36 @@ class Salon extends Component {
 
     componentDidMount() {
         const salon_id = this.props.match.params.whichSalon;
-        axios.get(`http://localhost:3001/salon/${salon_id}`)
-        .then(salon => {
-            axios.get(`http://localhost:3001/salon/category/${salon_id}`)
-            .then(result => {
-                this.setState({ salonInfo: salon.data , categoryInfo: result.data });
-            })
-            .catch(err => {
-                return err;
-            });
-        })
-        .catch(err => {
-            return err;
-        });
+        this.context.AppStore.getSalon(salon_id);
+        this.context.AppStore.getCategory(salon_id);
     }
 
     componentDidUpdate(prevProps){
         if(this.props.match.params.whichSalon !== prevProps.match.params.whichSalon) {
             const salon_id = this.props.match.params.whichSalon;
-            axios.get(`http://localhost:3001/salon/${salon_id}`)
-            .then(salon => {
-                axios.get(`http://localhost:3001/salon/category/${salon_id}`)
-                .then(result => {
-                    this.setState({ salonInfo: salon.data , categoryInfo: result.data });
-                })
-                .catch(err => {
-                    return err;
-                });
-            })
-            .catch(err => {
-                return err;
-            });
+            this.context.AppStore.getSalon(salon_id);
+            this.context.AppStore.getCategory(salon_id);
         }
     }
     
     render() {
-        const { salonInfo, categoryInfo } =this.state;
+        const { salon, category } =this.context.AppStore;
 		return (
              <Container className = "salon-page section">
-                <Row><h1 className = 'name'>{salonInfo.name}</h1></Row>
+                <Row><h1 className = 'name'>{salon.name}</h1></Row>
 				<Row className = 'about'>
 					<Col md="6" >
-						<img src={salonInfo.img} alt="salon images"/>
+						<img src={salon.img} alt="salon images"/>
 					</Col>
 					<Col md="6">
 						<h2>{Messages.beautySalons.beautySalonsAbout}</h2>
-						<p>{salonInfo.info}</p>
-                        <p>{Messages.beautySalons.beautySalonsAddress}` {salonInfo.address}</p>
-                        <p>{Messages.beautySalons.beautySalonsPhone}` {salonInfo.phone}</p>
+						<p>{salon.info}</p>
+                        <p>{Messages.beautySalons.beautySalonsAddress}` {salon.address}</p>
+                        <p>{Messages.beautySalons.beautySalonsPhone}` {salon.phone}</p>
 					</Col>
 
         		</Row>
-                {categoryInfo.map(categoryItem => {
+                {category.map(categoryItem => {
                     return 	<React.Fragment key = {categoryItem.name}>
                         <Row align = "center" className = "mt-5 mb-5 category">
                             <Col>
@@ -84,7 +66,7 @@ class Salon extends Component {
                         </Row>
                         <Workers 
                             category_id = {categoryItem.id}
-                            salon_id = {salonInfo.id}
+                            salon_id = {salon.id}
                             url = {this.props.match.url}
                         />
                     </React.Fragment>

@@ -4,9 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
-import Header from './components/Home/Header';
+import Header from './components/Home/Header/Header';
 import Loading from './components/Home/Loading';
-import Footer from './components/Home/Footer';
+import Footer from './components/Home/Footer/Footer';
 import Error from './components/Error';
 
 import UIStore from './stores/UIStore';
@@ -34,9 +34,6 @@ class App extends Component {
             UIStore: this.UIStore,
             AppStore: this.AppStore,
         }
-    }
-    componentDidMount() {
-        //this.AppStore.initData();
     }
     render() {
         const routes = [

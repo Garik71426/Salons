@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
-import Services  from './Services';
+import Services  from './Services/Services'
 
 import './home.css'
 
