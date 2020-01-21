@@ -14,32 +14,31 @@ class Salon extends Component {
     static contextTypes = {
         AppStore : PropTypes.shape({
             getSalon: PropTypes.func,
-            getCategory: PropTypes.func,
+            getSalonWorkers: PropTypes.func,
+            getSalonCategories: PropTypes.func,
             salon: PropTypes.object,
-            category: PropTypes.array,
+            salonWorkers: PropTypes.array,
+            salonCategories: PropTypes.array,
         }).isRequired
-    }
-    state = {
-        salonInfo: {},
-        categoryInfo: [], 
-    };
-
+    } 
     componentDidMount() {
         const salon_id = this.props.match.params.whichSalon;
+        this.context.AppStore.getSalonWorkers(salon_id);
         this.context.AppStore.getSalon(salon_id);
-        this.context.AppStore.getCategory(salon_id);
+        this.context.AppStore.getSalonCategories(salon_id);
     }
 
     componentDidUpdate(prevProps){
         if(this.props.match.params.whichSalon !== prevProps.match.params.whichSalon) {
             const salon_id = this.props.match.params.whichSalon;
+            this.context.AppStore.getSalonWorkers(salon_id);
             this.context.AppStore.getSalon(salon_id);
-            this.context.AppStore.getCategory(salon_id);
+            this.context.AppStore.getSalonCategories(salon_id);
         }
     }
     
     render() {
-        const { salon, category } =this.context.AppStore;
+        const { salon, salonWorkers, salonCategories } = this.context.AppStore;
 		return (
              <Container className = "salon-page section">
                 <Row><h1 className = 'name'>{salon.name}</h1></Row>
@@ -55,18 +54,17 @@ class Salon extends Component {
 					</Col>
 
         		</Row>
-                {category.map(categoryItem => {
-                    return 	<React.Fragment key = {categoryItem.name}>
+                {salonCategories.length !== 0 && salonCategories.map(category => {
+                    return 	<React.Fragment key = {category.id}>
                         <Row align = "center" className = "mt-5 mb-5 category">
                             <Col>
                                 <h2>
-                                    {categoryItem.name}
+                                    {category.name}
                                 </h2>
                             </Col>
                         </Row>
                         <Workers 
-                            category_id = {categoryItem.id}
-                            salon_id = {salon.id}
+                            workers = {salonWorkers.length !== 0 && salonWorkers.filter(worker => worker.category_id === category.id)}z
                             url = {this.props.match.url}
                         />
                     </React.Fragment>

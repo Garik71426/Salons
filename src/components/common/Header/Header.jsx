@@ -36,7 +36,7 @@ class Header extends Component {
     static contextTypes = {
         AppStore: PropTypes.shape({
             getAllSalons: PropTypes.func,
-            allSalons: PropTypes.array,
+            salonsMenu: PropTypes.array,
         }).isRequired
     }
     constructor(props) {
@@ -50,7 +50,7 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        this.context.AppStore.getAllSalons();
+        this.context.AppStore.getSalonsMenu();
         this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
             (user) => this.setState({ isSignedIn: !!user, uid: user.uid })
         );
@@ -126,7 +126,7 @@ class Header extends Component {
 
     render() {
         const { uid } = this.state;
-        const { allSalons } = this.context.AppStore;
+        const { salonsMenu } = this.context.AppStore;
         return (
             <div >
                 <Container>
@@ -150,8 +150,8 @@ class Header extends Component {
                                             {Messages.header.dropDown}
                                         </DropdownToggle>
                                         <DropdownMenu right>
-                                            {allSalons.map(item => {
-                                                return <Link to={`/salon/${item.id}`} key={item.address}>
+                                            {salonsMenu.map(item => {
+                                                return <Link to={`/salon/${item.id}`} key={item.id}>
                                                     <DropdownItem className='drop_item'>
                                                         {item.name}
                                                     </DropdownItem>

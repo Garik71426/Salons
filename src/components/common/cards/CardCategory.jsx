@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Card, CardImg, CardText, CardBody,
+    Card, CardImg, CardBody,
     CardTitle, Col
 } from 'reactstrap';
 import PropTypes from 'prop-types';
@@ -21,7 +21,7 @@ class CardCategory extends Component {
     }
 
     render() {
-        const { img, title, description, url, id } = this.props;
+        const { img, title, url, id } = this.props;
         return (
             <Col lg={3} md={6} sm={6} xs={8} className="cardCategory">
                 <Link to={`/${url}/${id}`} >

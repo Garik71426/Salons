@@ -4,10 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
-import Header from './components/Home/Header/Header';
-import Loading from './components/Home/Loading';
-import Footer from './components/Home/Footer/Footer';
-import Error from './components/Error';
+import Header from './components/common/Header/Header';
+import Loading from './components/common/Loading';
+import Footer from './components/common/Footer/Footer';
+import Error from './components/common/Error';
 
 import UIStore from './stores/UIStore';
 import AppStore from './stores/AppStore';
@@ -84,7 +84,6 @@ class App extends Component {
                         </div>
                 </Router>
                 <Footer />
-                
             </div>
         );
     }
