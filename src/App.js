@@ -1,25 +1,22 @@
 import React, { Component, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
-import Header from './components/common/Header/Header';
-import Loading from './components/common/Loading';
-import Footer from './components/common/Footer/Footer';
-import Error from './components/common/Error';
+import Header from './components/common/header';
+import Footer from './components/common/footer';
+import Loading from './components/common/loading';
+import Error from './components/common/error';
+
+import routes from './Route';
 
 import UIStore from './stores/UIStore';
 import AppStore from './stores/AppStore';
 
-import './../assets/stylesheets/App.css';
-import Acount from './components/acount/Acount';
-import AcountSetting from './components/acount/AccountSetting';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
-const Home = React.lazy(() => import("./components/Home/Home"));
-const Salon = React.lazy(() => import("./components/salons/Salon"));
-const Specialist = React.lazy(() => import("./components/specialists/Specialist"));
-const Categorys = React.lazy(() => import("./components/categorys/Categorys"));
+
 
 @observer
 class App extends Component {
@@ -36,36 +33,6 @@ class App extends Component {
         }
     }
     render() {
-        const routes = [
-            {
-                path: '/',
-                component: Home
-            },
-            {
-                path: '/salon/:whichSalon',
-                component: Salon
-            },
-            {
-                path: '/category/:whichCategory',
-                component: Categorys
-            },
-            {
-                path: '/salon/:whichSalon/:specialistIndex',
-                component: Specialist
-            },
-            {
-                path: '/specialist/:specialistIndex',
-                component: Specialist
-            },
-            {
-                path: '/my/:uid',
-                component: Acount
-            },
-            {
-                path: '/my/:uid/settings',
-                component: AcountSetting
-            }
-        ];
         return (
             <div className="App">
                 <Router>

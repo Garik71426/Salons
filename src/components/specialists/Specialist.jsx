@@ -5,8 +5,6 @@ import { observer } from 'mobx-react'
 
 import Messages from './../../Messages';
 
-import './../../../assets/stylesheets/specialist.css';
-
 @observer
 class SpecialistUser extends Component {
     static contextTypes = {
@@ -24,7 +22,7 @@ class SpecialistUser extends Component {
     };
 
     componentDidMount() {
-        const worker_id = this.props.match.params.specialistIndex;
+        const worker_id = this.props.match.params.specialist_id;
         this.context.AppStore.getWorker(worker_id);
         this.context.AppStore.getWorkerWorkImages(worker_id);
         this.context.AppStore.getSocial(worker_id);

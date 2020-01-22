@@ -3,11 +3,11 @@ import { Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react'
 
-import Workers from './Workers';
+import Workers from './workers';
 
 import Messages from './../../Messages';
 
-import './../../../assets/stylesheets/salon.css';
+import './salon.css';
 
 @observer
 class Salon extends Component {
@@ -22,15 +22,15 @@ class Salon extends Component {
         }).isRequired
     } 
     componentDidMount() {
-        const salon_id = this.props.match.params.whichSalon;
+        const salon_id = this.props.match.params.salon_id;
         this.context.AppStore.getSalonWorkers(salon_id);
         this.context.AppStore.getSalon(salon_id);
         this.context.AppStore.getSalonCategories(salon_id);
     }
 
     componentDidUpdate(prevProps){
-        if(this.props.match.params.whichSalon !== prevProps.match.params.whichSalon) {
-            const salon_id = this.props.match.params.whichSalon;
+        if(this.props.match.params.salon_id !== prevProps.match.params.salon_id) {
+            const salon_id = this.props.match.params.salon_id;
             this.context.AppStore.getSalonWorkers(salon_id);
             this.context.AppStore.getSalon(salon_id);
             this.context.AppStore.getSalonCategories(salon_id);

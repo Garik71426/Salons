@@ -1,4 +1,4 @@
-import {extendObservable, computed, action} from 'mobx';
+import { extendObservable } from 'mobx';
 
 
 class UIStore {

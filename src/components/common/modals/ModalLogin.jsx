@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Messages from './../../../Messages';
 import Constants from './../../../Constants';
 
-import './../../../../assets/stylesheets/header.css';
+import './../header/header.css';
 
 class ModalLogin extends Component {
 	static contextTypes = {

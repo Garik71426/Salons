@@ -1,4 +1,4 @@
-import {extendObservable, action, computed } from 'mobx';
+import {extendObservable } from 'mobx';
 import api from '../API';
 
 class AppStore {
