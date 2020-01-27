@@ -1,0 +1,29 @@
+.salon-page .name{
+  color: #6e3e24;
+  font-size: 2em;
+  margin: 1em auto 1.5em;
+}
+.salon-page .about img{
+  width: 100%;
+  max-height: 60vh;
+}
+.salon-page .about{
+  color: #6e3e24
+}
+.salon-page .about h2{
+  font-size: 2.5em;
+  color: salmon;
+  text-align: center;
+  margin: 1em;
+}
+
+.salon-page .about p:nth-of-type(1){
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.salon-page .category{
+  font-size: 2.5em;
+  color: salmon;
+  text-align: center;
+}

@@ -1,6 +1,6 @@
-/node_modules
-/build
-/yarn.lock
+/frontAn/node_modules
+/frontAn/build
+/frontAn/yarn.lock
 
-/Server/node_modules
-/Server/yarn.lock
+/BackAn/node_modules
+/BackAn/yarn.lock
