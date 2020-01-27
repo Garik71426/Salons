@@ -15,9 +15,7 @@ class CardSearch extends Component {
         const { worker } = this.props;
         return (<Card className="Card_top">
             <Media className="text">
-                <Media left href="#">
-                    <img src={worker.img} alt="specialistImg" className="img_size" />
-                </Media>
+                <img src={worker.img} alt="specialistImg" height = '200px'/>
                 <Media body className="full_text">
                     <Media heading className="name_title">
                         {`${worker.name} ${worker.surname}`}
