@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react'
 
@@ -20,6 +20,7 @@ class SalonAdmin extends Component {
                 salon: PropTypes.object,
                 salonWorkers: PropTypes.array,
                 changeSalonInfo: PropTypes.func,
+                saveSalonInfo: PropTypes.func,
             }).isRequired,
             ui: PropTypes.shape({
                 getSalon: PropTypes.func,
@@ -47,8 +48,14 @@ class SalonAdmin extends Component {
         }
     }
 
+    saveInfo = () => {
+        const { salonAdmin, ui } = this.context.AppStore;
+        salonAdmin.saveSalonInfo(ui.salon, salonAdmin.salon);
+    }
+
     render() {
         const { salon, salonWorkers, changeSalonInfo } = this.context.AppStore.salonAdmin;
+        const { saveInfo } = this;
         return (
             <Container className="salon-page section">
                 <Form >
@@ -90,7 +97,8 @@ class SalonAdmin extends Component {
                     workers={salonWorkers} 
                     url={this.props.match.url}
                 />
-                <AddWorker />
+                <AddWorker salon_id = {this.props.match.params.salon_id} />
+                <Button onClick = {saveInfo}>{Messages.AddWorker.save}</Button>
             </Container>
         );
     }

@@ -33,6 +33,12 @@ export default {
         getSocial: worker_id => axios.get(`${serverPath}/worker/${worker_id}/social`)
             .then(sendData),
         getAllSocial: () => axios.get(`${serverPath}/worker/social/all`)
-            .then(sendData),    
-    }
+            .then(sendData),
+    },
+    salonAdmin: {
+        updateSalonInfo: data => axios.patch(`${serverPath}/salonAdmin/updateSalon`, { data })
+            .then(sendData),
+        addWorker: data => axios.post(`${serverPath}/salonAdmin/addWorker`, { data })
+            .then(sendData),
+    },
 }

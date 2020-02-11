@@ -91,18 +91,6 @@ class SpecialistUser extends Component {
                                 <Input type="number" id='age' value={age} />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="salonPhone">{Messages.specialist.salonPhone}</Label>
-                                <Input type="text" id='salonPhone' value={worker.salon_phone} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="salonName">{Messages.specialist.salonName}</Label>
-                                <Input type="text" id='salonName' value={worker.salon_name} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="salonAddress">{Messages.specialist.salonAddress}</Label>
-                                <Input type="text" id='salonAddress' value={worker.salon_address} />
-                            </FormGroup>
-                            <FormGroup>
                                 <p>Կատեգորիա</p>
                                 {allCategories.map(item => {
                                     return <FormGroup check key={item.id}>
@@ -118,13 +106,10 @@ class SpecialistUser extends Component {
                             <p>{Messages.specialist.socialMedia}</p>
                             {allSocial.map(item => {
                                 return <FormGroup check key={item.id}>
-                                    <Label check>
-                                        <Input type="checkbox"
-                                            checked={item.path && item.path.length !== 0}
-                                        />
+                                    <Label>
                                         {item.name}
+                                        <input type = 'text' value = {item.path} />
                                     </Label>
-                                    <input type = 'text' value = {item.path} />
                                 </FormGroup>
                             })}
                         </Form>

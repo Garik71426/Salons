@@ -8,7 +8,7 @@ import './UserCard.css'
 
 class UserCard extends Component {
     static propTypes = {
-        img : PropTypes.string.isRequired,
+        img : PropTypes.string,
         title : PropTypes.string,
         explaText : PropTypes.string,
         buttonText : PropTypes.string.isRequired,
@@ -23,7 +23,7 @@ class UserCard extends Component {
 		return(
             <Col sm={3}>
                 <Card className = "card_design">
-                    <CardImg variant="top" src={img} />
+                    <CardImg variant="top" src={img || '/images/specialist.png'} />
                     <CardBody>
                         <CardTitle>{title}</CardTitle>
                         <CardText>{explaText}</CardText>

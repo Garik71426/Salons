@@ -14,7 +14,13 @@ class AddWorker extends Component {
             ui: PropTypes.shape({
                 getAllCategories: PropTypes.func,
                 allCategories: PropTypes.array,
-            }),
+            }).isRequired,
+            salonAdmin: PropTypes.shape({
+                addWorker: PropTypes.func,
+                changeAddWorkerForm: PropTypes.func,
+                addWorkerInfo: PropTypes.object,
+                allCategories: PropTypes.array,
+            }).isRequired,
         }).isRequired
     }
     state = {
@@ -30,7 +36,7 @@ class AddWorker extends Component {
     }
 
     render() {
-        const { allCategories } = this.context.AppStore.ui;
+        const { allCategories, addWorker, addWorkerInfo, changeAddWorkerForm } = this.context.AppStore.salonAdmin;
         return (
             <div>
                 <Button color="info" outline className="button" onClick={this.toggle}>{Messages.AddWorker.AddWorker}</Button>
@@ -40,11 +46,21 @@ class AddWorker extends Component {
                         <Form>
                             <FormGroup>
                                 <Label for="exampleAnun">{Messages.AddWorker.name}</Label>
-                                <Input type="text" name="Անուն" />
+                                <Input 
+                                    type="text" 
+                                    name="name" 
+                                    onChange = {changeAddWorkerForm} 
+                                    value = {addWorkerInfo.name}
+                                    />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="exampleAnun">{Messages.AddWorker.surname}</Label>
-                                <Input type="text" name="Ազգանուն" />
+                                <Input 
+                                    type="text" 
+                                    name="surname" 
+                                    onChange = {changeAddWorkerForm} 
+                                    value = {addWorkerInfo.surname}
+                                    />
                             </FormGroup>
                             <FormGroup>
                                 <p>Կատեգորիա</p>
@@ -53,15 +69,17 @@ class AddWorker extends Component {
                                         key = {item.id}
                                         type="radio" 
                                         id={item.id}
-                                        name="customRadio" 
-                                        label={item.name} 
+                                        name="category_id" 
+                                        label={item.name}
+                                        value = {item.id} 
+                                        onChange = {changeAddWorkerForm}
                                     />
                                 })}
                             </FormGroup>
                         </Form>
                     </ModalBody>
                     <ModalFooter onClick={this.toggle}>
-                        <Button className="modal_button" onClick={AddWorker} >{Messages.AddWorker.save}</Button>
+                        <Button className="modal_button" onClick={addWorker} >{Messages.AddWorker.save}</Button>
                     </ModalFooter>
                 </Modal>
             </div>

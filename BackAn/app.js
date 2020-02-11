@@ -9,6 +9,7 @@ const salonRouter = require('./routes/UI/salon');
 const categoryRouter = require('./routes/UI/category');
 const workerRouter = require('./routes/UI/worker');
 const usersRouter = require('./routes/users');
+const salonAminRouter = require('./routes/SalonAdmin/salon');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/salon', salonRouter);
 app.use('/category', categoryRouter);
 app.use('/worker', workerRouter);
+app.use('/salonAdmin', salonAminRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

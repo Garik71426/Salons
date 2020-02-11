@@ -1,4 +1,4 @@
-import { extendObservable, autorun } from 'mobx';
+import { extendObservable } from 'mobx';
 
 import ui from './UI/ui';
 import salon from './Admin/Salon/salon';
