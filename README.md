@@ -7,7 +7,7 @@ Salon
 ![Salon](/screenshots/Salon%20Ani.png)
 
 Specialist
-![Specialist](/screenshots/Category%20page.png)
+![Specialist](/screenshots/Salon%20specialist.png)
 
 Category
-![Category](/screenshots/Salon%20Category.png)
+![Category](/screenshots/Category%20page.png)
