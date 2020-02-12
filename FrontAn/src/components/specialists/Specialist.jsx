@@ -31,7 +31,7 @@ class SpecialistUser extends Component {
     render() {
         const { worker, workerWorkImages, social } = this.context.AppStore.ui;
         const { calculate_age } = this.context.UIStore;
-        const age = calculate_age(new Date(worker.b_day));
+        const age = worker.b_day ? calculate_age(new Date(worker.b_day)) : '';
         return (
             <Container className="mb-5 sections mt-5 section">
                 {worker && <>
@@ -39,7 +39,7 @@ class SpecialistUser extends Component {
                         <Col sm="8" >
                             <h3 className="textBlue" > {worker.name} {worker.surname}</h3>
                             <div className="user" >
-                                <img src={worker.img} height="200px" alt="user image" width="200px" className="d-inline" />
+                                <img src={worker.img || '/images/specialist.png'} height="200px" alt="user image" width="200px" className="d-inline" />
                                 <div className="info">
                                     <p>{worker.about}</p>
                                 </div>

@@ -5,6 +5,8 @@ import { observer } from 'mobx-react'
 
 import Workers from './workers';
 
+import { serverPath } from '../../server';
+
 import Messages from './../../Messages';
 
 import './salon.css';
@@ -44,7 +46,7 @@ class Salon extends Component {
                 <Row><h1 className = 'name'>{salon.name}</h1></Row>
 				<Row className = 'about'>
 					<Col md="6" >
-						<img src={salon.img} alt="salon images"/>
+						<img src={salon.img? `${serverPath}${salon.img}` : '/images/salon.png'} alt="salon images"/>
 					</Col>
 					<Col md="6">
 						<h2>{Messages.beautySalons.beautySalonsAbout}</h2>

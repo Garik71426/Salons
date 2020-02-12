@@ -40,5 +40,13 @@ export default {
             .then(sendData),
         addWorker: data => axios.post(`${serverPath}/salonAdmin/addWorker`, { data })
             .then(sendData),
+        changeImage: data => 
+            axios({
+            method: 'post',
+            url: `${serverPath}/salonAdmin/uploadImage`,
+            data: { data },
+            headers: {'Content-Type': 'multipart/form-data' }
+            })
+            .then(sendData),
     },
 }

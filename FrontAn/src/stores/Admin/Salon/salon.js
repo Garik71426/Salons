@@ -56,14 +56,32 @@ class salon {
         const name = event.target.name;
         const value = event.target.value;
         this.addWorkerInfo[name] = value;
-    }
-
-    changeSalonInfo = event => {
-        const name = event.target.name;
-        const value = event.target.value;
-        this.salon[name] = value;
     };
 
+    changeSalonInfo = (key, event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        // if(name === 'images') {
+        //     const body = {
+        //         salon_id: this.salon.id,
+        //         worker_id:
+        //     };
+        //     api.salonAdmin.changeImage(event.target.files[0])
+        //     // console.log(event.target.files[0]);
+        // }
+        this[key][name] = value;
+    };
+    changeSpecialistImg = data => {
+        // console.log(data)
+        // const body = {
+        //     salon_id: this.salon.id,
+        //     worker_id: data.worker_id,
+        //     files: data.file,
+        // };
+        // console.log(body)
+        api.salonAdmin.changeImage(data)
+        // console.log(event.target.files[0]);
+    }
 }
 
 
